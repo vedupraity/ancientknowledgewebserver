@@ -21,8 +21,8 @@ SITE_CONFIG = {
     'author_name': 'Vedprakash Upraity',
     'contact_email': 'ancientknowledgeinbox@gmail.com',
     'github_author_profile': 'https://github.com/vedupraity',
-    'github_site_repo': 'https://github.com/vedupraity/ancientknowledge',
-    'github_db_repo': 'https://github.com/vedupraity/ancientknowledgedatabase',
+    'github_webserver_repo': 'https://github.com/vedupraity/ancientknowledgewebserver',
+    'github_database_repo': 'https://github.com/vedupraity/ancientknowledgedatabase',
     'google_analytics_tracking_id': 'G-2G57C3C15V',
 }
 

@@ -62,7 +62,7 @@ python3 -m http.server 5001
 
 3. Clone flask app repository
 
-https://github.com/vedupraity/ancientknowledge
+https://github.com/vedupraity/ancientknowledgewebserver
 
 4. Start flask server
 
