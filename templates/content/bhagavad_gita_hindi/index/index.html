@@ -1,0 +1,44 @@
+{% extends 'generic/base.html' %}
+
+{% block content %}
+
+{% include 'generic/breadcrumb.html' %}
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-multiline is-centered" id="book-card-container">
+            {% for data in index_data %}
+                <div class="column is-12">
+                    <a class="is-clickable" href="{{ data.id }}/">
+                        <div class="card has-glow-md">
+                            <div class="card-content">
+                                <div class="content">
+                                    <h5 class="mb-0">
+                                        {{ data.title }}
+                                    </h5>
+                                    {% if data.subtitle %}
+                                        <p class="mt-3 mb-0">
+                                            {{ data.subtitle }}
+                                        </p>
+                                    {% endif %}
+
+                                    {% if data.summary %}
+                                        <hr class="mt-3 mb-3"/>
+                                        {% for summary in data.summary %}
+                                            <p class="has-text-justified">{{ summary }}</p>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% include 'generic/breadcrumb.html' %}
+
+{% endblock %}

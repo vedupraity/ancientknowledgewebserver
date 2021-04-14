@@ -1,0 +1,20 @@
+<section class="hero is-light is-small">
+    <div class="hero-body">
+        <div class="container">
+            <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
+                <ul>
+                    {% for item in breadcrumb %}
+                        <li {% if item.active %}class="is-active"{% endif %}>
+                            <a {% if not item.active %}class="is-link has-text-orange"{% endif %} href="{{ item.page_url }}">
+                                <span class="icon is-small">
+                                    <i class="fas {{ item.icon }}" aria-hidden="true"></i>
+                                </span>
+                                <span>{{ item.page_name }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>

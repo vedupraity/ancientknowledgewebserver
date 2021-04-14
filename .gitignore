@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+venv/
+
+# IDE config
+.vscode
+
+# local db symbolic link
+static/db-local
+
+# build artifacts
+build/

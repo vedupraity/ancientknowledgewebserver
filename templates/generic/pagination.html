@@ -1,0 +1,109 @@
+<div class="pagination-container">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        
+        <!-- previous page button -->
+        <a
+            class="pagination-previous pagination-button button is-orange is-outlined"
+            {% if pagination.is_first_page %}
+                disabled
+            {% else %}
+                href="{{ pagination.previous_page.url }}"
+            {% endif %}
+        >
+            {{ pagination.previous_button_text|default('Previous')}}
+        </a>
+
+        <!-- next page button -->
+        <a
+            class="pagination-next pagination-button button is-orange is-outlined"
+            {% if pagination.is_last_page %}
+                disabled
+            {% else %}
+                href="{{ pagination.next_page.url }}"
+            {% endif %}
+        >
+        {{ pagination.next_button_text|default('Next')}}
+        </a>
+
+        <ul class="pagination-list">
+            {# begin previous page buttons #}
+            {% if pagination.render_previous_page_buttons %}
+                <li>
+                    <a
+                        class="pagination-link"
+                        {% if pagination.is_first_page %}
+                            disabled
+                        {% else %}
+                            href="{{ pagination.first_page.url }}"
+                        {% endif %}
+                    >
+                        {{ pagination.first_page.id }}
+                    </a>
+                </li>
+                
+                {% if pagination.render_previous_page_id_button %}
+                    {% if pagination.render_previous_page_ellipsis %}
+                        <li>
+                            <span class="pagination-ellipsis">…</span>
+                        </li>
+                    {% endif %}
+
+                    <li>
+                        <a
+                            class="pagination-link"
+                            href="{{ pagination.previous_page.url }}"
+                        >
+                            {{ pagination.previous_page.id }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endif %}
+            {# end previous page buttons #}
+            
+            {# begin current page button #}
+            <li>
+                <a
+                    class="pagination-link is-current"
+                    aria-current="page"
+                    disabled
+                >
+                    {{ pagination.current_page.id }}
+                </a>
+            </li>
+            {# end current page button #}
+
+            {# begin next page buttons #}
+            {% if pagination.render_next_page_buttons %}
+                {% if pagination.render_next_page_id_button %}
+                    <li>
+                        <a
+                            class="pagination-link"
+                            href="{{ pagination.next_page.url }}"
+                        >
+                            {{ pagination.next_page.id }}
+                        </a>
+                    </li>
+                    {% if pagination.render_next_page_ellipsis %}
+                        <li>
+                            <span class="pagination-ellipsis">…</span>
+                        </li>
+                    {% endif %}
+                {% endif %}
+                
+                <li>
+                    <a
+                        class="pagination-link"
+                        {% if pagination.is_last_page %}
+                            disabled
+                        {% else %}
+                            href="{{ pagination.last_page.url }}"
+                        {% endif %}
+                    >
+                        {{ pagination.last_page.id }}
+                    </a>
+                </li>
+            {% endif %}
+            {# end next page buttons #}
+        </ul>
+    </nav>
+</div>

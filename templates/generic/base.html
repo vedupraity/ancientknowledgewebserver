@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics_tracking_id }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '{{ google_analytics_tracking_id }}');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-custom.css') }}" />
+    
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}" />
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-social@1/bin/bulma-social.min.css" />
+
+    <!-- Begin SEO tags -->
+    <title>{% if env == "dev" %}[{{env}}] {% endif %}{{ page_title|default(site_title) }}</title>
+    <meta name="description" content="{{ site_tagline }}">
+
+    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:description" content="{{ page_description|default(site_tagline) }}" />
+    <meta property="og:url" content="{{ site_url }}" />
+    <meta property="og:image" content="{% if site_image %}{{ site_url }}{{ url_for('static', filename=site_image) }}{% else %}{{ site_url }}{{ url_for('static', filename='images/favicon.png') }}{% endif %}" />
+    <meta property="og:type" content="{{ page_type|default('website') }}" />
+    
+    <meta property="twitter:title" content="{{ page_title }}" />
+    <meta property="twitter:description" content="{{ page_description|default(site_tagline) }}" />
+    <meta property="twitter:image" content="{% if site_image %}{{ site_url }}{{ url_for('static', filename=site_image) }}{% else %}{{ site_url }}{{ url_for('static', filename='images/favicon.png') }}{% endif %}" />
+    <!-- End SEO tags -->
+</head>
+
+<body>
+    {% include "generic/navbar.html" %}
+
+    {% include "generic/hero.html" %}
+
+    {% block content %}{% endblock %}
+
+    {% include "generic/footer.html" %}
+
+    {% block javascript %}{% endblock %}
+</body>
+
+</html>

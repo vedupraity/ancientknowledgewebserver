@@ -1,0 +1,74 @@
+{% extends 'generic/base.html' %}
+
+{% block content %}
+
+{% include 'generic/breadcrumb.html' %}
+
+<section
+    class="
+        section
+        content-card-section
+        {% if is_paginated %}pb-0{% endif %}
+    "
+>
+    <div class="container">
+        <div class="card has-glow-md">
+            <div class="card-content">
+                <div class="content is-medium">
+                    <h5 class="has-text-centered ">
+                        {{ post_heading }}
+                    </h5>
+                    
+                    <hr/>
+
+                    {% for group in post_data %}
+                        {% if group.type == 'textGroup' %}
+                            <div
+                                {% if group.groupStyle %}
+                                    class="{{ group.groupStyle|join(' ') }}"
+                                {% endif %}
+                            >
+                                {% for text in group.text %}
+                                    <p class="{{ group.textStyle|join(' ') }}">
+                                        {{ text }}
+                                    </p>
+                                {% endfor %}
+                            </div>
+                        {% elif group.type == 'listGroup' %}
+                            <ol
+                                {% if group.groupStyle %}
+                                    class="{{ group.groupStyle|join(' ') }}"
+                                {% endif %}
+                                {% if group.listStyleType %}
+                                    type="{{ group.listStyleType }}"
+                                {% endif %}
+                            >
+                                {% for text in group.text %}
+                                    <li
+                                        {% if group.textStyle %}
+                                            class="{{ group.textStyle|join(' ') }}"
+                                        {% endif %}
+                                    >
+                                        {{ text }}
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if is_paginated %}
+    <section class="section pt-0">
+        <div class="container mt-6">
+            {% include 'generic/pagination.html' %}
+        </div>
+    </section>
+{% endif %}
+
+{% include 'generic/breadcrumb.html' %}
+
+{% endblock %}

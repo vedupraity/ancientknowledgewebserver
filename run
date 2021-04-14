@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# display usage
+
+usage()
+{
+    echo "Usage:"
+    echo "  ./run [options] [environment]"
+    echo
+    echo "options:"
+    echo "  server     run flask server"
+    echo "  build      generate static files"
+    echo
+    echo "environment:"
+    echo "  prod      (default) use environment variables from .env.prod"
+    echo "  dev       use environment variables from .env.dev"
+    echo
+    echo "example:"
+    echo "  ./run server dev"
+    echo "  ./run build prod"
+}
+
+# identify environment
+
+ENV=".env.prod"
+
+if [ $2 ] && [ $2 == "dev" ]; then
+    ENV=".env.dev"
+fi
+
+# run commands
+
+if [ "$1" == "server" ]; then
+    source $ENV && python app.py
+elif [ "$1" == "build" ]; then
+    source $ENV && python freeze.py
+else
+    usage
+    exit 1
+fi
