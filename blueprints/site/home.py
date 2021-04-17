@@ -18,7 +18,6 @@ def homeView():
 
     context = getBaseTemplateContext()
     context.update({
-        'page_title': SITE_CONFIG['site_title'],
         'books': books_data,
     })
 

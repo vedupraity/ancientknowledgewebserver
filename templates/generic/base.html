@@ -16,35 +16,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#ffffff" />
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-custom.css') }}" />
+    <!-- Begin SEO tags -->
+    <title>{% if env == "dev" %}[{{env}}] {% endif %}{{ page_title|default(site_title) }}</title>
+    <meta name="description" content="{{ page_description|default(site_description) }}">
+    <meta name="keywords" content="{% if page_keywords|length %}{{ page_keywords|join(', ') }}{% else %}{{ site_keywords|join(', ') }}{% endif %}">
+
+    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:description" content="{{ page_description|default(site_description) }}" />
+    <meta property="og:url" content="{{ site_url }}" />
+    <meta property="og:image" content="{% if site_image %}{{ site_url }}{{ url_for('static', filename=site_image) }}{% else %}{{ site_url }}{{ url_for('static', filename='images/open-book-cover.jpg') }}{% endif %}" />
+    <meta property="og:type" content="{{ page_type|default('website') }}" />
     
-    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}" />
+    <meta property="twitter:title" content="{{ page_title }}" />
+    <meta property="twitter:description" content="{{ page_description|default(site_description) }}" />
+    <meta property="twitter:image" content="{% if site_image %}{{ site_url }}{{ url_for('static', filename=site_image) }}{% else %}{{ site_url }}{{ url_for('static', filename='images/open-book-cover.jpg') }}{% endif %}" />
+    <!-- End SEO tags -->
+
+    <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/theme.css') }}" />
+    <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/theme-custom.css') }}" />
+    
+    <link rel="icon" href="{{ site_url }}{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ site_url }}{{ url_for('static', filename='images/favicon.png') }}" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-social@1/bin/bulma-social.min.css" />
-
-    <!-- Begin SEO tags -->
-    <title>{% if env == "dev" %}[{{env}}] {% endif %}{{ page_title|default(site_title) }}</title>
-    <meta name="description" content="{{ site_tagline }}">
-
-    <meta property="og:title" content="{{ page_title }}" />
-    <meta property="og:description" content="{{ page_description|default(site_tagline) }}" />
-    <meta property="og:url" content="{{ site_url }}" />
-    <meta property="og:image" content="{% if site_image %}{{ site_url }}{{ url_for('static', filename=site_image) }}{% else %}{{ site_url }}{{ url_for('static', filename='images/favicon.png') }}{% endif %}" />
-    <meta property="og:type" content="{{ page_type|default('website') }}" />
-    
-    <meta property="twitter:title" content="{{ page_title }}" />
-    <meta property="twitter:description" content="{{ page_description|default(site_tagline) }}" />
-    <meta property="twitter:image" content="{% if site_image %}{{ site_url }}{{ url_for('static', filename=site_image) }}{% else %}{{ site_url }}{{ url_for('static', filename='images/favicon.png') }}{% endif %}" />
-    <!-- End SEO tags -->
 </head>
 
 <body>
     {% include "generic/navbar.html" %}
 
+    {% block hero_section %}
     {% include "generic/hero.html" %}
+    {% endblock %}
+
+    <div class="content is-centered has-text-centered" style="display: none;">
+        <h1>{{ site_title }}</h1>
+        <h2>{{ site_tagline }}</h2>
+        <h3>{{ page_title }}</h3>
+        <p>{{ page_description|default(site_description) }}</p>
+        <div class="tags is-centered">
+            {% for keyword in page_keywords or site_keywords %}
+                <span class="tag">{{ keyword }}</span>
+            {% endfor %}
+        </div>
+    </div>
 
     {% block content %}{% endblock %}
 

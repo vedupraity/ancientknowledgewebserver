@@ -16,6 +16,7 @@ def aboutView():
         'page_title': f'{SITE_CONFIG["site_title"]} | About',
         'github_webserver_repo': SITE_CONFIG['github_webserver_repo'],
         'github_database_repo': SITE_CONFIG['github_database_repo'],
+        'page_description': 'An online library of Ancient Knowledge, Scriptures and Books about History, Philosophy, Spirituality, Religion and more. Email: ancientknowledgeinbox@gmail.com',
     })
 
     return render_template(f'site/{blueprint_name}/index.html', **context)

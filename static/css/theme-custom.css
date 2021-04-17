@@ -1,13 +1,13 @@
 .bg-gradient-orange {
-    background-image: linear-gradient(to right, #f5a91c 0%, #ff8d58 100%) !important;
+    background-image: linear-gradient(to right, #EAB543 0%, #F97F51 100%) !important;
 }
 
 .bg-gradient-light-orange {
-    background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%) !important;
+    background-image: linear-gradient(to right, #F8EFBA 0%, #FEA47F 100%) !important;
 }
 
 hr {
-    background-image: linear-gradient(to right, #fcb69f 0%, #ffecd2 100%);
+    background-image: linear-gradient(to right, #FEA47F 0%, #F8EFBA 100%);
 }
 
 .has-text-orange {
@@ -19,11 +19,11 @@ hr {
 }
 
 .has-glow-md {
-    box-shadow: 0 0px 0 1px #ffecd2, 0 0.5em 0.75em -0.5em #ffcdbd;
+    box-shadow: 0 0px 0 1px #F8EFBA, 0 0.5em 0.75em -0.5em #FEA47F;
 }
 
 .has-glow-sm {
-    box-shadow: 0 0px 0 1px #ffecd2, 0 1px 1px -0.125em #ffcdbd;
+    box-shadow: 0 0px 0 1px #F8EFBA, 0 1px 1px -0.125em #FEA47F;
 }
 
 .pagination-link.is-current {
@@ -61,6 +61,6 @@ ol[type=devanagari] {
     }
 
     .content-card-section .has-glow-md {
-        box-shadow: 0 0px 0 1px #ffecd2, 0 1px 1px -0.125em #ffcdbd;
+        box-shadow: 0 0px 0 1px #F8EFBA, 0 1px 1px -0.125em #ffcdbd;
     }
 }

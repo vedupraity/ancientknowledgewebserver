@@ -1,39 +1,53 @@
 {% extends 'generic/base.html' %}
 
+{% block hero_section %}
+<section class="hero is-small is-bold is-dark bg-gradient-orange">
+    <div class="hero-body">
+        <div class="container has-text-centered p-5">
+            <div class="content">
+                <h1 class="title is-3">{{ site_title }}</h1>
+                <h2 class="title is-5">{{ hero_title|default(site_tagline) }}</h2>
+                <p class="is-italic">{{ site_description }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
 {% block content %}
-    <section class="section">
-        <div class="container">
-            <div class="columns is-multiline is-centered" id="book-card-container">
-                {% for book in books %}
-                    <div class="column is-4-desktop is-6-tablet">
-                        <a href="{{ site_url }}/{{ book.baseUrl }}/">
-                            <div class="card has-glow-md">
-                                <div class="card-image">
-                                    <figure class="image is-16by9">
-                                        <img src="{{ url_for('static', filename=book.coverImage) }}" alt="{{ book.title }}">
-                                    </figure>
+<section class="section">
+    <div class="container">
+        <div class="columns is-multiline is-centered" id="book-card-container">
+            {% for book in books %}
+            <div class="column is-4-desktop is-6-tablet">
+                <a href="{{ site_url }}/{{ book.baseUrl }}/">
+                    <div class="card has-glow-md">
+                        <div class="card-image">
+                            <figure class="image is-16by9">
+                                <img src="{{ url_for('static', filename=book.coverImage) }}" alt="{{ book.title }}">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <div>
+                                    <h2 class="mb-3 title is-6">{{ book.title }}</h2>
+                                    <p class="mb-3">- {{ book.author }}</p>
                                 </div>
-                                <div class="card-content">
-                                    <div class="content">
-                                        <div>
-                                            <h6 class="mb-3">{{ book.title }}</h6>
-                                            <p class="mb-3">{{ book.author }}</p>
-                                        </div>
-                                        <hr>
-                                        <div>
-                                            <div class="tags">
-                                                {% for tag in book.tags %}
-                                                    <span class="tag is-white has-glow-sm">{{ tag }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        </div>
+                                <hr>
+                                <div>
+                                    <div class="tags">
+                                        {% for tag in book.tags %}
+                                        <span class="tag is-white has-glow-sm">{{ tag }}</span>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
-                {% endfor %}
+                </a>
             </div>
+            {% endfor %}
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}

@@ -1,24 +1,25 @@
-<footer class="footer bg-gradient-light-orange pt-6 pb-6">
+<footer class="footer bg-gradient-light-orange pt-5 pb-5">
     <div class="container">
-        <div class="columns is-multiline is-centered">
-            <div class="column is-2-tablet has-text-centered">
-                <div>
-                    <a href="{{ site_url }}" class="link has-text-orange">Home</a>
+        <div class="content">
+            <div class="columns is-multiline is-centered">
+                <div class="column is-2-tablet has-text-centered">
+                    <div>
+                        <a href="{{ site_url }}" class="link has-text-orange">Home</a>
+                    </div>
+                </div>
+                <div class="column is-2-tablet has-text-centered">
+                    <div>
+                        <a href="{{ site_url }}{{ url_for('about_blueprint.aboutView') }}" class="link has-text-orange">About</a>
+                    </div>
                 </div>
             </div>
-            <div class="column is-2-tablet has-text-centered">
-                <div>
-                    <a href="{{ site_url }}{{ url_for('about_blueprint.aboutView') }}" class="link has-text-orange">About</a>
-                </div>
+
+            <hr class="mb-5 mt-0" />
+
+            <div class="has-text-centered">
+                <p><a href="{{ site_url }}" class="link has-text-orange">{{ site_title }}</a> is maintained by <a href="{{ github_author_profile }}" class="link has-text-orange">{{ author_name }}</a>.</p>
+                <p class="has-text-grey is-italic">Check About page for details on how to become a contributor.</p>
             </div>
-        </div>
-
-        <hr class="mb-6" />
-
-        <div class="content has-text-centered">
-            <a href="{{ site_url }}" class="link has-text-orange">{{ site_title }}</a>
-            is maintained by
-            <a href="{{ github_author_profile }}" class="link has-text-orange">{{ author_name }}</a>.
         </div>
     </div>
 </footer>

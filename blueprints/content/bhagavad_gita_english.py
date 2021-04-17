@@ -12,6 +12,7 @@ blueprint = Blueprint(f'{blueprint_name}_blueprint', __name__)
 
 page_title = CONTENT[blueprint_name]['page_title']
 base_url = CONTENT[blueprint_name]['base_url']
+page_keywords = CONTENT[blueprint_name]['keywords']
 
 
 @blueprint.route(f'/{base_url}/')
@@ -41,6 +42,7 @@ def bhagavadGitaEnglishIndexView():
         'page_title': page_title,
         'site_image': selected_book_meta['coverImage'],
         'page_description': f'Read Shrimad Bhagavad Gita - As It Is in English.',
+        'page_keywords': page_keywords,
         'hero_title': selected_book_meta['title'],
         'breadcrumb': breadcrumb.data,
         'index_data': index_data,
@@ -103,6 +105,7 @@ def bhagavadGitaEnglishChapterView(chapter_id):
             'page_title': page_title,
             'site_image': book_meta['coverImage'],
             'page_description': f'Read Shrimad Bhagavad Gita - As It Is in English.',
+            'page_keywords': page_keywords,
             'hero_title': book_meta['title'],
             'breadcrumb': breadcrumb.data,
             'index_data': text_data,
@@ -118,6 +121,7 @@ def bhagavadGitaEnglishChapterView(chapter_id):
             'page_title': page_title,
             'site_image': book_meta['coverImage'],
             'page_description': f'Read Shrimad Bhagavad Gita - As It Is in English.',
+            'page_keywords': page_keywords,
             'page_type': 'article',
             'hero_title': book_meta['title'],
             'breadcrumb': breadcrumb.data,
@@ -175,6 +179,7 @@ def bhagavadGitaEnglishTextView(chapter_id, text_id):
         'page_title': page_title,
         'site_image': book_meta['coverImage'],
         'page_description': f'Read Shrimad Bhagavad Gita - As It Is in English. Chapter {chapter_id} - Verse {",".join(text_id.split("-"))}',
+        'page_keywords': page_keywords,
         'page_type': 'article',
         'hero_title': book_meta['title'],
         'breadcrumb': breadcrumb.data,
