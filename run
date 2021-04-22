@@ -20,6 +20,8 @@ usage()
     echo "  ./run build prod"
 }
 
+. venv/bin/activate
+
 # identify environment
 
 ENV=".env.prod"
