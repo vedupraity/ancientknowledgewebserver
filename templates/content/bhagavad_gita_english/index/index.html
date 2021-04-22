@@ -4,7 +4,7 @@
 
 {% include 'generic/breadcrumb.html' %}
 
-<section class="section" oncopy="return false" oncut="return false" onpaste="return false">
+<section class="section" {% if env != "dev" %}oncopy="return false" oncut="return false" onpaste="return false"{% endif %}>
     <div class="container">
         <div class="columns is-multiline is-centered" id="book-card-container">
             {% for data in index_data %}
