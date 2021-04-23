@@ -64,3 +64,11 @@ ol[type=devanagari] {
         box-shadow: 0 0px 0 1px #F8EFBA, 0 1px 1px -0.125em #ffcdbd;
     }
 }
+
+.image-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
