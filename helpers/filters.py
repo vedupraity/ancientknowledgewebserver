@@ -1,3 +1,6 @@
+import markdown
+
+
 def hindiNumeral(number):
     """ Convert to hindi numerals """
     mapper = {
@@ -23,9 +26,21 @@ def hindiNumeral(number):
     return hindi_number
 
 
-FILTERS = [hindiNumeral]
+def caps(text):
+    """ Convert a string to all caps. """
+    return text.upper()
+
+
+def markdownToHTML(text):
+    """ convert markdown formatting into html """
+    return markdown.markdown(text).replace('<p>', '').replace('</p>', '')
+
+
+FILTERS = [hindiNumeral, caps, markdownToHTML]
+
 
 def register_filters(app):
     """Register the template filters with an app instance"""
+
     for func in FILTERS:
         app.add_template_filter(func)

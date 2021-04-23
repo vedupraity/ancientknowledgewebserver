@@ -31,7 +31,7 @@
                             >
                                 {% for text in group.text %}
                                     <p class="{{ group.textStyle|join(' ') }}">
-                                        {{ text }}
+                                        {{ text|markdownToHTML|safe }}
                                     </p>
                                 {% endfor %}
                             </div>
