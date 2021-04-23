@@ -16,19 +16,22 @@
                                     <h5 class="mb-0">
                                         {{ data.title }}
                                     </h5>
+                                    
+                                    {% if data.subtitle or data.summary %}
+                                        <hr class="mt-3 mb-3"/>
+                                    {% endif %}
+
                                     {% if data.subtitle %}
-                                        <p class="mt-3 mb-0">
+                                        <p>
                                             {{ data.subtitle }}
                                         </p>
                                     {% endif %}
 
                                     {% if data.summary %}
-                                        <hr class="mt-3 mb-3"/>
                                         {% for summary in data.summary %}
                                             <p class="has-text-justified">{{ summary }}</p>
                                         {% endfor %}
                                     {% endif %}
-
                                 </div>
                             </div>
                         </div>
