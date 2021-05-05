@@ -31,7 +31,11 @@
                             >
                                 {% for text in group.text %}
                                     <p class="{{ group.textStyle|join(' ') }}">
-                                        {{ text }}
+                                        {% if group.markdown == False %}
+                                            {{ text }}
+                                        {% else %}
+                                            {{ text|markdownToHTML|safe }}
+                                        {% endif %}
                                     </p>
                                 {% endfor %}
                             </div>
