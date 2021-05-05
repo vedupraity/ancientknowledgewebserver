@@ -1,6 +1,8 @@
-from flask import Blueprint, render_template, url_for
+import subprocess
 
-from config import CONTENT
+from flask import Blueprint, render_template, request, url_for
+
+from config import CONTENT, DATABASE_REPO_DIR
 from helpers.api import RequestHelper
 from helpers.breadcrumb import Breadcrumb
 from helpers.context import getBaseTemplateContext
@@ -134,8 +136,12 @@ def bhagavadGitaHindiChapterView(chapter_id):
         return render_template(f'content/{blueprint_name}/post/index.html', **context)
 
 
-@blueprint.route(f'/{base_url}/<chapter_id>/<text_id>/')
+@blueprint.route(f'/{base_url}/<chapter_id>/<text_id>/', methods=['GET', 'POST'])
 def bhagavadGitaHindiTextView(chapter_id, text_id):
+
+    if request.method == 'POST':
+        command = f'code {DATABASE_REPO_DIR}/content/{base_url}/{chapter_id}/{text_id}/post.json'
+        subprocess.run(command.split(' '))
 
     books_data_url = '/content/index.json'
     books_data = RequestHelper().getData(books_data_url)
