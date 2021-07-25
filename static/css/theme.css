@@ -155,7 +155,13 @@ body {
 
 .hero-body .hero-bottom {
     position: absolute;
-    bottom: 0;
+    bottom: 0.5rem;
+}
+
+@media screen and (max-width: 769px) {
+    .hero-body .hero-bottom {
+        bottom: calc(var(--navbar-height) + 0.5rem);
+    }
 }
 
 @keyframes bounce {
