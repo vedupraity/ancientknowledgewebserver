@@ -1,23 +1,25 @@
-<nav class="navbar is-warning bg-gradient-light-orange" x-data="{ openNav: false }">
-    <div class="container">
-        <div class="navbar-brand">
-            <a href="{{ site_url }}" class="navbar-item">
-                <p class="has-text-weight-normal has-text-orange">
-                    <span>📖</span>
-                    <span class="pl-2">{{ site_title }}</span>
-                </p>
+<nav class="navbar is-light glass" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item pl-4" href="{{ site_url }}">
+            <img src="{{ site_url }}{{ url_for('static', filename='images/logo.png') }}" width="28" height="28">
+            <span class="pl-4">
+                {{ site_title }}
+            </span>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+            data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="{{ site_url }}{{ url_for('about_blueprint.aboutView') }}">
+                About
             </a>
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu"
-                :class="{ 'is-active': openNav }" x-on:click="openNav = !openNav">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-        <div class="navbar-menu" id="navMenu" :class="{ 'is-active': openNav }">
-            <div class="navbar-end">
-                <a href="{{ site_url }}{{ url_for('about_blueprint.aboutView') }}" class="navbar-item has-text-weight-normal has-text-orange">About</a>
-            </div>
         </div>
     </div>
 </nav>

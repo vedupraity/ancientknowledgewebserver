@@ -1,57 +1,104 @@
 {% extends 'generic/base.html' %}
 
 {% block hero_section %}
-<section class="hero is-small is-bold is-dark bg-gradient-orange">
-    <div class="hero-body">
-        <div class="container has-text-centered p-5">
-            <div class="content">
-                <h1 class="title is-3 mb-3 mt-o">{{ site_title }}</h1>
-                <h2 class="title is-5 mt-0 mb-0">{{ hero_title|default(site_tagline) }}</h2>
-            </div>
+<section class="hero is-light is-fullheight">
+    <div class="hero-body is-flex is-justify-content-center animatedParent animateOnce">
+        
+        <img class="mandala-lg rotating-ccw-slow">
+        <img class="mandala-md-bg rotating-cw-slow">
+        <img class="mandala-md rotating-cw-slow">
+
+        <h1 id="site-title" class="title is-1 has-text-centered m-0" title-en="Ancient Knowledge" title-hi="प्राचीन ज्ञान">
+        </h1>
+        
+        <div class="hero-bottom">
+            <a onclick="scrollToCards()">
+                <i class="scroll-down-btn fas fa-angle-down animated bounceInUp delay-1000"></i>
+            </a>
         </div>
     </div>
 </section>
 {% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container">
-        <div class="columns is-multiline is-centered" id="book-card-container">
-            {% for book in books %}
-            <div class="column is-4-desktop is-6-tablet">
-                <a {% if book.url %}href="{{ site_url }}/{{ book.url }}/"{% endif %}>
-                    <div class="card has-glow-md">
-                        <div class="card-image">
-                            <figure class="image is-16by9">
-                                <img src="{{ url_for('static', filename=book.coverImage) }}" alt="{{ book.title }}">
-                                {% if book.status  == 'wip' %}
-                                    <div class="is-overlay image-overlay">
-                                        <p class="title is-3 has-text-white">Coming Soon!</p>
-                                    </div>
+<section id="cards-section" class="section">
+    <div class="animatedParent animateOnce">
+        <h2 class="subtitle is-3 has-text-centered mt-5 mb-5 animated fadeInUpShort">
+            A free digital library of ancient scriptures, texts, and books
+        </h2>
+    </div>
+    
+    <!-- Begin search bar -->
+    <!-- <div class="control has-icons-right mb-6">
+        <input class="input is-medium is-rounded is-warning" type="text" placeholder="Search">
+        <span class="icon is-right">
+            <i class="fas fa-search"></i>
+        </span>
+    </div> -->
+    <!-- End search bar -->
+
+    <div class="columns is-multiline is-centered is-variable is-4">
+            
+        <!-- Begin horizontal card column -->
+        {% for book in books %}
+        <div
+            class="column is-full-tablet is-full-desktop is-full-widescreen is-full-fullhd is-flex animatedParent animateOnce">
+            <div class="card card-horizontal is-flex-grow-1 animated fadeInUpShort">
+                <div class="card-content p-2">
+                    <div class="columns is-multiline is-variable m-0">
+                        <div class="column image-column is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd">
+                            <figure class="image is-4by3">
+                                <img class="round-corners" src="{{ url_for('static', filename=book.coverImage) }}" alt="{{ book.title }}" alt="Placeholder image">
+                                {% if not book.url %}
+                                <div class="overlay-text glass">
+                                    Coming Soon!
+                                </div>
                                 {% endif %}
                             </figure>
                         </div>
-                        <div class="card-content">
-                            <div class="content">
+                        <div class="column">
+                            <div class="content m-0">
                                 <div>
-                                    <h2 class="mb-3 title is-6">{{ book.title }}</h2>
-                                    <p class="mb-3 is-italic">{{ book.author }}</p>
-                                </div>
-                                <hr>
-                                <div>
-                                    <div class="tags">
-                                        {% for tag in book.tags %}
-                                        <span class="tag is-white has-glow-sm">{{ tag }}</span>
-                                        {% endfor %}
+                                    <div class="m-0">
+                                        <h5 class="title is-5 m-0">
+                                            {{ book.title }}{% if book.subtitle %} - {{ book.subtitle }}{% endif %}
+                                        </h5>
+                                        <p class="m-0 mt-2">
+                                            {{ book.authors|join(",") }}
+                                        </p>
+                                    </div>
+                                    <hr class="m-0 mt-2">
+                                    <div class="m-0 mt-2">
+                                        <p class="has-text-justified">
+                                            {{ book.description|markdownToHTML|safe }}
+                                        </p>
                                     </div>
                                 </div>
+                                {% if book.url %}
+                                <div class="m-0 mt-4">
+                                    <p>
+                                        <a class="button is-outlined is-warning" href="{{ site_url }}/{{ book.url }}">
+                                            Read Now
+                                        </a>
+                                    </p>
+                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
-            {% endfor %}
         </div>
+        <!-- End horizontal card column -->
+        {% endfor %}
     </div>
+</section>
+
+<section class="section pt-0 animatedParent animateOnce">
+    <article class="message is-warning is-small animated fadeInUpShort">
+        <div class="message-body has-text-justified">
+            This website may contain Copyrighted material used under Fair Use (Section 107 of the Copyright Act) for personal research and non-profit educational purposes.
+        </div>
+    </article>
 </section>
 {% endblock %}
