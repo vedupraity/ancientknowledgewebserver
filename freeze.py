@@ -21,11 +21,12 @@ def bhagavadGitaHindiChapterView():
     for chapter_meta in bg_hindi_index_data:
         chapter_id = chapter_meta['id']
 
-        # yield {'chapter_id': chapter_id}
-        yield url_for(
+        url = url_for(
             f'{bg_hindi_blueprint_name}_blueprint.bhagavadGitaHindiChapterView',
             chapter_id=chapter_id
         )
+        print(f"Generating static page for url {url}")
+        yield url
 
 
 @freezer.register_generator
@@ -34,13 +35,14 @@ def bhagavadGitaHindiTextView():
         chapter_id = chapter_meta['id']
         if chapter_meta['isNested']:
             for text_id in chapter_meta['pages']:
-
-                # yield {'chapter_id': chapter_id, 'text_id': text_id}
-                yield url_for(
+                
+                url = url_for(
                     f'{bg_hindi_blueprint_name}_blueprint.bhagavadGitaHindiTextView',
                     chapter_id=chapter_id,
                     text_id=text_id
                 )
+                print(f"Generating static page for url {url}")
+                yield url
 
 # bhagavad gita english - urls
 
@@ -57,11 +59,12 @@ def bhagavadGitaEnglishChapterView():
     for chapter_meta in bg_english_index_data:
         chapter_id = chapter_meta['id']
 
-        # yield {'chapter_id': chapter_id}
-        yield url_for(
+        url = url_for(
             f'{bg_english_blueprint_name}_blueprint.bhagavadGitaEnglishChapterView',
             chapter_id=chapter_id
         )
+        print(f"Generating static page for url {url}")
+        yield url
 
 
 @freezer.register_generator
@@ -71,12 +74,13 @@ def bhagavadGitaEnglishTextView():
         if chapter_meta['isNested']:
             for text_id in chapter_meta['pages']:
 
-                # yield {'chapter_id': chapter_id, 'text_id': text_id}
-                yield url_for(
+                url = url_for(
                     f'{bg_english_blueprint_name}_blueprint.bhagavadGitaEnglishTextView',
                     chapter_id=chapter_id,
                     text_id=text_id
                 )
+                print(f"Generating static page for url {url}")
+                yield url
 
 
 if __name__ == '__main__':

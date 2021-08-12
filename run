@@ -51,8 +51,7 @@ deploy () {
     echo "Deploying static site on github pages"
     cp -r build/* ../ancientknowledgewebsite/
     cd ../ancientknowledgewebsite/
-    echo "Type in commit message below:"
-    read commit_message
+    read -p 'Commit message: ' commit_message
     git add .
     git commit -m "$commit_message"
     git push origin master
