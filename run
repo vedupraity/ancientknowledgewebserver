@@ -26,6 +26,7 @@ usage()
 # Select environment variables
 
 ENV=".env.prod"
+deploy_commit_message=""
 
 if [ $2 ] && [ $2 == "dev" ]; then
     ENV=".env.dev"
@@ -51,9 +52,8 @@ deploy () {
     echo "Deploying static site on github pages"
     cp -r build/* ../ancientknowledgewebsite/
     cd ../ancientknowledgewebsite/
-    read -p 'Commit message: ' commit_message
     git add .
-    git commit -m "$commit_message"
+    git commit -m "$deploy_commit_message"
     git push origin master
 }
 
@@ -62,6 +62,8 @@ if [ "$1" == "server" ]; then
 elif [ "$1" == "build" ]; then
     build
 elif [ "$1" == "deploy" ]; then
+    read -p 'Deployment commit message: ' deploy_commit_message
+    build
     deploy
 else
     usage
