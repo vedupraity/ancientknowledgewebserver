@@ -43,6 +43,11 @@ CONTENT = {
         'base_url': 'bhagavad-gita-english',
         'keywords': ['Ancient', 'Knowledge', 'India', 'Shrimad', 'Bhagavad', 'Gita', 'Yatharoop', 'As It Is', 'Mahabharat', 'Krishna', 'Prabhupad', 'English']
     },
+    'ramcharitmanas_hindi': {
+        'page_title': f'{SITE_CONFIG["site_title"]} | Shriramcharitmanas | Hindi',
+        'base_url': 'ramcharitmanas-hindi',
+        'keywords': ['Ancient', 'Knowledge', 'India', 'Ramcharitmanas', 'Shriramcharitmanas', 'Hindi', 'Ram', 'Rama']
+    },
 }
 
 # End blueprint constants

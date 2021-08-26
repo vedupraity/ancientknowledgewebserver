@@ -6,6 +6,7 @@ from blueprints.site.about import blueprint as about_blueprint
 
 from blueprints.content.bhagavad_gita_hindi import blueprint as bhagavad_gita_hindi_blueprint
 from blueprints.content.bhagavad_gita_english import blueprint as bhagavad_gita_english_blueprint
+from blueprints.content.ramcharitmanas_hindi import blueprint as ramcharitmanas_hindi_blueprint
 
 
 # Initialise flask app
@@ -21,6 +22,7 @@ app.register_blueprint(about_blueprint)
 # Register content blueprints
 app.register_blueprint(bhagavad_gita_hindi_blueprint)
 app.register_blueprint(bhagavad_gita_english_blueprint)
+app.register_blueprint(ramcharitmanas_hindi_blueprint)
 
 
 if __name__ == '__main__':

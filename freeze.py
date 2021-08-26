@@ -82,6 +82,42 @@ def bhagavadGitaEnglishTextView():
                 print(f"Generating static page for url {url}")
                 yield url
 
+# Ramcharitmanas hindi - urls
+
+ramcharitmanas_hindi_blueprint_name = 'ramcharitmanas_hindi'
+ramcharitmanas_hindi_base_url = CONTENT[ramcharitmanas_hindi_blueprint_name]['base_url']
+
+ramcharitmanas_hindi_index_url = f'/content/{ramcharitmanas_hindi_base_url}/index.json'
+ramcharitmanas_hindi_index_data = RequestHelper().getData(ramcharitmanas_hindi_index_url)
+
+
+@freezer.register_generator
+def ramcharitmanasHindiChapterView():
+    for chapter_meta in ramcharitmanas_hindi_index_data:
+        chapter_id = chapter_meta['id']
+
+        url = url_for(
+            f'{ramcharitmanas_hindi_blueprint_name}_blueprint.ramcharitmanasHindiChapterView',
+            chapter_id=chapter_id
+        )
+        print(f"Generating static page for url {url}")
+        yield url
+
+
+@freezer.register_generator
+def ramcharitmanasHindiTextView():
+    for chapter_meta in ramcharitmanas_hindi_index_data:
+        chapter_id = chapter_meta['id']
+        if chapter_meta['isNested']:
+            for text_id in chapter_meta['pages']:
+                
+                url = url_for(
+                    f'{ramcharitmanas_hindi_blueprint_name}_blueprint.ramcharitmanasHindiTextView',
+                    chapter_id=chapter_id,
+                    text_id=text_id
+                )
+                print(f"Generating static page for url {url}")
+                yield url
 
 if __name__ == '__main__':
     freezer.freeze()
