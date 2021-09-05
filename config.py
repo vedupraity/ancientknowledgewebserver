@@ -48,6 +48,11 @@ CONTENT = {
         'base_url': 'ramcharitmanas-hindi',
         'keywords': ['Ancient', 'Knowledge', 'India', 'Ramcharitmanas', 'Shriramcharitmanas', 'Hindi', 'Ram', 'Rama']
     },
+    'ramcharitmanas_english': {
+        'page_title': f'{SITE_CONFIG["site_title"]} | Shriramcharitmanas | English',
+        'base_url': 'ramcharitmanas-english',
+        'keywords': ['Ancient', 'Knowledge', 'India', 'Ramcharitmanas', 'Shriramcharitmanas', 'English', 'Ram', 'Rama']
+    },
 }
 
 # End blueprint constants

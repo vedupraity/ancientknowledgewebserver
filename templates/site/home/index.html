@@ -50,7 +50,7 @@
                                 <div class="column image-column is-full-tablet is-one-third-desktop is-one-third-widescreen is-one-quarter-fullhd">
                                     <figure class="image is-4by3">
                                         <img class="round-corners" src="{{ url_for('static', filename=book.coverImage) }}" alt="{{ book.title }}" alt="Placeholder image">
-                                        {% if not book.url %}
+                                        {% if book.status == 'wip' %}
                                         <div class="overlay-text glass">
                                             Coming Soon!
                                         </div>
@@ -75,11 +75,19 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        {% if book.url %}
+                                        {% if book.status != 'wip' %}
                                         <div class="m-0 mt-4">
                                             <p>
                                                 <a class="button is-outlined is-warning" href="{{ site_url }}/{{ book.url }}">
                                                     Read Now
+                                                </a>
+                                            </p>
+                                        </div>
+                                        {% elif env == 'dev' %}
+                                        <div class="m-0 mt-4">
+                                            <p>
+                                                <a href="{{ site_url }}/{{ book.url }}">
+                                                    [{{ env }}] Read Now
                                                 </a>
                                             </p>
                                         </div>

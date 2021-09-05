@@ -119,5 +119,43 @@ def ramcharitmanasHindiTextView():
                 print(f"Generating static page for url {url}")
                 yield url
 
+# Ramcharitmanas english - urls
+
+ramcharitmanas_english_blueprint_name = 'ramcharitmanas_english'
+ramcharitmanas_english_base_url = CONTENT[ramcharitmanas_english_blueprint_name]['base_url']
+
+ramcharitmanas_english_index_url = f'/content/{ramcharitmanas_english_base_url}/index.json'
+ramcharitmanas_english_index_data = RequestHelper().getData(ramcharitmanas_english_index_url)
+
+
+@freezer.register_generator
+def ramcharitmanasEnglishChapterView():
+    for chapter_meta in ramcharitmanas_english_index_data:
+        chapter_id = chapter_meta['id']
+
+        url = url_for(
+            f'{ramcharitmanas_english_blueprint_name}_blueprint.ramcharitmanasEnglishChapterView',
+            chapter_id=chapter_id
+        )
+        print(f"Generating static page for url {url}")
+        yield url
+
+
+@freezer.register_generator
+def ramcharitmanasEnglishTextView():
+    for chapter_meta in ramcharitmanas_english_index_data:
+        chapter_id = chapter_meta['id']
+        if chapter_meta['isNested']:
+            for text_id in chapter_meta['pages']:
+                
+                url = url_for(
+                    f'{ramcharitmanas_english_blueprint_name}_blueprint.ramcharitmanasEnglishTextView',
+                    chapter_id=chapter_id,
+                    text_id=text_id
+                )
+                print(f"Generating static page for url {url}")
+                yield url
+
+
 if __name__ == '__main__':
     freezer.freeze()
