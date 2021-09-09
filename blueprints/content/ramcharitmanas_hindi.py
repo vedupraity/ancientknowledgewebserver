@@ -86,14 +86,19 @@ def ramcharitmanasHindiChapterView(chapter_id):
     if page_meta['isNested']:
         text_data = []
 
+        post_meta_url = f'/content/{base_url}/{chapter_id}/index.json'
+        post_meta = RequestHelper().getData(post_meta_url)
+
         for text_id in page_meta['pages']:
             post_data_url = f'/content/{base_url}/{chapter_id}/{text_id}/post.json'
             post_data = RequestHelper().getData(post_data_url)
 
+            _meta = list(filter(lambda i: i['id'] == text_id, post_meta))[0]
+
             text_data.append({
                 'id': text_id,
-                'title': f'{page_meta["title"]} - भाग {hindiNumeral(text_id)}',
-                'summary': ""
+                'title': f'{page_meta["title"]} - भाग {",".join(hindiNumeral(text_id).split("-"))}',
+                'summary': [f'{_meta["subtitle"]}']
             })
 
         context.update({
