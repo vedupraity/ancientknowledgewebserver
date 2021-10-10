@@ -4,7 +4,15 @@
             <p>Copyright Notice</p>
         </div>
         <div class="message-body has-text-centered">
-            <p class="">All material used here belongs to and copyrighted under Gitapress, Gorakhpur.</p>
+            {% for text in copyright_message %}
+                <p
+                    {% if loop.index0 + 1 != copyright_message|length %}
+                        class="mb-3"
+                    {% endif %}
+                >
+                    {{ text|markdownToHTML|safe }}
+                </p>
+            {% endfor %}
         </div>
     </article>
 </section>

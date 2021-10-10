@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    {# Global site tag (gtag.js) - Google Analytics #}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics_tracking_id }}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#ff902b" />
 
-    <!-- Begin SEO tags -->
+    {# Begin SEO tags #}
     <title>{% if env == "dev" %}[{{env}}] {% endif %}{{ page_title|default(site_title) }}</title>
     <meta name="description" content="{{ page_description|default(site_description) }}">
     <meta name="keywords" content="{% if page_keywords|length %}{{ page_keywords|join(', ') }}{% else %}{{ site_keywords|join(', ') }}{% endif %}">
@@ -30,7 +30,7 @@
     <meta property="twitter:title" content="{{ page_title }}" />
     <meta property="twitter:description" content="{{ page_description|default(site_description) }}" />
     <meta property="twitter:image" content="{% if site_image %}{{ site_url }}{{ url_for('static', filename=site_image) }}{% else %}{{ site_url }}{{ url_for('static', filename='images/open-book-cover.jpg') }}{% endif %}" />
-    <!-- End SEO tags -->
+    {# End SEO tags #}
 
     <link rel="icon" href="{{ site_url }}{{ url_for('static', filename='images/favicon.ico') }}">
     <link rel="shortcut icon" type="image/png" href="{{ site_url }}{{ url_for('static', filename='images/logo.png') }}" />
@@ -45,7 +45,7 @@
 
 </head>
 
-<body class="dark-modes">
+<body>
     {% include "generic/navbar.html" %}
 
     {% block hero_section %}{% endblock %}
