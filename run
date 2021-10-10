@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # display usage
 
@@ -18,13 +18,15 @@ usage()
     echo "example:"
     echo "  ./run server dev"
     echo "  ./run build prod"
+    echo "  ./run deploy"
 }
 
 . venv/bin/activate
 
-# identify environment
+# Select environment variables
 
 ENV=".env.prod"
+deploy_commit_message=""
 
 if [ $2 ] && [ $2 == "dev" ]; then
     ENV=".env.dev"
@@ -32,10 +34,37 @@ fi
 
 # run commands
 
-if [ "$1" == "server" ]; then
+runserver () {
+    echo "Running flask server in $ENV environment"
+    echo "Environment variables:"
+    cat $ENV
     source $ENV && python app.py
-elif [ "$1" == "build" ]; then
+}
+
+build () {
+    echo "Generating static pages in $ENV environment"
+    echo "Environment variables:"
+    cat $ENV
     source $ENV && python freeze.py
+}
+
+deploy () {
+    echo "Deploying static site on github pages"
+    cp -r build/* ../ancientknowledgewebsite/
+    cd ../ancientknowledgewebsite/
+    git add .
+    git commit -m "$deploy_commit_message"
+    git push origin master
+}
+
+if [ "$1" == "server" ]; then
+    runserver
+elif [ "$1" == "build" ]; then
+    build
+elif [ "$1" == "deploy" ]; then
+    read -p 'Deployment commit message: ' deploy_commit_message
+    build
+    deploy
 else
     usage
     exit 1

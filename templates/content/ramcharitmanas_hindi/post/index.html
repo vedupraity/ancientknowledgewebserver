@@ -61,6 +61,12 @@
                                                     </li>
                                                 {% endfor %}
                                             </ol>
+                                        {% elif group.type == 'hr' %}
+                                            <hr
+                                                {% if group.groupStyle %}
+                                                    class="{{ group.groupStyle|join(' ') }}"
+                                                {% endif %}
+                                            >
                                         {% endif %}
                                     
                                     {% endfor %}

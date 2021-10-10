@@ -16,6 +16,7 @@ blueprint = Blueprint(f'{blueprint_name}_blueprint', __name__)
 page_title = CONTENT[blueprint_name]['page_title']
 base_url = CONTENT[blueprint_name]['base_url']
 page_keywords = CONTENT[blueprint_name]['keywords']
+copyright_message = CONTENT[blueprint_name]['copyright_message']
 
 
 @blueprint.route(f'/{base_url}/')
@@ -46,6 +47,7 @@ def bhagavadGitaHindiIndexView():
         'page_keywords': page_keywords,
         'site_image': selected_book_meta['coverImage'],
         'hero_title': selected_book_meta['title'],
+        'copyright_message': copyright_message,
         'breadcrumb': breadcrumb.data,
         'index_data': index_data,
     })
@@ -108,6 +110,7 @@ def bhagavadGitaHindiChapterView(chapter_id):
             'page_description': f'Read Shrimad Bhagavad Gita - Yatharoop in hindi. श्रीमद्भगवद्गीता - यथारूप हिंदी में पढ़ें।',
             'page_keywords': page_keywords,
             'hero_title': book_meta['title'],
+            'copyright_message': copyright_message,
             'breadcrumb': breadcrumb.data,
             'index_data': text_data,
         })
@@ -126,6 +129,7 @@ def bhagavadGitaHindiChapterView(chapter_id):
             'page_keywords': page_keywords,
             'page_type': 'article',
             'hero_title': book_meta['title'],
+            'copyright_message': copyright_message,
             'breadcrumb': breadcrumb.data,
             'book_meta': book_meta,
             'page_meta': page_meta,
@@ -187,6 +191,7 @@ def bhagavadGitaHindiTextView(chapter_id, text_id):
         'page_keywords': page_keywords,
         'page_type': 'article',
         'hero_title': book_meta['title'],
+        'copyright_message': copyright_message,
         'breadcrumb': breadcrumb.data,
         'book_meta': book_meta,
         'page_meta': page_meta,

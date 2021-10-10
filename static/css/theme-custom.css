@@ -1,4 +1,211 @@
-.bg-gradient-orange {
+:root {
+    --black: rgb(0, 0, 0);
+    --white: rgb(255, 255, 255);
+    --gray-dark: rgb(50, 50, 50);
+    --gray-dark-25: rgba(50, 50, 50, 25%);
+    --gray-dark-50: rgba(50, 50, 50, 50%);
+
+    --ivory: rgb(255, 254, 238);
+    --saffron: rgb(241, 194, 47);
+    --saffron-50: rgb(241, 194, 47, 50%);
+    --saffron-dark: rgb(255, 144, 43);
+    --saffron-dark-50: rgb(255, 144, 43, 50%);
+    --pumpkin: rgb(255, 122, 14);
+    --red: rgb(233, 60, 45);
+}
+
+
+.hero-transparent {
+    background: var(--gray-dark) !important;
+    text-shadow: 0px 4px 4px var(--gray-dark-50);
+}
+
+.hero-transparent .title {
+    color: var(--white) !important;
+}
+
+@media screen and (max-width: 768px) {
+    .hero-transparent .hero-body {
+        padding: 1.5rem 1.5rem;
+    }
+    .hero-transparent .title.is-2 {
+        font-size: 1.5rem;
+    }
+    .hero-transparent .title.is-4 {
+        font-size: 1rem;
+    }
+}
+
+body {
+    position: relative;
+}
+
+body, button, input, optgroup, select, textarea {
+    font-family: Laila !important;
+    color: var(--gray-dark) !important;
+    
+}
+
+.is-family-primary {
+    font-family: Laila !important;
+    color: var(--gray-dark) !important;
+}
+
+body .cover-bg {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 50vh;
+    background-image: linear-gradient(180deg, var(--gray-dark-25), var(--white)), var(--page-background-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body.dark-mode .cover-bg {
+    background-image: linear-gradient(180deg, var(--gray-dark-25), var(--gray-dark)), var(--page-background-image);
+}
+
+.content-block {
+    background: var(--white);
+}
+
+.dark-mode .content-block {
+    background: var(--gray-dark);
+}
+
+.navbar.is-primary {
+    background: var(--saffron) !important;
+}
+
+.dark-mode .navbar.is-primary {
+    background: var(--gray-dark) !important;
+}
+
+.navbar.is-primary .navbar-brand>.navbar-item, .navbar.is-primary .navbar-brand .navbar-link, .navbar span {
+    color: var(--gray-dark);
+}
+
+.dark-mode .navbar.is-primary .navbar-brand>.navbar-item, .dark-mode .navbar.is-primary .navbar-brand .navbar-link, .dark-mode .navbar span {
+    color: var(--saffron);
+}
+
+.navbar.is-primary .navbar-brand>a.navbar-item:focus, .navbar.is-primary .navbar-brand>a.navbar-item:hover, .navbar.is-primary .navbar-brand>a.navbar-item.is-active, .navbar.is-primary .navbar-brand .navbar-link:focus, .navbar.is-primary .navbar-brand .navbar-link:hover, .navbar.is-primary .navbar-brand .navbar-link.is-active {
+    color: var(--gray-dark);
+    background-color: var(--saffron-dark);
+}
+
+.dark-mode .navbar.is-primary .navbar-brand>a.navbar-item:focus, .dark-mode .navbar.is-primary .navbar-brand>a.navbar-item:hover, .dark-mode .navbar.is-primary .navbar-brand>a.navbar-item.is-active, .dark-mode .navbar.is-primary .navbar-brand .navbar-link:focus, .dark-mode .navbar.is-primary .navbar-brand .navbar-link:hover, .dark-mode .navbar.is-primary .navbar-brand .navbar-link.is-active {
+    color: var(--gray-dark);
+    background-color: var(--saffron-dark);
+}
+
+.navbar.is-primary .navbar-start>.navbar-item, .navbar.is-primary .navbar-start .navbar-link, .navbar.is-primary .navbar-end>.navbar-item, .navbar.is-primary .navbar-end .navbar-link {
+    color: var(--gray-dark);
+    font-weight: bold !important;
+}
+
+.dark-mode .navbar.is-primary .navbar-start>.navbar-item, .dark-mode .navbar.is-primary .navbar-start .navbar-link, .dark-mode .navbar.is-primary .navbar-end>.navbar-item, .dark-mode .navbar.is-primary .navbar-end .navbar-link {
+    color: var(--saffron);
+    font-weight: bold !important;
+}
+
+.navbar.is-primary .navbar-start>a.navbar-item:focus, .navbar.is-primary .navbar-start>a.navbar-item:hover, .navbar.is-primary .navbar-start>a.navbar-item.is-active, .navbar.is-primary .navbar-start .navbar-link:focus, .navbar.is-primary .navbar-start .navbar-link:hover, .navbar.is-primary .navbar-start .navbar-link.is-active, .navbar.is-primary .navbar-end>a.navbar-item:focus, .navbar.is-primary .navbar-end>a.navbar-item:hover, .navbar.is-primary .navbar-end>a.navbar-item.is-active, .navbar.is-primary .navbar-end .navbar-link:focus, .navbar.is-primary .navbar-end .navbar-link:hover, .navbar.is-primary .navbar-end .navbar-link.is-active {
+    color: var(--gray-dark);
+    background-color: var(--saffron-dark);
+}
+
+.dark-mode .navbar.is-primary .navbar-start>a.navbar-item:focus, .dark-mode .navbar.is-primary .navbar-start>a.navbar-item:hover, .dark-mode .navbar.is-primary .navbar-start>a.navbar-item.is-active, .dark-mode .navbar.is-primary .navbar-start .navbar-link:focus, .dark-mode .navbar.is-primary .navbar-start .navbar-link:hover, .dark-mode .navbar.is-primary .navbar-start .navbar-link.is-active, .dark-mode .navbar.is-primary .navbar-end>a.navbar-item:focus, .dark-mode .navbar.is-primary .navbar-end>a.navbar-item:hover, .dark-mode .navbar.is-primary .navbar-end>a.navbar-item.is-active, .dark-mode .navbar.is-primary .navbar-end .navbar-link:focus, .dark-mode .navbar.is-primary .navbar-end .navbar-link:hover, .dark-mode .navbar.is-primary .navbar-end .navbar-link.is-active {
+    color: var(--gray-dark);
+    background-color: var(--saffron-dark);
+}
+
+.dark-mode .navbar-menu {
+    background: var(--gray-dark);
+}
+
+.switch.is-outlined input[type=checkbox]+.check, .switch.is-outlined:hover input[type=checkbox]+.check {
+    border: 0.1rem solid var(--gray-dark);
+}
+
+.switch.is-outlined input[type=checkbox]+.check:before {
+    background-color: var(--gray-dark);
+}
+
+.dark-mode .switch.is-outlined:hover input[type=checkbox]:checked+.check.is-info {
+    border-color: var(--saffron);
+}
+
+.dark-mode .switch.is-outlined input[type=checkbox]:checked+.check.is-info:before {
+    background: var(--saffron);
+}
+
+.dark-mode .switch.is-outlined input[type=checkbox]:checked+.check.is-info {
+    border-color: var(--saffron);
+}
+
+.switch input[type=checkbox]+.check:before {
+    width: 1.075em;
+}
+
+.switch.is-small {
+    font-size: 0.65rem;
+    margin-top: -0.1rem;
+}
+
+.card {
+    border-radius: 0.5rem;
+    background: var(--white);
+    box-shadow: 0px 4px 4px var(--saffron-dark-50);
+    color: var(--gray-dark);
+}
+
+.dark-mode .card {
+    border-radius: 0.5rem;
+    background: var(--gray-dark);
+    box-shadow: 0px 4px 4px var(--saffron-dark-50);
+    color: var(--gray-dark);
+}
+
+.column .card {
+    height: 100%;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+    color: var(--gray-dark);
+}
+
+.dark-mode .content h1, .dark-mode .content h2, .dark-mode .content h3, .dark-mode .content h4, .dark-mode .content h5, .dark-mode .content h6, .dark-mode .content h5, .dark-mode .content p {
+    color: var(--ivory);
+}
+
+.dark-mode strong {
+    color: var(--ivory);
+}
+
+a {
+    color: var(--saffron-dark);
+}
+
+a:hover {
+    color: var(--red);
+}
+
+.tag:not(body).is-white {
+    color: var(--gray-dark);
+    border: 1px solid var(--gray-dark-25);
+    padding-bottom: 0.1rem;
+}
+
+.dark-mode .tag:not(body).is-white {
+    color: var(--gray-dark);
+}
+
+/* ~~~ old styles ~~~ */
+
+
+/* .bg-gradient-orange {
     background-image: linear-gradient(to right, #EAB543 0%, #F97F51 100%) !important;
 }
 
@@ -71,4 +278,4 @@ ol[type=devanagari] {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
