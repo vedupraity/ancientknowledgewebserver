@@ -12,16 +12,6 @@ jobs:
         with:
           python-version: '3.8'
           architecture: 'x64'
-        run: echo "📥 Installing dependencies"
-      - name: build
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-          architecture: 'x64'
-        run: echo "⚒️ Building static pages"
-      - name: deploy
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-          architecture: 'x64'
-        run: echo "🚀 Deploying to production"
+      - run: echo "📥 Installing dependencies"
+      - run: echo "⚒️ Building static pages"
+      - run: echo "🚀 Deploying to production"
