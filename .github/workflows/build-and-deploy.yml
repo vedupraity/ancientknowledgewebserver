@@ -1,5 +1,8 @@
 name: Build and Deploy
-on: [push]
+on:
+  push:
+    branches:
+      - feature/github-actions
 jobs:
   Build:
     runs-on: ubuntu-latest
