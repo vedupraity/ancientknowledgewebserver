@@ -19,12 +19,11 @@ jobs:
           echo "using python $(python3 --version)"
           echo "using pip $(pip3 --version)"
           ls -lah
-          pip3 freeze | grep Flask
           pip3 install -r requirements.txt
-          pip3 freeze | grep Flask
       - name: ⚒️ Build
         run: |
-          python --version
+          python3 --version
+          pip3 freeze
       - name: 🚀 Deploy
         run: |
           echo "🚀 Deploying to production"
