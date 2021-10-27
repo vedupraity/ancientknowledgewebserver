@@ -15,7 +15,7 @@ jobs:
         run: |
           which python
           python3 --version
-          ls -lah
+          ls ../../ -lah
       - name: ⚒️ Build
         run: |
           python --version
