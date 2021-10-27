@@ -17,7 +17,7 @@ jobs:
       - name: 📥 Install
         run: |
           echo "using python $(python3 --version)"
-          echo "using pip $(pip3 --verion)"
+          echo "using pip $(pip3 --version)"
           ls -lah
           pip3 freeze | grep Flask
           pip3 install -r requirements.txt
