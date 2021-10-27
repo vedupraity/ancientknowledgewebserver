@@ -6,16 +6,19 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ancientknowledgewebserver
     steps:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
           architecture: 'x64'
       - name: 📥 Install
+        working-directory: ${{env.working-directory}}
         run: |
           which python
           python3 --version
-          ls ../ -lah
+          ls -lah
       - name: ⚒️ Build
         run: |
           python --version
