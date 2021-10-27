@@ -11,8 +11,9 @@ jobs:
         with:
           python-version: '3.8'
           architecture: 'x64'
-      - run: echo "📥 Installing dependencies"
-      - run: |
-        python3 --version
-      - run: echo "⚒️ Building static pages"
-      - run: echo "🚀 Deploying to production"
+      - name: 📥 Install
+        run: |
+          which python
+          python3 --version
+      # - run: echo "⚒️ Building static pages"
+      # - run: echo "🚀 Deploying to production"
