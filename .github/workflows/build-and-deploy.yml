@@ -15,5 +15,8 @@ jobs:
         run: |
           which python
           python3 --version
-      # - run: echo "⚒️ Building static pages"
+          ls -lah
+      - name: ⚒️ Build
+        run: |
+          python --version
       # - run: echo "🚀 Deploying to production"
