@@ -15,12 +15,16 @@ jobs:
           python-version: '3.8'
           architecture: 'x64'
       - name: 📥 Install
-        # working-directory: ${{env.working-directory}}
         run: |
-          which python
-          python3 --version
+          echo "using python $(python3 --version)"
+          echo "using pip $(pip3 --verion)"
           ls -lah
+          pip3 freeze | grep Flask
+          pip3 install -r requirements.txt
+          pip3 freeze | grep Flask
       - name: ⚒️ Build
         run: |
           python --version
-      # - run: echo "🚀 Deploying to production"
+      - name: 🚀 Deploy
+        run: |
+          echo "🚀 Deploying to production"
