@@ -4,10 +4,10 @@ on:
     branches:
       - feature/github-actions
 jobs:
-  Build:
+  Build and Deploy:
     runs-on: ubuntu-latest
     env:
-      working-directory: ancientknowledgewebserver
+      working-directory: ../ancientknowledgewebserver
     steps:
       - uses: actions/setup-python@v2
         with:
