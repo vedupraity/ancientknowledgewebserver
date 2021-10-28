@@ -24,12 +24,20 @@ jobs:
           mkdir build
           touch build/index.html
       - name: 🚀 Deploy
+        uses: actions/checkout@master
+        with:
+          name: vedupraity/ancientknowledgewebsite
+          ref: master
         run: |
-          echo "🚀 Deploying to production"
-          ls build -lah
-          git clone https://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@github.com/vedupraity/ancientknowledgewebsite.git
           ls -lah
-          cd ancientknowledgewebsite
-          git config user.name "Ved (bot)"
-          git config user.email "vedprakashupraity@gmail.com"
-          ls -lah
+
+      # - name: 🚀 Deploy
+      #   run: |
+      #     echo "🚀 Deploying to production"
+      #     ls build -lah
+      #     git clone https://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@github.com/vedupraity/ancientknowledgewebsite.git
+      #     ls -lah
+      #     cd ancientknowledgewebsite
+      #     git config user.name "Ved (bot)"
+      #     git config user.email "vedprakashupraity@gmail.com"
+      #     ls -lah
