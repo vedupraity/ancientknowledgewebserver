@@ -27,3 +27,5 @@ jobs:
         run: |
           echo "🚀 Deploying to production"
           ls build -lah
+          git clone git@github.com:vedupraity/ancientknowledgewebsite.git
+          ls -lah
