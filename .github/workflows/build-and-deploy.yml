@@ -6,8 +6,6 @@ on:
 jobs:
   BuildAndDeploy:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ../ancientknowledgewebserver
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
