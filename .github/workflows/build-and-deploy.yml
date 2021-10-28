@@ -4,7 +4,7 @@ on:
     branches:
       - feature/github-actions
 jobs:
-  BuildAndDeploy:
+  Build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,19 +23,19 @@ jobs:
           # source .env.prod && python freeze.py
           mkdir build
           touch build/index.html
-      - name: checkout
-        uses: actions/checkout@master
+      - name: Cache build artifacts
+        uses: actions/cache@v2
         with:
-          name: vedupraity/ancientknowledgewebsite
-          ref: master
+          key: build-artifact
+          path: ./build
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
       - name: 🚀 Deploy
         run: |
+          echo "🚀 Deploying to production"
           ls -lah
-
-      # - name: 🚀 Deploy
-      #   run: |
-      #     echo "🚀 Deploying to production"
-      #     ls build -lah
+      
       #     git clone https://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@github.com/vedupraity/ancientknowledgewebsite.git
       #     ls -lah
       #     cd ancientknowledgewebsite
