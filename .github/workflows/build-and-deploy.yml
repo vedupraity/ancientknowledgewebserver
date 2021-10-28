@@ -17,20 +17,25 @@ jobs:
           echo "using python $(python3 --version)"
           echo "using pip $(pip3 --version)"
           # pip3 install -r requirements.txt
+      - name: Cache build artifacts
+        id: build-artifact
+        uses: actions/cache@v2
+        with:
+          path: ./build
       - name: ⚒️ Build
         run: |
           # uncomment below line to freeze
           # source .env.prod && python freeze.py
           mkdir build
           touch build/index.html
-      - name: Cache build artifacts
-        uses: actions/cache@v2
-        with:
-          key: build-artifact
-          path: ./build
   Deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Cache build artifacts
+        id: build-artifact
+        uses: actions/cache@v2
+        with:
+          path: ./build
       - name: 🚀 Deploy
         run: |
           echo "🚀 Deploying to production"
