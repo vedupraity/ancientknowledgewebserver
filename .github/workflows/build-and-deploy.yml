@@ -19,11 +19,9 @@ jobs:
           echo "using python $(python3 --version)"
           echo "using pip $(pip3 --version)"
           pip3 install -r requirements.txt
-          bash run build prod
       - name: ⚒️ Build
         run: |
-          python3 --version
-          pip3 freeze
+          source .env.prod && python freeze.py
       - name: 🚀 Deploy
         run: |
           echo "🚀 Deploying to production"
