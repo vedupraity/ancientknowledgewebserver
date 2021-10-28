@@ -18,8 +18,8 @@ jobs:
         run: |
           echo "using python $(python3 --version)"
           echo "using pip $(pip3 --version)"
-          ls -lah
           pip3 install -r requirements.txt
+          bash run build prod
       - name: ⚒️ Build
         run: |
           python3 --version
