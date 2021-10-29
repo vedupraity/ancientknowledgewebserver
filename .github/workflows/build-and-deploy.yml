@@ -35,13 +35,14 @@ jobs:
         id: build-artifact
         uses: actions/cache@v2
         with:
-          key: .
+          key: build
           path: ./build
       - name: 🚀 Deploy
         run: |
           echo "🚀 Deploying to production"
           ls -lah
-          cat index.html
+          ls -lah build
+          cat build/index.html
       
       #     git clone https://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@github.com/vedupraity/ancientknowledgewebsite.git
       #     ls -lah
