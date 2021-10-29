@@ -35,9 +35,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out my other private repo
-        uses: actions/checkout@feature/github-actions
+        uses: actions/checkout@v2
         with:
           repository: vedupraity/ancientknowledgewebsite
+          ref: feature/github-actions
           token: ${{ secrets.PAT_GITHUB_REPO }}
       - name: Download build artifact
         uses: actions/download-artifact@v2
