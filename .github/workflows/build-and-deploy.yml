@@ -34,7 +34,7 @@ jobs:
   Deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out my other private repo
+      - name: Check out repo - ancientknowledgewebsite
         uses: actions/checkout@v2
         with:
           repository: vedupraity/ancientknowledgewebsite
