@@ -16,15 +16,10 @@ jobs:
         run: |
           echo "using python $(python3 --version)"
           echo "using pip $(pip3 --version)"
-          # pip3 install -r requirements.txt
+          pip3 install -r requirements.txt
       - name: ⚒️ Build
         run: |
-          # uncomment below line to freeze
-          # source .env.prod && python freeze.py
-          mkdir build
-          echo "hellow 3" > build/index.html
-          ls -lah build
-          cat build/index.html
+          source .env.prod && python freeze.py
       - name: Upload build artifact
         uses: actions/upload-artifact@v2
         with:
@@ -48,8 +43,6 @@ jobs:
       - name: 🚀 Deploy
         run: |
           echo "🚀 Deploying to production"
-          ls -lah
-          cat index.html
 
           git config user.email "vedprakashupraity@gmail.com"
           git config user.name "Ved"
