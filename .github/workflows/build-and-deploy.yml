@@ -22,7 +22,7 @@ jobs:
           # uncomment below line to freeze
           # source .env.prod && python freeze.py
           mkdir build
-          touch build/index.html
+          echo "hellow" > build/index.html
   Deploy:
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +41,7 @@ jobs:
         run: |
           echo "🚀 Deploying to production"
           ls -lah
-          ls build -lah
+          cat index.html
       
       #     git clone https://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@github.com/vedupraity/ancientknowledgewebsite.git
       #     ls -lah
