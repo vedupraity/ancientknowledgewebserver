@@ -22,7 +22,7 @@ jobs:
           # uncomment below line to freeze
           # source .env.prod && python freeze.py
           mkdir build
-          echo "hellow 2" > build/index.html
+          echo "hellow 3" > build/index.html
           ls -lah build
           cat build/index.html
       - name: Upload build artifact
@@ -32,6 +32,7 @@ jobs:
           path: |
             build/*
   Deploy:
+    needs: Build
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo - ancientknowledgewebsite
