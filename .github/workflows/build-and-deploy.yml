@@ -1,0 +1,73 @@
+name: Build and Deploy
+
+### on github push event
+# on:
+#   push:
+#     branches:
+#       - feature/github-actions
+
+## on scheduled event
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '30 19 * * *' # 12:00 AM IST
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: vedupraity/ancientknowledgewebserver
+          ref: feature/github-actions
+          token: ${{ secrets.PAT_GITHUB_REPO }}
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+          architecture: "x64"
+
+      # - name: 📥 Install
+      #   run: |
+      #     echo "using python $(python3 --version)"
+      #     echo "using pip $(pip3 --version)"
+      #     # pip3 install -r requirements.txt
+
+      # - name: ⚒️ Build
+      #   run: |
+      #     source .env.prod && python freeze.py
+
+      # - name: Upload build artifact
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: build-artifact
+      #     path: |
+      #       build/*
+
+  Deploy:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      # - name: Check out repo - ancientknowledgewebsite
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: vedupraity/ancientknowledgewebsite
+      #     ref: feature/github-actions
+      #     token: ${{ secrets.PAT_GITHUB_REPO }}
+
+      # - name: Download build artifact
+      #   uses: actions/download-artifact@v2
+      #   with:
+      #     name: build-artifact
+
+      - name: 🚀 Deploy
+        env:
+          GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
+        run: |
+          echo "release $GITHUB_RUN_NUMBER on $(date -u)"
+          # git config user.email "vedprakashupraity@gmail.com"
+          # git config user.name "Ved"
+          # git status
+          # git add .
+          # git commit -m "release $GITHUB_RUN_NUMBER on $(date -u)"
+          # git push origin feature/github-actions
