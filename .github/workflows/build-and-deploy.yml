@@ -26,6 +26,11 @@ jobs:
   Deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out my other private repo
+        uses: actions/checkout@master
+        with:
+          repository: vedupraity/ancientknowledgewebsite
+          token: ${{ secrets.PAT_GITHUB_REPO }}
       - name: Cache build artifacts
         id: build-artifact
         uses: actions/cache@v2
@@ -36,6 +41,7 @@ jobs:
         run: |
           echo "🚀 Deploying to production"
           ls -lah
+          ls build -lah
       
       #     git clone https://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@github.com/vedupraity/ancientknowledgewebsite.git
       #     ls -lah
