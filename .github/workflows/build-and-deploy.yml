@@ -50,3 +50,4 @@ jobs:
           echo "🚀 Deploying to production"
           ls -lah
           cat index.html
+          git status
