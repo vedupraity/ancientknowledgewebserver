@@ -51,3 +51,6 @@ jobs:
           ls -lah
           cat index.html
           git status
+          git add .
+          git commit -m "release - $(date)"
+          git push origin feature/github-actions
