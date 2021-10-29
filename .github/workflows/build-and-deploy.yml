@@ -17,12 +17,6 @@ jobs:
           echo "using python $(python3 --version)"
           echo "using pip $(pip3 --version)"
           # pip3 install -r requirements.txt
-      - name: Cache build artifacts
-        id: build-artifact
-        uses: actions/cache@v2
-        with:
-          key: build
-          path: ./build
       - name: ⚒️ Build
         run: |
           # uncomment below line to freeze
@@ -36,6 +30,12 @@ jobs:
         id: build-artifact
         uses: actions/cache@v2
         with:
+          path: ./build
+      - name: Cache build artifacts
+        id: build-artifact
+        uses: actions/cache@v2
+        with:
+          key: build
           path: ./build
       - name: 🚀 Deploy
         run: |
