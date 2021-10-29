@@ -31,7 +31,7 @@ jobs:
         run: |
           echo "using python $(python3 --version)"
           echo "using pip $(pip3 --version)"
-          # pip3 install -r requirements.txt
+          pip3 install -r requirements.txt
 
       - name: ⚒️ Build
         run: |
@@ -64,10 +64,9 @@ jobs:
         env:
           GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
         run: |
-          echo "release $GITHUB_RUN_NUMBER on $(date -u)"
-          # git config user.email "vedprakashupraity@gmail.com"
-          # git config user.name "Ved"
-          # git status
-          # git add .
-          # git commit -m "release $GITHUB_RUN_NUMBER on $(date -u)"
-          # git push origin feature/github-actions
+          git config user.email "vedprakashupraity@gmail.com"
+          git config user.name "Ved"
+          git status
+          git add .
+          git commit -m "release $GITHUB_RUN_NUMBER on $(date -u)"
+          git push origin feature/github-actions
