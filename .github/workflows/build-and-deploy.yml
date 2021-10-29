@@ -50,6 +50,9 @@ jobs:
           echo "🚀 Deploying to production"
           ls -lah
           cat index.html
+
+          git config user.email "vedprakashupraity@gmail.com"
+          git config user.name "Ved"
           git status
           git add .
           git commit -m "release - $(date)"
