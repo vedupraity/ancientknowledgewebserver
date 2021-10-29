@@ -10,7 +10,7 @@ name: Build and Deploy
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '*/10 * * * *' # 12:00 AM IST
+    - cron:  '00 20 * * *' # 12:00 AM IST
 
 jobs:
   Build:
