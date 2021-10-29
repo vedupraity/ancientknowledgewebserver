@@ -21,6 +21,7 @@ jobs:
         id: build-artifact
         uses: actions/cache@v2
         with:
+          key: build
           path: ./build
       - name: ⚒️ Build
         run: |
