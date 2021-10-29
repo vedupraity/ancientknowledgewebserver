@@ -1,8 +1,17 @@
 name: Build and Deploy
+
+### on github push event 
+# on:
+#   push:
+#     branches:
+#       - feature/github-actions
+
+### on scheduled event
 on:
-  push:
-    branches:
-      - feature/github-actions
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '00 00 * * *'
+
 jobs:
   Build:
     runs-on: ubuntu-latest
