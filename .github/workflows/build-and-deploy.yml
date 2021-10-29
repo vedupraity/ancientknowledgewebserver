@@ -1,16 +1,16 @@
 name: Build and Deploy
 
 ### on github push event
-on:
-  push:
-    branches:
-      - feature/github-actions
-
-### on scheduled event
 # on:
-#   schedule:
-#     # * is a special character in YAML so you have to quote this string
-#     - cron:  '30 06 * * *' # 12:00 AM IST
+#   push:
+#     branches:
+#       - feature/github-actions
+
+## on scheduled event
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '20 19 * * *' # 12:00 AM IST
 
 jobs:
   Build:
