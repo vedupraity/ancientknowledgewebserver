@@ -28,10 +28,12 @@ jobs:
           architecture: "x64"
 
       - name: 📥 Install
+        env:
+          GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
         run: |
           echo "using python $(python3 --version)"
           echo "using pip $(pip3 --version)"
-          echo "build id - ${{ env.GITHUB_RUN_NUMBER }} ; date - $(date)"
+          echo "build id - $GITHUB_RUN_NUMBER ; date - $(date)"
           # pip3 install -r requirements.txt
 
       # - name: ⚒️ Build
