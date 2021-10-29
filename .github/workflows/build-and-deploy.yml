@@ -23,12 +23,14 @@ jobs:
           # source .env.prod && python freeze.py
           mkdir build
           echo "hellow" > build/index.html
-      - name: Cache build artifacts
-        id: build-artifact
-        uses: actions/cache@v2
+          ls -lah build
+          cat build/index.html
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
         with:
-          key: build
-          path: ./build
+          name: build-artifact
+          path: |
+            build
   Deploy:
     runs-on: ubuntu-latest
     steps:
@@ -37,22 +39,11 @@ jobs:
         with:
           repository: vedupraity/ancientknowledgewebsite
           token: ${{ secrets.PAT_GITHUB_REPO }}
-      - name: Cache build artifacts
-        id: build-artifact
-        uses: actions/cache@v2
+      - name: Download build artifact
+        uses: actions/download-artifact@v2
         with:
-          key: build
-          path: ./build
+          name: build-artifact
       - name: 🚀 Deploy
         run: |
           echo "🚀 Deploying to production"
           ls -lah
-          ls -lah build
-          cat build/index.html
-      
-      #     git clone https://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@github.com/vedupraity/ancientknowledgewebsite.git
-      #     ls -lah
-      #     cd ancientknowledgewebsite
-      #     git config user.name "Ved (bot)"
-      #     git config user.email "vedprakashupraity@gmail.com"
-      #     ls -lah
