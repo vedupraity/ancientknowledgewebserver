@@ -35,8 +35,8 @@ jobs:
         id: build-artifact
         uses: actions/cache@v2
         with:
-          key: build
-          path: ./
+          key: .
+          path: ./build
       - name: 🚀 Deploy
         run: |
           echo "🚀 Deploying to production"
