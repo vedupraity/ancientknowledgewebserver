@@ -23,6 +23,12 @@ jobs:
           # source .env.prod && python freeze.py
           mkdir build
           echo "hellow" > build/index.html
+      - name: Cache build artifacts
+        id: build-artifact
+        uses: actions/cache@v2
+        with:
+          key: build
+          path: ./build
   Deploy:
     runs-on: ubuntu-latest
     steps:
