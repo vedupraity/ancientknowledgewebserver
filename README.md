@@ -28,15 +28,14 @@ ancient_knowledge_site/  # project root
 ├── blueprints/  # flask blueprints
 │   ├── site/  # site routes and views
 │   └── content/  # content routes and views
-├── build/  # generated static html and assets
 ├── helpers/  # helper modules
 ├── static/  # css, images, js
 ├── templates/  # jinja templates
 │   ├── generic/  # base templates
 │   ├── site/  # site page templates
 │   └── content/  # content page templates
-├── .env.dev  # env vars (development)
-├── .env.prod  # env vars (production)
+├── .env.dev  # env vars (for development)
+├── .env.prod  # env vars (for production)
 ├── app.py  # flask app
 ├── config.py  # app settings and constants
 ├── freeze.py  # static site generation script
