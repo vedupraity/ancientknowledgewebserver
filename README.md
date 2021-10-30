@@ -1,14 +1,13 @@
 # Ancient Knowledge
 
-## Recollecting the lost knowledge
-
+Official Website URL: 
 https://www.ancientknowledge.in
 
 ---
 
 ## About
 
-Ancient Knowledge is an educational, open-source, and non-profit project to collect ancient Indian scriptures, books, texts based on history, mythology, philosophy, rituals, and spirituality.
+This is the Python/Flask project for the website.
 
 ---
 
@@ -57,7 +56,7 @@ https://github.com/vedupraity/ancientknowledgedatabase
 
 ```sh
 cd <ancientknowledgedatabase-repo-dir>
-python3 -m http.server 5001
+python3 server.py
 ```
 
 3. Clone flask app repository
@@ -74,11 +73,11 @@ pip install -r requirements.txt
 
 5. Freeze app into static files (building in dev)
 
+This will build artifacts in `build` directory with generated static pages and assets
+
 ```sh
 ./run build dev
 ```
-
-look into the `build` directory for generated static pages and assets
 
 6. Building for production
 
