@@ -13,7 +13,30 @@ on:
 #     - cron:  '30 18 * * *' # 12:00 AM IST
 
 jobs:
+  CheckCommits:
+    runs-on: ubuntu-latest
+    outputs:
+      hasCommitsInDatabase: ${{ steps.check-new-commits-in-database.outputs.has-new-commits }}
+      hasCommitsInWebserver: ${{ steps.check-new-commits-in-webserver.outputs.has-new-commits }}
+    steps:
+      - name: Check for new commits in database
+        id: check-new-commits-in-database
+        uses: adriangl/check-new-commits-action@v1
+        with:
+          token: ${{ secrets.PAT_GITHUB_REPO }}
+          seconds: 87300  # 24 Hours and 15 minutes = (24*60*60) + (15*60) Seconds
+          branch: 'master'
+      - name: Check for new commits in webserver
+        id: check-new-commits-in-webserver
+        uses: adriangl/check-new-commits-action@v1
+        with:
+          token: ${{ secrets.PAT_GITHUB_REPO }}
+          seconds: 87300  # 24 Hours and 15 minutes = (24*60*60) + (15*60) Seconds
+          branch: 'master'
+
   Build:
+    needs: CheckCommits
+    if: ${{ needs.CheckCommits.outputs.hasCommitsInDatabase == 'true' && needs.CheckCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -45,6 +68,7 @@ jobs:
 
   Deploy:
     needs: Build
+    if: ${{ needs.CheckCommits.outputs.hasCommitsInDatabase == 'true' && needs.CheckCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo - ancientknowledgewebsite
