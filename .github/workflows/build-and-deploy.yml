@@ -1,16 +1,16 @@
 name: Build and Deploy
 
 ### on github push event
-# on:
-#   push:
-#     branches:
-#       - master
+on:
+  push:
+    branches:
+      - master
 
 ## on scheduled event
-on:
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '30 18 * * *' # 12:00 AM IST
+# on:
+#   schedule:
+#     # * is a special character in YAML so you have to quote this string
+#     - cron:  '30 18 * * *' # 12:00 AM IST
 
 jobs:
   Build:
@@ -62,8 +62,8 @@ jobs:
 
       - name: Replace existing files with build arifacts
         run: |
-          mv -f build/* .
-          rmdir build
+          cp -rf build/* .
+          rm -rf build
 
       - name: 🚀 Deploy
         env:
