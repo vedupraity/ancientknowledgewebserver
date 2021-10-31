@@ -37,12 +37,11 @@ jobs:
         run: |
           source .env.prod && python freeze.py
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v2
+      - name: Cache build directory
+        uses: actions/cache@v2
         with:
-          name: build-artifact
-          path: |
-            build/*
+          path: ./build
+          key: cache-build-dir-${{ github.run_number }}
 
   Deploy:
     needs: Build
@@ -55,10 +54,16 @@ jobs:
           ref: feature/github-actions
           token: ${{ secrets.PAT_GITHUB_REPO }}
 
-      - name: Download build artifact
-        uses: actions/download-artifact@v2
+      - name: Cache build directory
+        uses: actions/cache@v2
         with:
-          name: build-artifact
+          path: ./build
+          key: cache-build-dir-${{ github.run_number }}
+
+      - name: Replace existing files with build arifacts
+        run: |
+          mv -f build/* .
+          rmdir build
 
       - name: 🚀 Deploy
         env:
