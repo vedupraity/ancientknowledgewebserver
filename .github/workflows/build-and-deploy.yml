@@ -86,7 +86,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: vedupraity/ancientknowledgewebsite
-          ref: feature/github-actions
+          ref: master
           token: ${{ secrets.PAT_GITHUB_REPO }}
 
       - name: Cache build directory
@@ -109,4 +109,5 @@ jobs:
           git status
           git add .
           git commit -m "release $GITHUB_RUN_NUMBER on $(date -u)"
-          git push origin feature/github-actions
+          git pull origin master
+          git push origin master
