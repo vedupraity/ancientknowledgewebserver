@@ -65,7 +65,7 @@ jobs:
       - name: 📥 Install
         run: |
           echo "using: $(python3 --version) and $(pip3 --version)"
-          # pip3 install -r requirements.txt
+          pip3 install -r requirements.txt
 
       - name: ⚒️ Build
         run: |
