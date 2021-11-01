@@ -48,7 +48,7 @@ jobs:
 
   Build:
     needs: CheckCommits
-    if: ${{ needs.CheckCommits.outputs.hasCommitsInDatabase == 'true' && needs.CheckCommits.outputs.hasCommitsInWebserver == 'true' }}
+    # if: ${{ needs.CheckCommits.outputs.hasCommitsInDatabase == 'true' && needs.CheckCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
