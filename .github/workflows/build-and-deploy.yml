@@ -109,5 +109,4 @@ jobs:
           git status
           git add .
           git commit -m "release $GITHUB_RUN_NUMBER on $(date -u)"
-          git pull origin master
           git push origin master
