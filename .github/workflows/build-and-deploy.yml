@@ -13,7 +13,7 @@ on:
 #     - cron:  '30 18 * * *' # 12:00 AM IST
 
 jobs:
-  CheckCommits:
+  CheckRecentCommits:
     runs-on: ubuntu-latest
     outputs:
       hasCommitsInDatabase: ${{ steps.check-new-commits-in-database.outputs.has-new-commits }}
@@ -47,8 +47,8 @@ jobs:
           fi
 
   Build:
-    needs: CheckCommits
-    # if: ${{ needs.CheckCommits.outputs.hasCommitsInDatabase == 'true' && needs.CheckCommits.outputs.hasCommitsInWebserver == 'true' }}
+    needs: CheckRecentCommits
+    if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -68,21 +68,19 @@ jobs:
           echo "using pip $(pip3 --version)"
           # pip3 install -r requirements.txt
 
-          echo ${{ needs.CheckCommits.outputs.hasCommitsInDatabase }} ${{ needs.CheckCommits.outputs.hasCommitsInWebserver }}
+  #     - name: ⚒️ Build
+  #       run: |
+  #         source .env.prod && python freeze.py
 
-      # - name: ⚒️ Build
-      #   run: |
-      #     source .env.prod && python freeze.py
-
-      # - name: Cache build directory
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ./build
-      #     key: cache-build-dir-${{ github.run_number }}
+  #     - name: Cache build directory
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ./build
+  #         key: cache-build-dir-${{ github.run_number }}
 
   # Deploy:
   #   needs: Build
-  #   if: ${{ needs.CheckCommits.outputs.hasCommitsInDatabase == 'true' && needs.CheckCommits.outputs.hasCommitsInWebserver == 'true' }}
+  #   if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Check out repo - ancientknowledgewebsite
