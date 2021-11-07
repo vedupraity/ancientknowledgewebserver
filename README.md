@@ -53,7 +53,7 @@ https://github.com/vedupraity/ancientknowledgedatabase
 2. Start local database server
 
 ```sh
-cd <ancientknowledgedatabase-repo-dir>
+cd ancientknowledgedatabase
 python3 server.py
 ```
 
@@ -64,7 +64,7 @@ https://github.com/vedupraity/ancientknowledgewebserver
 4. Start flask server
 
 ```sh
-cd <ancientknowledge-repo-dir>
+cd ancientknowledgewebserver
 pip install -r requirements.txt
 ./run server dev
 ```

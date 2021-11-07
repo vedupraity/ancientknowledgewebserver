@@ -57,10 +57,29 @@
                                                             class="{{ group.textStyle|join(' ') }}"
                                                         {% endif %}
                                                     >
-                                                        {{ text }}
+                                                        {{ text|markdownToHTML|safe }}
                                                     </li>
                                                 {% endfor %}
                                             </ol>
+                                        {% elif group.type == 'unorderedListGroup' %}
+                                            <ul
+                                                {% if group.groupStyle %}
+                                                    class="{{ group.groupStyle|join(' ') }}"
+                                                {% endif %}
+                                                {% if group.listStyleType %}
+                                                    type="{{ group.listStyleType }}"
+                                                {% endif %}
+                                            >
+                                                {% for text in group.text %}
+                                                    <li
+                                                        {% if group.textStyle %}
+                                                            class="{{ group.textStyle|join(' ') }}"
+                                                        {% endif %}
+                                                    >
+                                                        {{ text|markdownToHTML|safe }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
                                         {% elif group.type == 'hr' %}
                                             <hr
                                                 {% if group.groupStyle %}

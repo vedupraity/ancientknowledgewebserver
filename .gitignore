@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # Environments
-venv/
+venv*/
 
 # IDE config
 .vscode

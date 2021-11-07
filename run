@@ -21,7 +21,7 @@ usage()
     echo "  ./run deploy"
 }
 
-. venv/bin/activate
+# . venv/bin/activate
 
 # Select environment variables
 
