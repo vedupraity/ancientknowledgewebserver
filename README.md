@@ -31,9 +31,8 @@ ancient_knowledge_site/  # project root
 ├── helpers/  # helper modules
 ├── static/  # css, images, js
 ├── templates/  # jinja templates
-│   ├── generic/  # base templates
-│   ├── site/  # site page templates
-│   └── content/  # content page templates
+│   ├── components/  # reusable jinja templates
+│   ├── pages/  # jinja templates for html pages
 ├── .env.dev  # env vars (for development)
 ├── .env.prod  # env vars (for production)
 ├── app.py  # flask app
