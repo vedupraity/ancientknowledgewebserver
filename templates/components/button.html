@@ -1,12 +1,20 @@
 {#  Variables:
-    url (required)
+    url (optional)
     text (optional)
+    is_disabled (optional)
+    additional_classes (optional)
 #}
 
 <a
     type="button"
-    class="button is-outlined is-warning"
-    href="{{ url }}"
+    role="button"
+    aria-hidden="true"
+    class="button is-outlined is-warning {{ additional_classes }}"
+    {% if is_disabled %}
+        disabled
+    {% else %}
+        href="{{ url }}"
+    {% endif %}
 >
     {{ text or 'Read Now' }}
 </a>

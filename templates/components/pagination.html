@@ -1,46 +1,31 @@
 <section class="section animatedParent animateOnce pb-0">
     <div class="box glass animated fadeInUpShort">
         <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-            <!-- previous page button -->
-            <a
-                class="button is-outlined is-warning pagination-previous pagination-button button is-orange is-outlined"
-                {% if pagination.is_first_page %}
-                    disabled
-                {% else %}
-                    href="{{ pagination.previous_page.url }}"
-                {% endif %}
-            >
-                {{ pagination.previous_button_text|default('Previous')}}
-            </a>
-
-            <!-- next page button -->
-            <!-- <a
-                class="button is-outlined is-warning pagination-next pagination-button button is-orange is-outlined"
-                {% if pagination.is_last_page %}
-                    disabled
-                {% else %}
-                    href="{{ pagination.next_page.url }}"
-                {% endif %}
-            >
-            {{ pagination.next_button_text|default('Next')}} -->
-            </a>
+            {# Begin previous page button #}
+            {% with
+                url=pagination.previous_page.url,
+                text=pagination.previous_button_text|default('Previous'),
+                is_disabled=pagination.is_first_page,
+                additional_classes="pagination-previous pagination-button"
+            %}
+            {% include 'components/button.html' %}
+            {% endwith %}
+            {# End previous page button #}
 
             <ul class="pagination-list">
-                {# begin previous page buttons #}
+                {# begin previous page button group #}
                 {% if pagination.render_previous_page_buttons %}
                     <li>
-                        <a
-                            class="button is-outlined is-warning pagination-link"
-                            {% if pagination.is_first_page %}
-                                disabled
-                            {% else %}
-                                href="{{ pagination.first_page.url }}"
-                            {% endif %}
-                        >
-                            {{ pagination.first_page.id }}
-                        </a>
+                        {% with
+                            url=pagination.first_page.url,
+                            text=pagination.first_page.id,
+                            is_disabled=pagination.is_first_page,
+                            additional_classes="pagination-link"
+                        %}
+                        {% include 'components/button.html' %}
+                        {% endwith %}
                     </li>
-                    
+
                     {% if pagination.render_previous_page_id_button %}
                         {% if pagination.render_previous_page_ellipsis %}
                             <li>
@@ -49,39 +34,41 @@
                         {% endif %}
 
                         <li>
-                            <a
-                                class="button is-outlined is-warning pagination-link"
-                                href="{{ pagination.previous_page.url }}"
-                            >
-                                {{ pagination.previous_page.id }}
-                            </a>
+                            {% with
+                                url=pagination.previous_page.url,
+                                text=pagination.previous_page.id,
+                                additional_classes="pagination-link"
+                            %}
+                            {% include 'components/button.html' %}
+                            {% endwith %}
                         </li>
                     {% endif %}
                 {% endif %}
-                {# end previous page buttons #}
-                
+                {# end previous page button group #}
+
                 {# begin current page button #}
                 <li>
-                    <a
-                        class="button is-outlined is-warning pagination-link is-current" tabindex="-1"
-                        aria-current="page"
-                        disabled
-                    >
-                        {{ pagination.current_page.id }}
-                    </a>
+                    {% with
+                        text=pagination.current_page.id,
+                        is_disabled=true,
+                        additional_classes="pagination-link"
+                    %}
+                    {% include 'components/button.html' %}
+                    {% endwith %}
                 </li>
                 {# end current page button #}
 
-                {# begin next page buttons #}
+                {# begin next page button group #}
                 {% if pagination.render_next_page_buttons %}
                     {% if pagination.render_next_page_id_button %}
                         <li>
-                            <a
-                                class="button is-outlined is-warning pagination-link"
-                                href="{{ pagination.next_page.url }}"
-                            >
-                                {{ pagination.next_page.id }}
-                            </a>
+                            {% with
+                                url=pagination.next_page.url,
+                                text=pagination.next_page.id,
+                                additional_classes="pagination-link"
+                            %}
+                            {% include 'components/button.html' %}
+                            {% endwith %}
                         </li>
                         {% if pagination.render_next_page_ellipsis %}
                             <li>
@@ -89,34 +76,31 @@
                             </li>
                         {% endif %}
                     {% endif %}
-                    
+
                     <li>
-                        <a
-                            class="button is-outlined is-warning pagination-link"
-                            {% if pagination.is_last_page %}
-                                disabled
-                            {% else %}
-                                href="{{ pagination.last_page.url }}"
-                            {% endif %}
-                        >
-                            {{ pagination.last_page.id }}
-                        </a>
+                        {% with
+                            url=pagination.last_page.url,
+                            text=pagination.last_page.id,
+                            is_disabled=pagination.is_last_page,
+                            additional_classes="pagination-link"
+                        %}
+                        {% include 'components/button.html' %}
+                        {% endwith %}
                     </li>
                 {% endif %}
-                {# end next page buttons #}
+                {# end next page button group #}
             </ul>
 
-            <!-- next page button -->
-            <a
-                class="button is-outlined is-warning pagination-next pagination-button button is-orange is-outlined"
-                {% if pagination.is_last_page %}
-                    disabled
-                {% else %}
-                    href="{{ pagination.next_page.url }}"
-                {% endif %}
-            >
-            {{ pagination.next_button_text|default('Next')}}
-            </a>
+            {# Begin next page button #}
+            {% with
+                url=pagination.next_page.url,
+                text=pagination.next_button_text|default('Next'),
+                is_disabled=pagination.is_last_page,
+                additional_classes="pagination-next pagination-button"
+            %}
+            {% include 'components/button.html' %}
+            {% endwith %}
+            {# End next page button #}
         </nav>
     </div>
 </section>
