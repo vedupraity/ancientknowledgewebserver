@@ -11,7 +11,7 @@ blueprint = Blueprint(f'{blueprint_name}_blueprint', __name__)
 
 
 @blueprint.route('/')
-def homeView():
+def landingView():
 
     books_data_url = '/content/index.json'
     books_data = RequestHelper().getData(books_data_url)
@@ -21,4 +21,4 @@ def homeView():
         'books': books_data,
     })
 
-    return render_template(f'site/{blueprint_name}/index.html', **context)
+    return render_template(f'pages/landing.html', **context)

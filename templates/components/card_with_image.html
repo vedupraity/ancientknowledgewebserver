@@ -2,6 +2,7 @@
     image_url (required)
     title_primary (required)
     title_secondary (optional)
+    button_url (required)
     button_text (optional)
     is_wip (optional)
 #}
@@ -47,8 +48,8 @@
                     </div>
                     {% if not is_wip %}
                         <div class="m-0 mt-4">
-                            {% with url=site_url + '/' + book.url + '/' %}
-                                {% include 'generic/components/button.html' %}
+                            {% with url=button_url %}
+                            {% include 'components/button.html' %}
                             {% endwith %}
                         </div>
                     {% endif %}

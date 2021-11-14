@@ -6,7 +6,7 @@ class Breadcrumb:
         self.data = [
             {
                 'page_name': 'Home',
-                'page_url': url_for('home_blueprint.homeView'),
+                'page_url': url_for('home_blueprint.landingView'),
                 'icon': 'fa-home',
                 'active': False
             }

@@ -47,13 +47,13 @@
 </head>
 
 <body>
-    {% include "generic/navbar.html" %}
+    {% include "components/navbar.html" %}
 
     {% block hero_section %}{% endblock %}
 
     {% block content %}{% endblock %}
 
-    {% include "generic/footer.html" %}
+    {% include "components/footer.html" %}
 
     <script src="{{ site_url }}{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ site_url }}{{ url_for('static', filename='js/script.js') }}"></script>

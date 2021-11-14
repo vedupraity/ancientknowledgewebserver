@@ -17,4 +17,4 @@ def aboutView():
         'page_description': SITE_CONFIG['site_description'],
     })
 
-    return render_template(f'site/{blueprint_name}/index.html', **context)
+    return render_template(f'pages/about.html', **context)

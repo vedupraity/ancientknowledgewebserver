@@ -1,4 +1,4 @@
-{% extends 'generic/base.html' %}
+{% extends 'pages/base.html' %}
 
 {% block hero_section %}
 <section class="hero is-light is-fullheight">
@@ -24,7 +24,7 @@
 <section id="cards-section" class="section">
     <div class="content animatedParent animateOnce">
         <p class="subtitle is-3 has-text-warning-dark has-text-centered mt-5 mb-5 animated fadeInUpShort">
-            A free digital library of ancient scriptures, texts, and books
+            “Our mission is to allow everyone to learn about Vedic Culture and the Sanātana Dharma.”
         </p>
     </div>
     
@@ -37,9 +37,7 @@
     </div> #}
     {# End search bar #}
 
-    <div class="columns is-multiline is-centered is-variable is-4">
-            
-        {# Begin horizontal card column #}
+    <div class="columns is-multiline is-centered is-variable is-4">    
         {% for book in books %}
             {% if book.status in ['live', 'wip'] %}
                 <div
@@ -49,13 +47,13 @@
                         title_primary=book.title,
                         title_secondary=book.author,
                         description_text=book.description,
+                        button_url=site_url + '/' + book.url + '/',
                         is_wip=(book.status == 'wip')
                     %}
-                        {% include 'generic/components/card_with_image.html' %}
+                        {% include 'components/card_with_image.html' %}
                     {% endwith %}
                 </div>
             {% endif %}
-        {# End horizontal card column #}
         {% endfor %}
     </div>
 </section>
