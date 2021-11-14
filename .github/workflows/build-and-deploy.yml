@@ -70,6 +70,10 @@ jobs:
       - name: ⚒️ Build
         run: |
           source .env.prod && python freeze.py
+          
+      - name: ⚙️ Optimize build for Production
+        run: |
+          css-html-js-minify --multiple --overwrite ./build
 
       - name: Cache build directory
         uses: actions/cache@v2
@@ -95,7 +99,7 @@ jobs:
           path: ./build
           key: cache-build-dir-${{ github.run_number }}
 
-      - name: Replace existing files with build arifacts
+      - name: 🧱 Replace existing files with build arifacts
         run: |
           cp -rf build/* .
           rm -rf build
@@ -110,3 +114,9 @@ jobs:
           git add .
           git commit -m "release $GITHUB_RUN_NUMBER on $(date -u)"
           git push origin master
+
+      - name: 🎉 Done!
+        env:
+          GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
+        run: |
+          echo "Deployed release $GITHUB_RUN_NUMBER"

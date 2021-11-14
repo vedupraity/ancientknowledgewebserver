@@ -1,9 +1,10 @@
 {% extends 'pages/base.html' %}
 
 {% block hero_section %}
-<section class="hero is-light is-fullheight">
+<div class="animatedParent animateOnce">
+<section class="hero is-light is-fullheight animated fadeInUpShort">
     <div class="hero-body is-flex is-justify-content-center animatedParent animateOnce">
-        
+
         <img class="mandala-lg rotating-ccw-slow">
         <img class="mandala-md-bg rotating-cw-slow">
         <img class="mandala-md rotating-cw-slow">
@@ -18,12 +19,13 @@
         </div>
     </div>
 </section>
+</div>
 {% endblock %}
 
 {% block content %}
 <section id="cards-section" class="section">
     <div class="content animatedParent animateOnce">
-        <p class="subtitle is-3 has-text-warning-dark has-text-centered mt-5 mb-5 animated fadeInUpShort">
+        <p class="subtitle is-4 has-text-warning-dark has-text-centered mt-5 mb-5 animated fadeInUpShort">
             “Our mission is to allow everyone to learn about Vedic Culture and the Sanātana Dharma.”
         </p>
     </div>
