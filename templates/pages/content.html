@@ -1,10 +1,9 @@
-{% extends 'generic/base.html' %}
+{% extends 'pages/base.html' %}
 
 {% block content %}
 
-<!-- Margin top behind navbar -->
+{# Margin top behind navbar #}
 <div class="mt-6"></div>
-
 <style>
     :root {
         --page-background-image: url({{ url_for('static', filename=site_image) }});
@@ -12,7 +11,7 @@
 </style>
 <div class="image-background"></div>
 
-{% include 'generic/breadcrumb.html' %}
+{% include 'components/breadcrumb.html' %}
 
 <section class="section pt-0 pb-0">
     <div class="columns is-multiline is-centered is-variable is-4">
@@ -25,8 +24,8 @@
                             <div class="content is-medium m-0">
                                 <div class="">
                                     {% for group in post_data %}
-                                    
                                         {% if group.type == 'textGroup' %}
+                                            {# Begin markdown text group #}
                                             <div
                                                 {% if group.groupStyle %}
                                                     class="{{ group.groupStyle|join(' ') }}"
@@ -34,15 +33,18 @@
                                             >
                                                 {% for text in group.text %}
                                                     <p class="{{ group.textStyle|join(' ') }}">
-                                                        {% if group.markdown == False %}
-                                                            {{ text }}
-                                                        {% else %}
-                                                            {{ text|markdownToHTML|safe }}
-                                                        {% endif %}
+                                                        {% with
+                                                            text=text,
+                                                            is_markdown=group.markdown
+                                                        %}
+                                                            {% include 'components/text.html' %}
+                                                        {% endwith %}
                                                     </p>
                                                 {% endfor %}
                                             </div>
+                                            {# End markdown text group #}
                                         {% elif group.type == 'listGroup' %}
+                                            {# Begin ordered list group #}
                                             <ol
                                                 {% if group.groupStyle %}
                                                     class="{{ group.groupStyle|join(' ') }}"
@@ -57,18 +59,51 @@
                                                             class="{{ group.textStyle|join(' ') }}"
                                                         {% endif %}
                                                     >
-                                                        {{ text }}
+                                                        {% with
+                                                            text=text,
+                                                            is_markdown=group.markdown
+                                                        %}
+                                                            {% include 'components/text.html' %}
+                                                        {% endwith %}
                                                     </li>
                                                 {% endfor %}
                                             </ol>
+                                            {# End ordered list group #}
+                                        {% elif group.type == 'unorderedListGroup' %}
+                                            {# Begin unordered list group #}
+                                            <ul
+                                                {% if group.groupStyle %}
+                                                    class="{{ group.groupStyle|join(' ') }}"
+                                                {% endif %}
+                                                {% if group.listStyleType %}
+                                                    type="{{ group.listStyleType }}"
+                                                {% endif %}
+                                            >
+                                                {% for text in group.text %}
+                                                    <li
+                                                        {% if group.textStyle %}
+                                                            class="{{ group.textStyle|join(' ') }}"
+                                                        {% endif %}
+                                                    >
+                                                        {% with
+                                                            text=text,
+                                                            is_markdown=group.markdown
+                                                        %}
+                                                            {% include 'components/text.html' %}
+                                                        {% endwith %}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                            {# End unordered list group #}
                                         {% elif group.type == 'hr' %}
+                                            {# Begin horizontal separater #}
                                             <hr
                                                 {% if group.groupStyle %}
                                                     class="{{ group.groupStyle|join(' ') }}"
                                                 {% endif %}
                                             >
+                                            {# End horizontal separater #}
                                         {% endif %}
-                                    
                                     {% endfor %}
                                 </div>
                             </div>
@@ -81,11 +116,11 @@
 </section>
 
 {% if is_paginated %}
-{% include 'generic/pagination.html' %}
+    {% include 'components/pagination.html' %}
 {% endif %}
 
-{% include 'generic/breadcrumb.html' %}
+{% include 'components/breadcrumb.html' %}
 
-{% include 'generic/components/copyright_notice.html' %}
+{% include 'components/copyright_notice.html' %}
 
 {% endblock %}

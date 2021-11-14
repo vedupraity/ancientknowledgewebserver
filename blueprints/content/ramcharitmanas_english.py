@@ -51,7 +51,7 @@ def ramcharitmanasEnglishIndexView():
         'index_data': index_data,
     })
 
-    return render_template(f'content/{blueprint_name}/index/index.html', **context)
+    return render_template(f'pages/content_tree.html', **context)
 
 
 @blueprint.route(f'/{base_url}/<chapter_id>/')
@@ -115,7 +115,7 @@ def ramcharitmanasEnglishChapterView(chapter_id):
         })
 
 
-        return render_template(f'content/{blueprint_name}/index/index.html', **context)
+        return render_template(f'pages/content_tree.html', **context)
     else:
         post_data_url = f'/content/{base_url}/{chapter_id}/post.json'
         post_data = RequestHelper().getData(post_data_url)
@@ -136,7 +136,7 @@ def ramcharitmanasEnglishChapterView(chapter_id):
             'post_data': post_data,
         })
 
-        return render_template(f'content/{blueprint_name}/post/index.html', **context)
+        return render_template(f'pages/content.html', **context)
 
 
 @blueprint.route(f'/{base_url}/<chapter_id>/<text_id>/', methods=['GET', 'POST'])
@@ -216,4 +216,4 @@ def ramcharitmanasEnglishTextView(chapter_id, text_id):
         'pagination': pagination
     })
 
-    return render_template(f'content/{blueprint_name}/post/index.html', **context)
+    return render_template(f'pages/content.html', **context)

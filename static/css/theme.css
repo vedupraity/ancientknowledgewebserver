@@ -543,6 +543,12 @@ input.is-warning:active {
     }
 }
 
+@media screen and (max-width: 769px) {
+    .pagination-ellipsis {
+        padding: 0;
+    }
+}
+
 hr {
     background-color: var(--yellow);
 }
