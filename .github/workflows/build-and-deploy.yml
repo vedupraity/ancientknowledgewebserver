@@ -70,10 +70,14 @@ jobs:
       - name: ⚒️ Build
         run: |
           source .env.prod && python freeze.py
-          
+          echo "finished building all static files"
+          du -h -d 1 build
+
       - name: ⚙️ Optimize build for Production
         run: |
           css-html-js-minify --multiple --overwrite ./build
+          echo "finished optimizing build for production"
+          du -h -d 2 build
 
       - name: Cache build directory
         uses: actions/cache@v2
