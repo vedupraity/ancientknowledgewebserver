@@ -114,7 +114,7 @@ jobs:
         run: |
           date_now_utc="$(date -u)"
           release_name="release-$GITHUB_RUN_NUMBER"
-          echo "$release_name ($date_now_utc)">version
+          echo "$release_name ($date_now_utc)">version.txt
           
           git config user.email "vedprakashupraity@gmail.com"
           git config user.name "Ved"
