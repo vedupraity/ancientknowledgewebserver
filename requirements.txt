@@ -16,5 +16,5 @@ pycodestyle==2.8.0
 python-dotenv==0.16.0
 requests==2.26.0
 toml==0.10.2
-urllib3==1.26.5
+urllib3==1.26.7
 Werkzeug==1.0.1
