@@ -8,7 +8,7 @@ Flask==1.1.2
 Frozen-Flask==0.15
 idna==2.10
 itsdangerous==2.0.1
-Jinja2==2.11.3
+Jinja2==3.0.3
 Markdown==3.3.6
 MarkupSafe==2.0.1
 marshmallow==3.14.1
