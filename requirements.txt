@@ -1,4 +1,4 @@
-autopep8==1.5.6
+autopep8==1.6.0
 certifi==2021.10.8
 chardet==4.0.0
 click==8.0.3
@@ -7,14 +7,14 @@ environs==9.3.2
 Flask==1.1.2
 Frozen-Flask==0.15
 idna==2.10
-itsdangerous==1.1.0
+itsdangerous==2.0.1
 Jinja2==2.11.3
 Markdown==3.3.6
 MarkupSafe==2.0.1
 marshmallow==3.14.1
 pycodestyle==2.8.0
-python-dotenv==0.16.0
+python-dotenv==0.19.2
 requests==2.26.0
 toml==0.10.2
-urllib3==1.26.5
+urllib3==1.26.7
 Werkzeug==1.0.1
