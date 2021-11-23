@@ -6,7 +6,7 @@ css-html-js-minify==2.5.5
 environs==9.3.2
 Flask==1.1.2
 Frozen-Flask==0.15
-idna==2.10
+idna==3.3
 itsdangerous==2.0.1
 Jinja2==2.11.3
 Markdown==3.3.6
