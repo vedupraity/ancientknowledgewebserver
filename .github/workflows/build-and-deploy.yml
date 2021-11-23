@@ -1,15 +1,8 @@
 name: Build and Deploy
 
-### on github push event
-# on:
-#   push:
-#     branches:
-#       - master
-
-## on scheduled event
 on:
+  workflow_dispatch
   schedule:
-    # * is a special character in YAML so you have to quote this string
     - cron:  '30 18 * * *' # 12:00 AM IST
 
 jobs:
