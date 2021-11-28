@@ -33,7 +33,7 @@ def caps(text):
 
 def markdownToHTML(text):
     """ convert markdown formatting into html """
-    return markdown.markdown(text).replace('<p>', '').replace('</p>', '')
+    return markdown.markdown(text, extensions=['markdown.extensions.tables']).replace('<p>', '').replace('</p>', '')
 
 
 FILTERS = [hindiNumeral, caps, markdownToHTML]
