@@ -24,20 +24,15 @@
 
 {% block content %}
 <section id="cards-section" class="section">
-    <div class="content animatedParent animateOnce">
-        <p class="subtitle is-4 has-text-warning-dark has-text-centered mt-5 mb-5 animated fadeInUpShort">
+    <div class="content">
+        <p class="subtitle is-4 has-text-warning-dark has-text-centered mt-5 mb-5">
             “Our mission is to allow everyone to learn about Vedic Culture and the Sanātana Dharma.”
         </p>
     </div>
-    
-    {# Begin search bar #}
-    {# <div class="control has-icons-right mb-6">
-        <input class="input is-medium is-rounded is-warning" type="text" placeholder="Search">
-        <span class="icon is-right">
-            <i class="fas fa-search"></i>
-        </span>
-    </div> #}
-    {# End search bar #}
+
+    <div class="mb-6">
+        <div class="gcse-search"></div>
+    </div>
 
     <div class="columns is-multiline is-centered is-variable is-4">    
         {% for book in books %}
