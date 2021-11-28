@@ -97,11 +97,13 @@ jobs:
           key: cache-build-dir-${{ github.run_number }}
 
       - name: 🚀 Deploy
+        env:
+          GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
         run: |
           cp -rf build/* . && rm -rf build
 
           date_now_utc="$(date -u)"
-          release_name="release-${{ env.GITHUB_RUN_NUMBER }}"
+          release_name="release-$GITHUB_RUN_NUMBER"
           echo "$release_name ($date_now_utc)">version.txt
 
           git config user.email "${{ secrets.GIT_USER_EMAIL }}"
