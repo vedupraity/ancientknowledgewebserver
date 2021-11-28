@@ -60,13 +60,13 @@ jobs:
           echo "using: $(python3 --version) and $(pip3 --version)"
           pip3 install -r requirements.txt
 
-      - name: ⚒️ Build
+      - name: ⚒️ Build static pages
         run: |
           source .env.prod && python freeze.py
           echo "finished building all static files"
           du -h -d 1 build
 
-      - name: ⚙️ Optimize build for Production
+      - name: ⚙️ Build optimization
         run: |
           css-html-js-minify --multiple --overwrite ./build
           echo "finished optimizing build for production"
@@ -96,7 +96,7 @@ jobs:
           path: ./build
           key: cache-build-dir-${{ github.run_number }}
 
-      - name: 🧱 Replace existing files with build arifacts
+      - name: 🧱 Update static pages
         run: |
           cp -rf build/* .
           rm -rf build
@@ -116,8 +116,14 @@ jobs:
           git commit -m "$release_name ($date_now_utc)"
           git push origin master
 
-      - name: 🎉 Done!
-        env:
-          GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
+  PostDeploy:
+    needs: Deploy
+    if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🧹 Purge cloudflare cache
         run: |
-          echo "Deployed release $GITHUB_RUN_NUMBER"
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CF_PURGE_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}'
