@@ -556,3 +556,12 @@ hr {
 body, p, a, h1, h2, h3, h4, h5, h6 {
     font-family: 'Noto Sans' !important;
 }
+
+/* Begin: Google search customization */
+
+.gsc-control-cse {
+    border-radius: 0.5rem;
+    box-shadow: var(--box-shadow);
+}
+
+/* End: Google search customization */
