@@ -60,13 +60,13 @@ jobs:
           echo "using: $(python3 --version) and $(pip3 --version)"
           pip3 install -r requirements.txt
 
-      - name: ⚒️ Build static pages
+      - name: ⚒️ Build
         run: |
           source .env.prod && python freeze.py
           echo "finished building all static files"
           du -h -d 1 build
 
-      - name: ⚙️ Build optimization
+      - name: 💼 Minify
         run: |
           css-html-js-minify --multiple --overwrite ./build
           echo "finished optimizing build for production"
@@ -96,21 +96,16 @@ jobs:
           path: ./build
           key: cache-build-dir-${{ github.run_number }}
 
-      - name: 🧱 Update static pages
-        run: |
-          cp -rf build/* .
-          rm -rf build
-
       - name: 🚀 Deploy
-        env:
-          GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
         run: |
+          cp -rf build/* . && rm -rf build
+
           date_now_utc="$(date -u)"
-          release_name="release-$GITHUB_RUN_NUMBER"
+          release_name="release-${{ env.GITHUB_RUN_NUMBER }}"
           echo "$release_name ($date_now_utc)">version.txt
-          
-          git config user.email "vedprakashupraity@gmail.com"
-          git config user.name "Ved"
+
+          git config user.email "${{ secrets.GIT_USER_EMAIL }}"
+          git config user.name "${{ secrets.GIT_USER_NAME }}"
           git status
           git add .
           git commit -m "$release_name ($date_now_utc)"
