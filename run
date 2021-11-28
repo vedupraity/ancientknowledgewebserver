@@ -21,8 +21,6 @@ usage()
     echo "  ./run deploy"
 }
 
-# . venv/bin/activate
-
 # Select environment variables
 
 ENV=".env.prod"

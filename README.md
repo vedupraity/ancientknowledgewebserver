@@ -1,6 +1,6 @@
 # Ancient Knowledge
 
-Official Website: https://www.ancientknowledge.in
+Website URL: https://www.ancientknowledge.in
 
 ---
 
