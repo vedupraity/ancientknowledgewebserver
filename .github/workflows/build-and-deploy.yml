@@ -43,6 +43,7 @@ jobs:
     needs: CheckRecentCommits
     if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v2
         with:
