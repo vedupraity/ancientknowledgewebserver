@@ -124,12 +124,12 @@ jobs:
           # git commit -m "$release_name ($date_now_utc)"
           # git push origin master
 
-      - name: 🧹 Purge Cloudflare Cache
-        run: |
-          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
-            -H "Authorization: Bearer ${{ secrets.CF_PURGE_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            --data '{"purge_everything":true}'
+      # - name: 🧹 Purge Cloudflare Cache
+      #   run: |
+      #     curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
+      #       -H "Authorization: Bearer ${{ secrets.CF_PURGE_TOKEN }}" \
+      #       -H "Content-Type: application/json" \
+      #       --data '{"purge_everything":true}'
       
       - name: Update Deployment Status
         uses: bobheadxi/deployments@v0.4.3
