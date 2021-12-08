@@ -65,7 +65,7 @@ jobs:
         run: |
           source .env.prod
           # python freeze.py
-          mkdir build
+          sleep 10 && mkdir build
           echo "finished building all static files"
           du -h -d 1 build
 
@@ -112,7 +112,7 @@ jobs:
         env:
           GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
         run: |
-          cp -rf build/* . && rm -rf build
+          sleep 10 && cp -rf build/* . && rm -rf build
 
           # date_now_utc="$(date -u)"
           # release_name="release-$GITHUB_RUN_NUMBER"
