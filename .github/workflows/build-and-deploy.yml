@@ -63,7 +63,8 @@ jobs:
 
       - name: ⚒️ Build
         run: |
-          source .env.prod && python freeze.py
+          source .env.prod
+          python freeze.py
           echo "finished building all static files"
           du -h -d 1 build
 
@@ -73,7 +74,7 @@ jobs:
           echo "finished optimizing build for production"
           du -h -d 1 build
 
-      - name: Cache build directory
+      - name: Create Build Cache
         uses: actions/cache@v2
         with:
           path: ./build
@@ -92,7 +93,15 @@ jobs:
           ref: master
           token: ${{ secrets.PAT_GITHUB_REPO }}
 
-      - name: Cache build directory
+      - name: Start Deployment
+        uses: bobheadxi/deployments@v0.4.3
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.PAT_GITHUB_REPO }}
+          env: production
+
+      - name: Obtain Build Cache
         uses: actions/cache@v2
         with:
           path: ./build
@@ -115,15 +124,18 @@ jobs:
           git commit -m "$release_name ($date_now_utc)"
           git push origin master
 
-  PostDeploy:
-    needs: Deploy
-    if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: 🧹 Purge cloudflare cache
+      - name: 🧹 Purge Cloudflare Cache
         run: |
           curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
             -H "Authorization: Bearer ${{ secrets.CF_PURGE_TOKEN }}" \
             -H "Content-Type: application/json" \
             --data '{"purge_everything":true}'
+      
+      - name: Update Deployment Status
+        uses: bobheadxi/deployments@v0.4.3
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.PAT_GITHUB_REPO }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
