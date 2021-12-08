@@ -43,6 +43,7 @@ jobs:
     needs: CheckRecentCommits
     if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v2
         with:
@@ -82,6 +83,7 @@ jobs:
     needs: Build
     if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: Check out repo - ancientknowledgewebsite
         uses: actions/checkout@v2
@@ -117,6 +119,7 @@ jobs:
     needs: Deploy
     if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: 🧹 Purge cloudflare cache
         run: |
