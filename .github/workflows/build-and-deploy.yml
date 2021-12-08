@@ -112,7 +112,7 @@ jobs:
         env:
           GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
         run: |
-          sleep 10 && cp -rf build/* . && rm -rf build
+          sleep 10 # cp -rf build/* . && rm -rf build
 
           # date_now_utc="$(date -u)"
           # release_name="release-$GITHUB_RUN_NUMBER"
