@@ -113,7 +113,6 @@ jobs:
           git config user.email "${{ secrets.GIT_USER_EMAIL }}"
           git config user.name "${{ secrets.GIT_USER_NAME }}"
           git status
-          exit 1
           # git add .
           # git commit -m "$release_name ($date_now_utc)"
           # git push origin master
