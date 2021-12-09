@@ -64,7 +64,8 @@ jobs:
       - name: ⚒️ Build
         run: |
           source .env.prod
-          python freeze.py
+          # python freeze.py
+          mkdir build
           echo "finished building all static files"
           du -h -d 1 build
 
@@ -93,14 +94,6 @@ jobs:
           ref: master
           token: ${{ secrets.PAT_GITHUB_REPO }}
 
-      - name: Start Deployment
-        uses: bobheadxi/deployments@v0.4.3
-        id: deployment
-        with:
-          step: start
-          token: ${{ secrets.PAT_GITHUB_REPO }}
-          env: production
-
       - name: Obtain Build Cache
         uses: actions/cache@v2
         with:
@@ -120,9 +113,9 @@ jobs:
           git config user.email "${{ secrets.GIT_USER_EMAIL }}"
           git config user.name "${{ secrets.GIT_USER_NAME }}"
           git status
-          git add .
-          git commit -m "$release_name ($date_now_utc)"
-          git push origin master
+          # git add .
+          # git commit -m "$release_name ($date_now_utc)"
+          # git push origin master
 
       - name: 🧹 Purge Cloudflare Cache
         run: |
@@ -130,12 +123,3 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.CF_PURGE_TOKEN }}" \
             -H "Content-Type: application/json" \
             --data '{"purge_everything":true}'
-      
-      - name: Update Deployment Status
-        uses: bobheadxi/deployments@v0.4.3
-        if: always()
-        with:
-          step: finish
-          token: ${{ secrets.PAT_GITHUB_REPO }}
-          status: ${{ job.status }}
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
