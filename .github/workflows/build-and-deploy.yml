@@ -36,7 +36,7 @@ jobs:
           if [[ "$(git log --since='24 hours ago')" != "" ]]; then
             echo "::set-output name=has-new-commits::true"
           else
-            echo "::set-output name=has-new-commits::true"
+            echo "::set-output name=has-new-commits::false"
           fi
 
   Build:
