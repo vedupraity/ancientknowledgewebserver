@@ -86,6 +86,7 @@ jobs:
     if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
     environment: production
+      url: https://www.ancientknowledge.in
     steps:
       - name: Check out repo - ancientknowledgewebsite
         uses: actions/checkout@v2
