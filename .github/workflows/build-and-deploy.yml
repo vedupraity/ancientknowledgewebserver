@@ -64,8 +64,7 @@ jobs:
       - name: ⚒️ Build
         run: |
           source .env.prod
-          # python freeze.py
-          mkdir build
+          python freeze.py
           echo "finished building all static files"
           du -h -d 1 build
 
@@ -115,9 +114,9 @@ jobs:
           git config user.email "${{ secrets.GIT_USER_EMAIL }}"
           git config user.name "${{ secrets.GIT_USER_NAME }}"
           git status
-          # git add .
-          # git commit -m "$release_name ($date_now_utc)"
-          # git push origin master
+          git add .
+          git commit -m "$release_name ($date_now_utc)"
+          git push origin master
 
       - name: 🧹 Purge Cloudflare Cache
         run: |
