@@ -85,7 +85,8 @@ jobs:
     needs: Build
     if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
-    environment: production
+    environment:
+      name: production
       url: https://www.ancientknowledge.in
     steps:
       - name: Check out repo - ancientknowledgewebsite
