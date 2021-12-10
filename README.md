@@ -1,12 +1,12 @@
 # Ancient Knowledge
 
-Website URL: https://www.ancientknowledge.in
+https://www.ancientknowledge.in
 
 ---
 
 ## About
 
-This is the Python/Flask project for the website.
+This is Python (Flask) web server project for the website: https://www.ancientknowledge.in
 
 ---
 
@@ -45,22 +45,22 @@ ancient_knowledge_site/  # project root
 
 ## Development Environment Setup
 
-1. Clone content (database) repository
+1. Clone database repository
 
 https://github.com/vedupraity/ancientknowledgedatabase
 
-2. Start local database server
+2. Start database server
 
 ```sh
 cd ancientknowledgedatabase
 python3 server.py
 ```
 
-3. Clone flask app repository
+3. Clone flask web server repository
 
 https://github.com/vedupraity/ancientknowledgewebserver
 
-4. Start flask server
+4. Start flask web server
 
 ```sh
 cd ancientknowledgewebserver
@@ -68,16 +68,10 @@ pip install -r requirements.txt
 ./run server dev
 ```
 
-5. Freeze app into static files (building in dev)
+5. Generate static files
 
-This will build artifacts in `build` directory with generated static pages and assets
+This will build artifacts and store under `build` directory
 
 ```sh
 ./run build dev
-```
-
-6. Building for production
-
-```sh
-./run build prod
 ```
