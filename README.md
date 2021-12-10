@@ -1,5 +1,7 @@
 # Ancient Knowledge
 
+“Our mission is to allow everyone to learn about Vedic Culture and the Sanātana Dharma.”
+
 https://www.ancientknowledge.in
 
 ---
