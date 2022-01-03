@@ -1,0 +1,30 @@
+{#  Variables:
+    cards (required): An array of cards. 
+#}
+
+<div class="columns is-variable is-multiline">
+    {% for card in cards %}
+        <div class="column is-3">
+            <a href="{{ card.path }}">
+                <div class="card is-fullheight">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                        <img
+                            src="{{ url_for('static', filename=card.image if card.image else 'images/open-book-cover.jpg') }}"
+                            alt="Placeholder image"
+                        >
+                        </figure>
+                    </div>
+                    <div class="card-content p-4">
+                        <div class="content">
+                            <h6 class="mb-0">{{ card.title }}</h6>
+                            {% if card.subtitle %}
+                                <p class="mt-3">{{ card.subtitle}}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>

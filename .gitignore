@@ -9,8 +9,8 @@ venv*/
 # IDE config
 .vscode
 
-# local db symbolic link
-static/db-local
+# development database
+github_database_tree.json
 
 # build artifacts
 build/

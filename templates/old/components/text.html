@@ -1,0 +1,10 @@
+{#  Variables:
+    text (required)
+    is_markdown (optional)
+#}
+
+{% if is_markdown == False %}
+    {{ text }}
+{% else %}
+    {{ text|markdownToHTML|safe }}
+{% endif %}

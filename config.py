@@ -9,6 +9,7 @@ env = Env()
 ENV = env("ENV")
 SITE_URL = env("SITE_URL")
 DATABASE_URL = env("DATABASE_URL")
+GITHUB_DATABASE_BRANCH = env("GITHUB_DATABASE_BRANCH")
 
 DATABASE_REPO_DIR = '/home/ved/Work/PersonalProjects/AncientKnowledge/ancientknowledgedatabase'
 
@@ -18,17 +19,19 @@ DATABASE_REPO_DIR = '/home/ved/Work/PersonalProjects/AncientKnowledge/ancientkno
 
 SITE_CONFIG = {
     'env': ENV,
-    'site_title': 'Ancient Knowledge',
-    'site_tagline': '“Our mission is to allow everyone to learn about Vedic Culture and the Sanatana Dharma.”',
-    'site_description': 'An online library of Ancient Knowledge, Scriptures and Books about History, Philosophy, Spirituality, Religion and more.',
-    'site_keywords': ['Ancient', 'Knowledge', 'India', 'History', 'Philosophy', 'Spirituality', 'Dharma', 'Religion', 'Sanatan', 'Hindu', 'Devotee'],
     'site_url': SITE_URL,
-    'author_name': 'Vedprakash Upraity',
+    'site_title': 'Ancient Knowledge',
+    'site_tagline': '“Our mission is to allow everyone to learn about Vedic Culture and the Sanātana Dharma.”',
+    'site_description': 'Free library of Ancient Knowledge from India including Texts, Scriptures and Books promoting the Sanātana Dharma.',
+    'content_languages': ['hi', 'en'],
+    'seo_keywords': [
+        'ancient', 'knowledge', 'india', 'history', 'philosophy', 'spirituality', 'dharma', 'religion', 'sanatan', 'hindu', 'devotee',
+    ],
     'contact_email': 'ancientknowledgeinbox@gmail.com',
     'google_analytics_tracking_id': 'G-2G57C3C15V',
-    'facebook_profile_url': 'https://www.facebook.com/PraacheenGyaan/',
-    'instagram_profile_url': 'https://www.instagram.com/PraacheenGyaan/',
-    'twitter_profile_url': 'https://www.twitter.com/PraacheenGyaan/',
+    'social_media_facebook': 'https://www.facebook.com/PraacheenGyaan/',
+    'social_media_instagram': 'https://www.instagram.com/PraacheenGyaan/',
+    'social_media_twitter': 'https://www.twitter.com/PraacheenGyaan/',
 }
 
 # End site settings

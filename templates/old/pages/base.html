@@ -21,7 +21,7 @@
     {# Begin SEO tags #}
     <title>{% if env == "dev" %}[{{env}}] {% endif %}{{ page_title|default(site_title) }}</title>
     <meta name="description" content="{{ page_description|default(site_description) }}">
-    <meta name="keywords" content="{% if page_keywords|length %}{{ page_keywords|join(', ') }}{% else %}{{ seo_keywords|join(', ') }}{% endif %}">
+    <meta name="keywords" content="{% if page_keywords|length %}{{ page_keywords|join(', ') }}{% else %}{{ site_keywords|join(', ') }}{% endif %}">
 
     <meta property="og:title" content="{{ page_title }}" />
     <meta property="og:description" content="{{ page_description|default(site_description) }}" />

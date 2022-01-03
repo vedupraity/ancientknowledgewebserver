@@ -75,45 +75,37 @@ body {
 @keyframes title-transition {
     0% {
         transform: translateY(-9rem);
-        filter: blur(3rem);
         opacity: 0;
     }
     2% {
         transform: unset;
-        filter: blur(0);
         opacity: 1;
     }
 
     48% {
         transform: unset;
-        filter: blur(0);
         opacity: 1;
     }
     50% {
         transform: translateY(9rem);
-        filter: blur(3rem);
         opacity: 0;
     }
 
     50.01% {
         transform: translateY(-9rem);
-        filter: blur(3rem);
         opacity: 0;
     }
     51% {
         transform: unset;
-        filter: blur(0);
         opacity: 1;
     }
 
     98% {
         transform: unset;
-        filter: blur(0);
         opacity: 1;
     }
     100% {
         transform: translateY(9rem);
-        filter: blur(3rem);
         opacity: 0;
     }
 }
@@ -181,10 +173,11 @@ body {
     opacity: 0.75;
     color: white;
     border-radius: 500px;
-    padding-top: 0.3rem;
-    padding-left: 0.6rem;
-    padding-right: 0.6rem;
-    font-size: calc(var(--navbar-height) / 1.25);
+    padding-top: 0.4rem;
+    padding-bottom: 0.2rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+    font-size: calc(var(--navbar-height) / 1);
     margin-bottom: calc(var(--navbar-height) / 4);
 }
 
@@ -193,7 +186,7 @@ body {
 .scroll-down-btn:active {
     cursor: pointer;
     color: var(--saffron);
-    font-size: calc(var(--navbar-height) / 1.25);
+    font-size: calc(var(--navbar-height) / 1);
     margin-bottom: calc(var(--navbar-height) / 4.75);
     background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(var(--backdrop-blur));
@@ -364,7 +357,7 @@ a.no-decoration {
 
 .pagination .pagination-previous,
 .pagination .pagination-next {
-    width: 9em;
+    min-width: 9em;
 }
 
 .button.is-warning.is-outlined {
@@ -549,6 +542,12 @@ input.is-warning:active {
     }
 }
 
+@media screen and (max-width: 769px) {
+    .breadcrumb ol, .breadcrumb ul {
+        flex-direction: column;
+    }
+}
+
 hr {
     background-color: var(--yellow);
 }
@@ -556,6 +555,33 @@ hr {
 body, p, a, h1, h2, h3, h4, h5, h6 {
     font-family: 'Noto Sans' !important;
 }
+
+.card.is-fullheight {
+    height: 100%;
+}
+
+.center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-content hr {
+    margin: 1rem 0;
+}
+
+.main-content h4 {
+    color: chocolate;
+}
+
+/* .main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content h4,
+.main-content h5,
+.main-content h6 {
+    text-align: center;
+} */
 
 /* Begin: Google search customization */
 

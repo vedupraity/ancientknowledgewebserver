@@ -1,0 +1,17 @@
+{#  Variables:
+    content (required): html content. 
+#}
+
+<div class="animatedParent animateOnce">
+    <div class="columns is-variable is-multiline animated fadeInUpShort">
+        <div class="column is-12">
+            <div class="card is-fullheight">
+                <div class="card-content p-4">
+                    <div class="content main-content has-text-justified">
+                        {{ content|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
