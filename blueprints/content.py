@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, url_for
+from ancientknowledgewebserver.config import SITE_CONFIG
 
 from helpers.api import get_yaml, get_markdown
+from helpers.context import getBaseTemplateContext
 from helpers.generic import get_meta_object, get_meta_array, markdown_to_html
 
 
@@ -57,7 +59,7 @@ def get_content(language, content_path):
 def get_previous_page(language, current_path, breadcrumb_path_array):
     if current_path == breadcrumb_path_array[0]:
         return None
-    
+
     parent_path = '/'.join(current_path.split('/')[:-1])
     parent_tree_meta = get_tree_metadata(language, parent_path)
     current_path_meta = list(filter(
@@ -107,7 +109,7 @@ def get_previous_page(language, current_path, breadcrumb_path_array):
 def get_next_page(language, current_path, breadcrumb_path_array):
     if current_path == breadcrumb_path_array[0]:
         return None
-    
+
     parent_path = '/'.join(current_path.split('/')[:-1])
     parent_tree_meta = get_tree_metadata(language, parent_path)
     current_path_meta = list(filter(
@@ -164,6 +166,30 @@ def get_pagination(language, content_path, breadcrumb):
     }
 
 
+def get_cover_image(language, root_path):
+    path_metadata = get_parent_metadata(
+        language, root_path.replace(f'/{language}/', ''))
+
+    if not path_metadata['image']:
+        default_cover_image = SITE_CONFIG['default_cover_image']
+        return default_cover_image
+    else:
+        return path_metadata['image']
+
+
+def get_context(language, breadcrumb, parent_metadata, tree_metadata, content, pagination):
+    context = getBaseTemplateContext()
+    context.update({
+        'breadcrumb': breadcrumb,
+        'metadata': parent_metadata,
+        'tree': tree_metadata,
+        'content': content,
+        'pagination': pagination,
+        'cover_image': get_cover_image(language, breadcrumb[2]['path']),
+    })
+    return context
+
+
 @blueprint.route('/<language>/<path:content_path>/')
 def contentView(language, content_path):
     breadcrumb = get_breadcrumb(language, content_path)
@@ -175,12 +201,13 @@ def contentView(language, content_path):
     pagination = get_pagination(
         language, content_path, breadcrumb) if parent_metadata['paginated'] == True else None
 
-    context = {
-        'breadcrumb': breadcrumb,
-        'metadata': parent_metadata,
-        'tree': tree_metadata,
-        'content': content,
-        'pagination': pagination,
-    }
+    context = get_context(
+        language,
+        breadcrumb,
+        parent_metadata,
+        tree_metadata,
+        content,
+        pagination,
+    )
 
     return render_template(f'pages/content.html', **context)
