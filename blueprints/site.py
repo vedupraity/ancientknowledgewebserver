@@ -22,8 +22,9 @@ def aboutView():
 @blueprint.route('/', defaults={'language': None})
 @blueprint.route('/<language>/')
 def homeView(language=None):
+    supported_languages_code = [_[0] for _ in SITE_CONFIG['content_languages']]
     languages = [language] \
-        if language in SITE_CONFIG['content_languages'] else SITE_CONFIG['content_languages']
+        if language in supported_languages_code else supported_languages_code
 
     books_meta = get_yaml('/books/meta.yaml')
     stotra_meta = get_yaml('/stotra/meta.yaml')

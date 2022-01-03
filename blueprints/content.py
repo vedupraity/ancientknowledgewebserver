@@ -166,16 +166,20 @@ def get_pagination(language, content_path, breadcrumb):
     }
 
 
-def get_cover_image(language, root_path):
+def get_cover_image(language, breadcrumb):
+    root_path = breadcrumb[2]['path'] if len(breadcrumb) > 2 else None
+    default_cover_image = SITE_CONFIG['default_cover_image']
+    
+    if not root_path:
+        return default_cover_image
+    
     path_metadata = get_parent_metadata(
         language, root_path.replace(f'/{language}/', ''))
 
     if not path_metadata['image']:
-        default_cover_image = SITE_CONFIG['default_cover_image']
         return default_cover_image
     else:
         return path_metadata['image']
-
 
 def get_context(language, breadcrumb, parent_metadata, tree_metadata, content, pagination):
     context = getBaseTemplateContext()
@@ -185,7 +189,7 @@ def get_context(language, breadcrumb, parent_metadata, tree_metadata, content, p
         'tree': tree_metadata,
         'content': content,
         'pagination': pagination,
-        'cover_image': get_cover_image(language, breadcrumb[2]['path']),
+        'cover_image': get_cover_image(language, breadcrumb),
     })
     return context
 

@@ -56,81 +56,6 @@
             </div>
         </div>
 
-        {# <div
-            class="column is-full-tablet is-full-desktop is-full-widescreen is-full-fullhd is-flex is-justify-content-center mt-4 animatedParent animateOnce">
-            <div class="content animated fadeInUpShort">
-                <h2 class="has-text-centered m-0 mb-4">
-                    Our Team
-                </h2>
-            </div>
-        </div>
-
-        <div
-            class="column is-one-third-tablet is-one-quarter-desktop is-one-quarter-widescreen is-one-quarter-fullhd is-flex is-justify-content-center animatedParent animateOnce">
-            <div class="box content is-flex-grow-1 animated fadeInUpShort">
-                <div class="is-flex is-flex-direction-column is-align-items-center mb-0">
-                    <div class="m-0">
-                        <figure class="image is-128x128 m-0">
-                            <img class="is-rounded" src="{{ site_url }}{{ url_for('static', filename='images/vedprakashupraity.jpg') }}">
-                        </figure>
-                    </div>
-                    <div class="has-text-centered mt-4">
-                        <h5 class="m-0">Vedprakash Upraity</h5>
-                        <div class="tags is-centered m-0 mt-4">
-                            <span class="tag is-medium is-warning">Founder</span>
-                        </div>
-                        <p class="m-0 mt-2">
-                            He works as a software engineer. He composes music in his free time.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div
-            class="column is-one-third-tablet is-one-quarter-desktop is-one-quarter-widescreen is-one-quarter-fullhd is-flex is-justify-content-center animatedParent animateOnce">
-            <div class="box content is-flex-grow-1 animated fadeInUpShort">
-                <div class="is-flex is-flex-direction-column is-align-items-center mb-0">
-                    <div class="m-0">
-                        <figure class="image is-128x128 m-0">
-                            <img class="is-rounded" src="{{ site_url }}{{ url_for('static', filename='images/rounakupraity.jpg') }}">
-                        </figure>
-                    </div>
-                    <div class="has-text-centered mt-4">
-                        <h5 class="m-0">Rounak Upraity</h5>
-                        <div class="tags is-centered m-0 mt-4">
-                            <span class="tag is-medium is-warning">Creative Assistant</span>
-                        </div>
-                        <p class="m-0 mt-2">
-                            He is a high school student. He develops video games in his free time.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div
-            class="column is-one-third-tablet is-one-quarter-desktop is-one-quarter-widescreen is-one-quarter-fullhd is-flex is-justify-content-center animatedParent animateOnce">
-            <div class="box content is-flex-grow-1 animated fadeInUpShort">
-                <div class="is-flex is-flex-direction-column is-align-items-center mb-0">
-                    <div class="m-0">
-                        <figure class="image is-128x128 m-0">
-                            <i class="is-rounded fas fa-users"></i>
-                        </figure>
-                    </div>
-                    <div class="has-text-centered mt-4">
-                        <h5 class="m-0">and friends...</h5>
-                        <div class="tags is-centered m-0 mt-4">
-                            <span class="tag is-medium is-warning">General Support</span>
-                        </div>
-                        <p class="m-0 mt-2">
-                            A bunch of good friends supporting this project. And you can join us too! 😃
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div> #}
-
         <div
             class="column is-full-tablet is-full-desktop is-full-widescreen is-full-fullhd is-flex is-justify-content-center mt-4 animatedParent animateOnce">
             <div class="content animated fadeInUpShort">
@@ -220,4 +145,10 @@
 
     </div>
 </section>
+{% endblock %}
+
+{% block js_extension %}
+<script>
+    $('#language-selector-navbar-item').addClass('is-hidden');
+</script>
 {% endblock %}

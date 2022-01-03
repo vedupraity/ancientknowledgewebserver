@@ -24,7 +24,10 @@ SITE_CONFIG = {
     'site_tagline': '“Our mission is to allow everyone to learn about Vedic Culture and the Sanātana Dharma.”',
     'site_description': 'Free library of Ancient Knowledge from India including Texts, Scriptures and Books promoting the Sanātana Dharma.',
     'default_cover_image': 'images/default-cover-4x3.jpg',
-    'content_languages': ['hi', 'en'],
+    'content_languages': [
+        ('hi', 'Hindi'),
+        ('en', 'English'),
+    ],
     'seo_keywords': [
         'ancient', 'knowledge', 'india', 'history', 'philosophy', 'spirituality', 'dharma', 'religion', 'sanatan', 'hindu', 'devotee',
     ],
@@ -34,6 +37,8 @@ SITE_CONFIG = {
     'social_media_instagram': 'https://www.instagram.com/PraacheenGyaan/',
     'social_media_twitter': 'https://www.twitter.com/PraacheenGyaan/',
 }
+
+SITE_CONFIG['content_languages_codes'] = [_[0] for _ in SITE_CONFIG['content_languages']]
 
 # End site settings
 

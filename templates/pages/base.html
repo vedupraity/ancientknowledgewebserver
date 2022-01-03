@@ -38,6 +38,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ site_url }}{{ url_for('static', filename='images/logo.png') }}" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.3/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/bulma.min.css') }}">
     <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/theme.css') }}">
     <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/animations.css') }}">
@@ -56,11 +57,55 @@
 
     {% include "components/footer.html" %}
 
+    <template id="language-selector-swal-template">
+        <swal-title>
+            Select language
+        </swal-title>
+        <swal-input type="select" value="{{ content_languages[0][0] }}" />
+            {% for language in content_languages %}
+                <swal-input-option value="{{ language[0] }}">{{ language[1] }}</swal-input-option>
+            {% endfor %}
+        </swal-input>
+
+        <swal-button type="confirm">
+            Confirm
+        </swal-button>
+        <swal-button type="cancel">
+            Cancel
+        </swal-button>
+        <swal-param name="allowOutsideClick" value="false" />
+        <swal-param name="scrollbarPadding" value="false" />
+        <swal-param name="customClass" value='{ "confirmButton": "button is-warning is-outlined", "cancelButton": "button is-grey is-outlined" }' />
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.3/dist/sweetalert2.min.js"></script>
+    <script>
+        window.redirectTo = function(url) {
+            window.location.href = url;
+        }
+        window.languageSelector = async () => {
+            const { value: language } = await Swal.fire({
+                template: '#language-selector-swal-template'
+            })
+            
+            if (language) {
+                if (window.location.pathname === '/') {
+                    window.redirectTo(`/${language}/`);
+                } else {
+                    let currentPath = window.location.pathname;
+                    let newPath = currentPath.replace(/^\/[a-z]{2}\/?/, `/${language}/`);
+                    window.redirectTo(newPath);
+                }
+            }
+        };
+    </script>
+
     <script src="{{ site_url }}{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ site_url }}{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ site_url }}{{ url_for('static', filename='js/css3-animate-it.js') }}"></script>
 
-    {% block javascript_extension %}{% endblock %}
+    {% block js_extension %}{% endblock %}
+    {% block css_extension %}{% endblock %}
 </body>
 
 </html>
