@@ -95,7 +95,7 @@ if __name__ == '__main__':
     
     for i in range(len(urls)):
         _urls = urls[i:i+max_threads]
-        freeze_urls_asynchronous(_urls)
+        freeze_urls_synchronous(_urls)
 
     end_time = datetime.datetime.now()
     print(f'took {(end_time - start_time).seconds} seconds to freeze {len(urls)} urls')

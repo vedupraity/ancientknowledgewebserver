@@ -24,12 +24,18 @@ def get_json(url):
 
 
 def get_yaml(url):
-    return yaml_to_json(requests.get(
+    response = requests.get(
         url=DATABASE_URL + url,
-    ).text)
+    )
+    response.encoding = 'utf-8'
+    
+    return yaml_to_json(response.text)
 
 
 def get_markdown(url):
-    return requests.get(
+    response = requests.get(
         url=DATABASE_URL + url,
-    ).text
+    )
+    response.encoding = 'utf-8'
+
+    return response.text
