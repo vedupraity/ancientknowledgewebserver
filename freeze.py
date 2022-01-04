@@ -20,7 +20,7 @@ app.config['FREEZER_DESTINATION_IGNORE'] = ['*']
 app.config['FREEZER_DESTINATION'] = build_destionation
 app.config['FREEZER_DEFAULT_MIMETYPE'] = 'text/html; charset=utf-8'
 app.config['FREEZER_IGNORE_MIMETYPE_WARNINGS'] = True
-max_threads = 500
+max_threads = 100
 
 class freezerClass():
     def __init__(self, url):
