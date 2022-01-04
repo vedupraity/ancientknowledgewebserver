@@ -2,8 +2,8 @@ name: Build and Deploy
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron:  '30 18 * * *' # 12:00 AM IST
+  # schedule:
+  #   - cron:  '30 18 * * *' # 12:00 AM IST
 
 jobs:
   CheckRecentCommits:
@@ -111,16 +111,16 @@ jobs:
           release_name="release-$GITHUB_RUN_NUMBER"
           echo "$release_name ($date_now_ist)">version.txt
 
-          git config user.email "${{ secrets.GIT_USER_EMAIL }}"
-          git config user.name "${{ secrets.GIT_USER_NAME }}"
-          git status
-          git add .
-          git commit -m "$release_name ($date_now_ist)"
-          git push origin master
+          # git config user.email "${{ secrets.GIT_USER_EMAIL }}"
+          # git config user.name "${{ secrets.GIT_USER_NAME }}"
+          # git status
+          # git add .
+          # git commit -m "$release_name ($date_now_ist)"
+          # git push origin master
 
-      - name: 🧹 Purge Cloudflare Cache
-        run: |
-          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
-            -H "Authorization: Bearer ${{ secrets.CF_PURGE_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            --data '{"purge_everything":true}'
+      # - name: 🧹 Purge Cloudflare Cache
+      #   run: |
+      #     curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
+      #       -H "Authorization: Bearer ${{ secrets.CF_PURGE_TOKEN }}" \
+      #       -H "Content-Type: application/json" \
+      #       --data '{"purge_everything":true}'
