@@ -1,161 +1,101 @@
-from flask_frozen import Freezer, url_for
+import datetime
+import json
+import os
+import shutil
+
+from flask_frozen import Freezer
+import threading
 
 from app import app
-from config import CONTENT
-from helpers.api import RequestHelper
+from config import SITE_CONFIG
+from helpers.api import fetch_gitub_database_tree
 
 
-freezer = Freezer(app)
+start_time = datetime.datetime.now()
 
-# bhagavad gita hindi - urls
+app_root_path = app.root_path
+build_destionation = 'build'
+app.config['FREEZER_REMOVE_EXTRA_FILES'] = False
+app.config['FREEZER_DESTINATION_IGNORE'] = ['*']
+app.config['FREEZER_DESTINATION'] = build_destionation
+app.config['FREEZER_DEFAULT_MIMETYPE'] = 'text/html; charset=utf-8'
+app.config['FREEZER_IGNORE_MIMETYPE_WARNINGS'] = True
+max_threads = 20
 
-bg_hindi_blueprint_name = 'bhagavad_gita_hindi'
-bg_hindi_base_url = CONTENT[bg_hindi_blueprint_name]['base_url']
+class freezerClass():
+    def __init__(self, url):
+        self.url = url
+        self.freezer = Freezer(app)
 
-bg_hindi_index_url = f'/content/{bg_hindi_base_url}/index.json'
-bg_hindi_index_data = RequestHelper().getData(bg_hindi_index_url)
+    def _yield_urls(self):
+        print(f'generating {self.url}')
+        yield self.url
 
-
-@freezer.register_generator
-def bhagavadGitaHindiChapterView():
-    for chapter_meta in bg_hindi_index_data:
-        chapter_id = chapter_meta['id']
-
-        url = url_for(
-            f'{bg_hindi_blueprint_name}_blueprint.bhagavadGitaHindiChapterView',
-            chapter_id=chapter_id
-        )
-        print(f"Generating static page for url {url}")
-        yield url
-
-
-@freezer.register_generator
-def bhagavadGitaHindiTextView():
-    for chapter_meta in bg_hindi_index_data:
-        chapter_id = chapter_meta['id']
-        if chapter_meta['isNested']:
-            for text_id in chapter_meta['pages']:
-                
-                url = url_for(
-                    f'{bg_hindi_blueprint_name}_blueprint.bhagavadGitaHindiTextView',
-                    chapter_id=chapter_id,
-                    text_id=text_id
-                )
-                print(f"Generating static page for url {url}")
-                yield url
-
-# bhagavad gita english - urls
+    def freeze(self):
+        self.freezer.register_generator(self._yield_urls)
+        self.freezer.freeze()
 
 
-bg_english_blueprint_name = 'bhagavad_gita_english'
-bg_english_base_url = CONTENT[bg_english_blueprint_name]['base_url']
-
-bg_english_index_url = f'/content/{bg_english_base_url}/index.json'
-bg_english_index_data = RequestHelper().getData(bg_english_index_url)
+def freeze_single_url(url):
+    freezer = freezerClass(url)
+    freezer.freeze()
 
 
-@freezer.register_generator
-def bhagavadGitaEnglishChapterView():
-    for chapter_meta in bg_english_index_data:
-        chapter_id = chapter_meta['id']
+def freeze_urls_asynchronous(urls):
+    threads = []
 
-        url = url_for(
-            f'{bg_english_blueprint_name}_blueprint.bhagavadGitaEnglishChapterView',
-            chapter_id=chapter_id
-        )
-        print(f"Generating static page for url {url}")
-        yield url
+    for url in urls:
+        threads.append(threading.Thread(
+            target=freeze_single_url, args=(url,)))
 
+    for thread in threads:
+        thread.start()
 
-@freezer.register_generator
-def bhagavadGitaEnglishTextView():
-    for chapter_meta in bg_english_index_data:
-        chapter_id = chapter_meta['id']
-        if chapter_meta['isNested']:
-            for text_id in chapter_meta['pages']:
-
-                url = url_for(
-                    f'{bg_english_blueprint_name}_blueprint.bhagavadGitaEnglishTextView',
-                    chapter_id=chapter_id,
-                    text_id=text_id
-                )
-                print(f"Generating static page for url {url}")
-                yield url
-
-# Ramcharitmanas hindi - urls
-
-ramcharitmanas_hindi_blueprint_name = 'ramcharitmanas_hindi'
-ramcharitmanas_hindi_base_url = CONTENT[ramcharitmanas_hindi_blueprint_name]['base_url']
-
-ramcharitmanas_hindi_index_url = f'/content/{ramcharitmanas_hindi_base_url}/index.json'
-ramcharitmanas_hindi_index_data = RequestHelper().getData(ramcharitmanas_hindi_index_url)
+    for thread in threads:
+        thread.join()
 
 
-@freezer.register_generator
-def ramcharitmanasHindiChapterView():
-    for chapter_meta in ramcharitmanas_hindi_index_data:
-        chapter_id = chapter_meta['id']
-
-        url = url_for(
-            f'{ramcharitmanas_hindi_blueprint_name}_blueprint.ramcharitmanasHindiChapterView',
-            chapter_id=chapter_id
-        )
-        print(f"Generating static page for url {url}")
-        yield url
+def freeze_urls_synchronous(urls):
+    for url in urls:
+        freeze_single_url(url)
 
 
-@freezer.register_generator
-def ramcharitmanasHindiTextView():
-    for chapter_meta in ramcharitmanas_hindi_index_data:
-        chapter_id = chapter_meta['id']
-        if chapter_meta['isNested']:
-            for text_id in chapter_meta['pages']:
-                
-                url = url_for(
-                    f'{ramcharitmanas_hindi_blueprint_name}_blueprint.ramcharitmanasHindiTextView',
-                    chapter_id=chapter_id,
-                    text_id=text_id
-                )
-                print(f"Generating static page for url {url}")
-                yield url
-
-# Ramcharitmanas english - urls
-
-ramcharitmanas_english_blueprint_name = 'ramcharitmanas_english'
-ramcharitmanas_english_base_url = CONTENT[ramcharitmanas_english_blueprint_name]['base_url']
-
-ramcharitmanas_english_index_url = f'/content/{ramcharitmanas_english_base_url}/index.json'
-ramcharitmanas_english_index_data = RequestHelper().getData(ramcharitmanas_english_index_url)
+def clean_build_directory(directory):
+    if os.path.exists(directory):
+        shutil.rmtree(directory)
+        os.mkdir(directory)
 
 
-@freezer.register_generator
-def ramcharitmanasEnglishChapterView():
-    for chapter_meta in ramcharitmanas_english_index_data:
-        chapter_id = chapter_meta['id']
+def get_content_urls():
+    urls = []
+    
+    github_database_tree = fetch_gitub_database_tree()
+    languages = SITE_CONFIG['content_languages_codes']
+    
+    for language in languages:
+        language_prefix = f'/{language}/'
+        for node in github_database_tree['tree']:  # todo
+            if node['type'] == 'tree':
+                urls.append(language_prefix + node['path'] + '/')
+    return urls
 
-        url = url_for(
-            f'{ramcharitmanas_english_blueprint_name}_blueprint.ramcharitmanasEnglishChapterView',
-            chapter_id=chapter_id
-        )
-        print(f"Generating static page for url {url}")
-        yield url
 
-
-@freezer.register_generator
-def ramcharitmanasEnglishTextView():
-    for chapter_meta in ramcharitmanas_english_index_data:
-        chapter_id = chapter_meta['id']
-        if chapter_meta['isNested']:
-            for text_id in chapter_meta['pages']:
-                
-                url = url_for(
-                    f'{ramcharitmanas_english_blueprint_name}_blueprint.ramcharitmanasEnglishTextView',
-                    chapter_id=chapter_id,
-                    text_id=text_id
-                )
-                print(f"Generating static page for url {url}")
-                yield url
+def get_urls_to_freeze():
+    urls = ['/', '/about/']
+    urls += [f'/{language}/' for language in SITE_CONFIG['content_languages_codes']]
+    urls += get_content_urls()
+    return urls
 
 
 if __name__ == '__main__':
-    freezer.freeze()
+    clean_build_directory(build_destionation)
+
+    urls = get_urls_to_freeze()
+    print(f'freezing {len(urls)} urls')
+    
+    for i in range(len(urls)):
+        _urls = urls[i:i+max_threads]
+        freeze_urls_asynchronous(_urls)
+
+    end_time = datetime.datetime.now()
+    print(f'took {(end_time - start_time).seconds} seconds to freeze {len(urls)} urls')

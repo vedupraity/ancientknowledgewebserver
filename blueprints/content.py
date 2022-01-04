@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for
-from ancientknowledgewebserver.config import SITE_CONFIG
+from config import SITE_CONFIG
 
 from helpers.api import get_yaml, get_markdown
 from helpers.context import getBaseTemplateContext
