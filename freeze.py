@@ -90,7 +90,7 @@ def get_urls_to_freeze():
 if __name__ == '__main__':
     clean_build_directory(build_destionation)
 
-    urls = list(set(get_urls_to_freeze()))[:80]
+    urls = list(set(get_urls_to_freeze()))
     print(f'freezing {len(urls)} urls')
     
     for i in range(0, len(urls), max_threads):
