@@ -4,7 +4,7 @@
 <head>
     {# Global site tag (gtag.js) - Google Analytics #}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics_tracking_id }}"></script>
-    <script type="application/javascript">
+    <script type="text/javascript">
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);};
         gtag('js', new Date());
@@ -79,26 +79,7 @@
     </template>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.3/dist/sweetalert2.min.js"></script>
-    <script type="application/javascript">
-        window.redirectTo = (url) => {
-            window.location.href = url;
-        };
-        window.languageSelector = async () => {
-            const { value: language } = await Swal.fire({
-                template: '#language-selector-swal-template'
-            });
-
-            if (language) {
-                if (window.location.pathname === '/') {
-                    window.redirectTo(`/${language}/`);
-                } else {
-                    let currentPath = window.location.pathname;
-                    let newPath = currentPath.replace(/^\/[a-z]{2}\/?/, `/${language}/`);
-                    window.redirectTo(newPath);
-                };
-            };
-        };
-    </script>
+    <script src="{{ site_url }}{{ url_for('static', filename='js/language-selector.js') }}"></script>
 
     <script src="{{ site_url }}{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ site_url }}{{ url_for('static', filename='js/script.js') }}"></script>

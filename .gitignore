@@ -14,3 +14,6 @@ github_database_tree.json
 
 # build artifacts
 build/
+
+# requests cache
+api_cache.sqlite
