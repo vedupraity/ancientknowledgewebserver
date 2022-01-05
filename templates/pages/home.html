@@ -1,6 +1,8 @@
 {% extends 'pages/base.html' %}
 
 {% block hero_section %}
+<div class="content" style="position: absolute;top: 50vh;text-align: center;width: 100vw;"><h4>Loading...</h4></div>
+
 <div class="animatedParent animateOnce">
 <section class="hero is-light is-fullheight animated fadeInUpShort">
     <div class="hero-body is-flex is-justify-content-center animatedParent animateOnce">
@@ -33,25 +35,27 @@
     <div class="mb-6">
         <div class="gcse-search"></div>
     </div>
+    
+    <div class="animatedParent animateOnce">
+        <div class="mb-6 animated fadeInUpShort">
+            <p class="title is-4 has-text-warning-dark mt-5 mb-4">
+                Books
+            </p>
+            {% with cards=books %}
+                {% include 'components/home_page_card_columns.html' %}
+            {% endwith %}
+        </div>
+    </div>
 
-    <div class="columns is-multiline is-centered is-variable is-4">    
-        {% for book in books %}
-            {% if book.status in ['live', 'wip'] %}
-                <div
-                    class="column is-full-tablet is-full-desktop is-full-widescreen is-full-fullhd is-flex animatedParent animateOnce">
-                    {% with
-                        image_url=url_for('static', filename=book.coverImage),
-                        title_primary=book.title,
-                        title_secondary=book.author,
-                        description_text=book.description,
-                        button_url=site_url + '/' + book.url + '/',
-                        is_wip=(book.status == 'wip')
-                    %}
-                        {% include 'components/card_with_image.html' %}
-                    {% endwith %}
-                </div>
-            {% endif %}
-        {% endfor %}
+    <div class="animatedParent animateOnce">
+        <div class="mt-6 animated fadeInUpShort">
+            <p class="title is-4 has-text-warning-dark mt-5 mb-4">
+                Stotra (hymns)
+            </p>
+            {% with cards=stotra %}
+                {% include 'components/home_page_card_columns.html' %}
+            {% endwith %}
+        </div>
     </div>
 </section>
 
@@ -62,4 +66,14 @@
         </div>
     </article>
 </section>
+{% endblock %}
+
+
+{% block js_extension %}
+<script type="text/javascript">
+    const supported_languages = {{ content_languages_codes|safe }};
+    if (window.location.pathname === '/') {
+        window.languageSelector();
+    }
+</script>
 {% endblock %}

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Begin 🍔
+    // Begin hamburger menu script
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
     // Check if there are any navbar burgers
@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-    // End 🍔
+    // End hamburger menu script
 
-    // Begin 🔔
+    // Begin notification script
     (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
         const $notification = $delete.parentNode;
 
@@ -31,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
             $notification.parentNode.removeChild($notification);
         });
     });
-    // End 🔔
+    // End notification script
 
-    // Begin 📜
+    // Begin scroll to content script
     window.scrollToCards = () => {
         const cardsSection = document.getElementById('cards-section');
 
@@ -43,5 +43,5 @@ document.addEventListener('DOMContentLoaded', () => {
             behavior: 'smooth'
         })
     }
-    // End 📜
+    // End scroll to content script
 });

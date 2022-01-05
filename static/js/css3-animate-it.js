@@ -1,15 +1,3 @@
-/*
- * CSS3 Animate it
- * Copyright (c) 2014 Jack McCourt
- * https://github.com/kriegar/css3-animate-it
- * Version: 0.1.0
- * 
- * I utilise the jQuery.appear plugin within this javascript file so here is a link to that too
- * https://github.com/morr/jquery.appear
- *
- * I also utilise the jQuery.doTimeout plugin for the data-sequence functionality so here is a link back to them.
- * http://benalman.com/projects/jquery-dotimeout-plugin/
- */
 (function($) {
   var selectors = [];
 

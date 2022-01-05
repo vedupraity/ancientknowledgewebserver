@@ -16,5 +16,5 @@
         href="{{ url }}"
     {% endif %}
 >
-    {{ text or 'Read Now' }}
+    {{ text or 'Read Now' | safe }}
 </a>

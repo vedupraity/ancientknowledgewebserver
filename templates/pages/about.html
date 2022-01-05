@@ -37,15 +37,15 @@
                                 <p class="has-text-centered has-text-warning-dark mt-5">Follow us @PraacheenGyaan</p>
 
                                 <p class="has-text-centered mb-5 animatedParent animateOnce">
-                                    <a class="box icon facebook is-large fa-2x mb-0 mr-3 animated growIn" href="{{ facebook_profile_url }}" target="_blank">
+                                    <a class="box icon facebook is-large fa-2x mb-0 mr-3 animated growIn" href="{{ social_media_facebook }}" target="_blank">
                                         <i class="fab fa-facebook-square has-text-white"></i>
                                     </a>
 
-                                    <a class="box icon instagram is-large fa-2x mb-0 mr-3 animated growIn delay-500" href="{{ instagram_profile_url }}" target="_blank">
+                                    <a class="box icon instagram is-large fa-2x mb-0 mr-3 animated growIn delay-500" href="{{ social_media_instagram }}" target="_blank">
                                         <i class="fab fa-instagram-square has-text-white"></i>
                                     </a>
 
-                                    <a class="box icon twitter is-large fa-2x mb-0 animated growIn delay-1000" href="{{ twitter_profile_url }}" target="_blank">
+                                    <a class="box icon twitter is-large fa-2x mb-0 animated growIn delay-1000" href="{{ social_media_twitter }}" target="_blank">
                                         <i class="fab fa-twitter-square has-text-white"></i>
                                     </a>
                                 </p>
@@ -55,81 +55,6 @@
                 </div>
             </div>
         </div>
-
-        {# <div
-            class="column is-full-tablet is-full-desktop is-full-widescreen is-full-fullhd is-flex is-justify-content-center mt-4 animatedParent animateOnce">
-            <div class="content animated fadeInUpShort">
-                <h2 class="has-text-centered m-0 mb-4">
-                    Our Team
-                </h2>
-            </div>
-        </div>
-
-        <div
-            class="column is-one-third-tablet is-one-quarter-desktop is-one-quarter-widescreen is-one-quarter-fullhd is-flex is-justify-content-center animatedParent animateOnce">
-            <div class="box content is-flex-grow-1 animated fadeInUpShort">
-                <div class="is-flex is-flex-direction-column is-align-items-center mb-0">
-                    <div class="m-0">
-                        <figure class="image is-128x128 m-0">
-                            <img class="is-rounded" src="{{ site_url }}{{ url_for('static', filename='images/vedprakashupraity.jpg') }}">
-                        </figure>
-                    </div>
-                    <div class="has-text-centered mt-4">
-                        <h5 class="m-0">Vedprakash Upraity</h5>
-                        <div class="tags is-centered m-0 mt-4">
-                            <span class="tag is-medium is-warning">Founder</span>
-                        </div>
-                        <p class="m-0 mt-2">
-                            He works as a software engineer. He composes music in his free time.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div
-            class="column is-one-third-tablet is-one-quarter-desktop is-one-quarter-widescreen is-one-quarter-fullhd is-flex is-justify-content-center animatedParent animateOnce">
-            <div class="box content is-flex-grow-1 animated fadeInUpShort">
-                <div class="is-flex is-flex-direction-column is-align-items-center mb-0">
-                    <div class="m-0">
-                        <figure class="image is-128x128 m-0">
-                            <img class="is-rounded" src="{{ site_url }}{{ url_for('static', filename='images/rounakupraity.jpg') }}">
-                        </figure>
-                    </div>
-                    <div class="has-text-centered mt-4">
-                        <h5 class="m-0">Rounak Upraity</h5>
-                        <div class="tags is-centered m-0 mt-4">
-                            <span class="tag is-medium is-warning">Creative Assistant</span>
-                        </div>
-                        <p class="m-0 mt-2">
-                            He is a high school student. He develops video games in his free time.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div
-            class="column is-one-third-tablet is-one-quarter-desktop is-one-quarter-widescreen is-one-quarter-fullhd is-flex is-justify-content-center animatedParent animateOnce">
-            <div class="box content is-flex-grow-1 animated fadeInUpShort">
-                <div class="is-flex is-flex-direction-column is-align-items-center mb-0">
-                    <div class="m-0">
-                        <figure class="image is-128x128 m-0">
-                            <i class="is-rounded fas fa-users"></i>
-                        </figure>
-                    </div>
-                    <div class="has-text-centered mt-4">
-                        <h5 class="m-0">and friends...</h5>
-                        <div class="tags is-centered m-0 mt-4">
-                            <span class="tag is-medium is-warning">General Support</span>
-                        </div>
-                        <p class="m-0 mt-2">
-                            A bunch of good friends supporting this project. And you can join us too! 😃
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div> #}
 
         <div
             class="column is-full-tablet is-full-desktop is-full-widescreen is-full-fullhd is-flex is-justify-content-center mt-4 animatedParent animateOnce">
@@ -220,4 +145,10 @@
 
     </div>
 </section>
+{% endblock %}
+
+{% block js_extension %}
+<script type="text/javascript">
+    $('#language-selector-navbar-item').addClass('is-hidden');
+</script>
 {% endblock %}

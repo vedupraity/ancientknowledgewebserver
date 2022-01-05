@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {# Global site tag (gtag.js) - Google Analytics #}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics_tracking_id }}"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);};
+        gtag('js', new Date());
+
+        gtag('config', '{{ google_analytics_tracking_id }}');
+    </script>
+    <script async src="https://cse.google.com/cse.js?cx=ff45d1729ad35e76f"></script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ff902b" />
+    <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet'>
+
+    <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/bulma.min.css') }}">
+    <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/theme.css') }}">
+    <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/animations.css') }}">
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+            text-align: center;
+            
+            background-color: unset;
+            background-image: url('https://images.pexels.com/photos/531321/pexels-photo-531321.jpeg?cs=tinysrgb&dpr=1&w=1280');
+            background-size: cover;
+            background-position: center;
+        }
+
+        body, html {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section animatedParent animateOnce">
+        <div class="box glass animated bounceInUp">
+            <div class="content">
+                <a href="{{ site_url }}" class="no-decoration">
+                    <img src="{{ site_url }}{{ url_for('static', filename='images/logo.png') }}" width="32" height="32" class="mt-0 mb-3">
+                    <h4 class="mt-0 mb-5">Ancient Knowledge</h4>
+                </a>
+                <hr class="mt-0 mb-5">
+                <h2 class="mt-0 mb-5">404</h2>
+                <h5 class="mt-0 mb-5">this page is either removed or has been moved to a new address!</h5>
+                <h4 class="mt-0 mb-0">
+                    <a href="{{ site_url }}" class="button is-warning is-outlined no-decoration">Take me to Home page</a>
+                </h4>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ site_url }}{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ site_url }}{{ url_for('static', filename='js/css3-animate-it.js') }}"></script>
+</body>
+
+</html>

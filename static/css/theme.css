@@ -3,6 +3,7 @@
     --sarawak-white: rgba(248, 239, 186);  /* #f8efba */
     --honey-glow: rgba(234, 181, 67);  /* #eab543 */
     --saffron: rgba(255, 144, 43);  /* #ff902b */
+    --dark-grey: #444444;
 
     --yellow: #f9d976;
     --red: #e93c2d;
@@ -56,6 +57,10 @@ body {
     color: var(--saffron) !important;
 }
 
+.navbar-item i{
+    font-size: 2rem;
+}
+
 .hero .hero-body {
     padding: 0 !important;
     position: relative;
@@ -75,45 +80,37 @@ body {
 @keyframes title-transition {
     0% {
         transform: translateY(-9rem);
-        filter: blur(3rem);
         opacity: 0;
     }
     2% {
         transform: unset;
-        filter: blur(0);
         opacity: 1;
     }
 
     48% {
         transform: unset;
-        filter: blur(0);
         opacity: 1;
     }
     50% {
         transform: translateY(9rem);
-        filter: blur(3rem);
         opacity: 0;
     }
 
     50.01% {
         transform: translateY(-9rem);
-        filter: blur(3rem);
         opacity: 0;
     }
     51% {
         transform: unset;
-        filter: blur(0);
         opacity: 1;
     }
 
     98% {
         transform: unset;
-        filter: blur(0);
         opacity: 1;
     }
     100% {
         transform: translateY(9rem);
-        filter: blur(3rem);
         opacity: 0;
     }
 }
@@ -181,10 +178,11 @@ body {
     opacity: 0.75;
     color: white;
     border-radius: 500px;
-    padding-top: 0.3rem;
-    padding-left: 0.6rem;
-    padding-right: 0.6rem;
-    font-size: calc(var(--navbar-height) / 1.25);
+    padding-top: 0.4rem;
+    padding-bottom: 0.2rem;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+    font-size: calc(var(--navbar-height) / 1);
     margin-bottom: calc(var(--navbar-height) / 4);
 }
 
@@ -193,7 +191,7 @@ body {
 .scroll-down-btn:active {
     cursor: pointer;
     color: var(--saffron);
-    font-size: calc(var(--navbar-height) / 1.25);
+    font-size: calc(var(--navbar-height) / 1);
     margin-bottom: calc(var(--navbar-height) / 4.75);
     background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(var(--backdrop-blur));
@@ -364,12 +362,20 @@ a.no-decoration {
 
 .pagination .pagination-previous,
 .pagination .pagination-next {
-    width: 9em;
+    min-width: 9em;
 }
 
 .button.is-warning.is-outlined {
+    border: 1px solid;
     border-color: var(--saffron);
     color: var(--saffron);
+}
+
+.button.is-grey.is-outlined {
+    border: 1px solid;
+    border-color: var(--dark-grey);
+    color: var(--dark-grey);
+    background: transparent;
 }
 
 .button.is-warning.is-outlined[disabled] {
@@ -395,6 +401,16 @@ a.no-decoration {
     box-shadow: var(--box-shadow);
     transition: background-image;
     transition-duration: 1s;
+}
+
+.button.is-grey.is-outlined.is-focused,
+.button.is-grey.is-outlined.is-hovered,
+.button.is-grey.is-outlined:focus,
+.button.is-grey.is-outlined:hover {
+    border-color: var(--honey-glow);
+    color: white;
+    box-shadow: var(--box-shadow);
+    background: var(--dark-grey);
 }
 
 figure.is-96x96 i {
@@ -549,6 +565,12 @@ input.is-warning:active {
     }
 }
 
+@media screen and (max-width: 769px) {
+    .breadcrumb ol, .breadcrumb ul {
+        flex-direction: column;
+    }
+}
+
 hr {
     background-color: var(--yellow);
 }
@@ -557,11 +579,63 @@ body, p, a, h1, h2, h3, h4, h5, h6 {
     font-family: 'Noto Sans' !important;
 }
 
+.card.is-fullheight {
+    height: 100%;
+}
+
+.center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-content hr {
+    margin: 1rem 0;
+}
+
+.main-content h4 {
+    color: chocolate;
+}
+
+.main-content p {
+    text-align: justify;
+}
+
+
 /* Begin: Google search customization */
 
 .gsc-control-cse {
     border-radius: 0.5rem;
     box-shadow: var(--box-shadow);
+}
+
+.gsc-input {
+    height: 2.2rem;
+}
+
+.gsc-input-box {
+    border-radius: 0.5rem;
+}
+
+.gsc-search-button.gsc-search-button-v2 {
+    cursor: pointer;
+    height: 2.2rem;
+    border-radius: 0.5rem;
+}
+
+@media screen and (max-width: 769px) {
+    .gsc-search-button.gsc-search-button-v2 {
+        height: 2.8rem;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: unset;
+    }
+
+    .gsc-input-box {
+        height: 2.8rem;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 }
 
 /* End: Google search customization */

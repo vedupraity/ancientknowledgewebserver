@@ -1,14 +1,14 @@
 <section class="section animatedParent animateOnce">
-    <div class="box glass animated fadeInUpShort">
-        <nav class="breadcrumb is-medium is-centered" aria-label="breadcrumbs">
+    <div class="box animated fadeInUpShort">
+        <nav class="breadcrumb is-medium" aria-label="breadcrumbs">
             <ul>
                 {% for item in breadcrumb %}
-                <li {% if item.active %}class="is-active"{% endif %}>
-                    <a {% if not item.active %}class="is-link has-text-orange"{% else %}tabindex="-1"{% endif %} href="{{ item.page_url }}">
+                <li {% if item.is_active %}class="is-active"{% endif %}>
+                    <a {% if not item.is_active %}class="is-link has-text-orange"{% else %}class="strong" tabindex="-1"{% endif %} href="{{ item.path }}">
                         <span class="icon is-small">
-                            <i class="fas {{ item.icon }}" aria-hidden="true"></i>
+                            <i class="{{ item.icon_class }}" aria-hidden="true"></i>
                         </span>
-                        <span>{{ item.page_name }}</span>
+                        <span>{{ item.name }}</span>
                     </a>
                 </li>
                 {% endfor %}
