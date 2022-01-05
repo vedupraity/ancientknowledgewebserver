@@ -68,7 +68,7 @@
 
 
 {% block js_extension %}
-<script>
+<script type="application/javascript">
     const supported_languages = {{ content_languages_codes|safe }};
     if (window.location.pathname === '/') {
         window.languageSelector();
