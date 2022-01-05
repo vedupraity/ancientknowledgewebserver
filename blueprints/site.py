@@ -19,6 +19,13 @@ def aboutView():
     return render_template(f'pages/about.html', **context)
 
 
+@blueprint.route('/404/')
+def pageNotFound():
+    context = getBaseTemplateContext()
+
+    return render_template(f'pages/404.html', **context)
+
+
 @blueprint.route('/', defaults={'language': None})
 @blueprint.route('/<language>/')
 def homeView(language=None):

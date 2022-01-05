@@ -80,7 +80,7 @@ def get_content_urls():
 
 
 def get_urls_to_freeze():
-    urls = ['/', '/about/']
+    urls = ['/', '/about/' '/404/']
     urls += [f'/{language}/' for language in SITE_CONFIG['content_languages_codes']]
     urls += get_content_urls()
     return urls

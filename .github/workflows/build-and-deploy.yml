@@ -2,8 +2,8 @@ name: Build and Deploy
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron:  '30 18 * * *' # 12:00 AM IST
+  schedule:
+    - cron:  '30 18 * * *' # 12:00 AM IST
 
 jobs:
   CheckRecentCommits:
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: vedupraity/ancientknowledgewebserver
-          ref: feature/markdown-database
+          ref: master
           token: ${{ secrets.PAT_GITHUB_REPO }}
 
       - uses: actions/setup-python@v2
@@ -92,7 +92,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: vedupraity/ancientknowledgewebsite
-          ref: feature/markdown-database
+          ref: master
           token: ${{ secrets.PAT_GITHUB_REPO }}
 
       - name: Obtain Build Cache
@@ -117,7 +117,7 @@ jobs:
           git add .
           git commit -m "$release_name ($date_now_ist)"
           # git push origin master
-          git push origin feature/markdown-database
+          git push origin master
 
       - name: 🧹 Purge Cloudflare Cache
         run: |

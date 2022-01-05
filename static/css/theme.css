@@ -623,4 +623,19 @@ body, p, a, h1, h2, h3, h4, h5, h6 {
     border-radius: 0.5rem;
 }
 
+@media screen and (max-width: 769px) {
+    .gsc-search-button.gsc-search-button-v2 {
+        height: 2.8rem;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: unset;
+    }
+
+    .gsc-input-box {
+        height: 2.8rem;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
 /* End: Google search customization */
