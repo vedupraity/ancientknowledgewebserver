@@ -108,7 +108,7 @@ jobs:
           cp -rf build/* . && rm -rf build
 
           date_now_ist="$(TZ=Asia/Kolkata date)"
-          release_name="feature-$GITHUB_RUN_NUMBER"
+          release_name="release-$GITHUB_RUN_NUMBER"
           echo "$release_name ($date_now_ist)">version.txt
 
           git config user.email "${{ secrets.GIT_USER_EMAIL }}"
