@@ -20,7 +20,7 @@ app.config['FREEZER_DESTINATION_IGNORE'] = ['*']
 app.config['FREEZER_DESTINATION'] = build_destionation
 app.config['FREEZER_DEFAULT_MIMETYPE'] = 'text/html; charset=utf-8'
 app.config['FREEZER_IGNORE_MIMETYPE_WARNINGS'] = True
-max_threads = 8
+max_threads = 10
 
 class freezerClass():
     def __init__(self, url):
@@ -90,10 +90,10 @@ def get_urls_to_freeze():
 if __name__ == '__main__':
     clean_build_directory(build_destionation)
 
-    urls = get_urls_to_freeze()
+    urls = list(set(get_urls_to_freeze()))[:80]
     print(f'freezing {len(urls)} urls')
     
-    for i in range(len(urls)):
+    for i in range(0, len(urls), max_threads):
         _urls = urls[i:i+max_threads]
         freeze_urls_asynchronous(_urls)
 
