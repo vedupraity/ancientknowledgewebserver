@@ -1,7 +1,6 @@
 import os
 
 from flask import Flask
-from helpers.filters import register_filters
 
 from blueprints.site import blueprint as website_blueprint
 from blueprints.content import blueprint as content_blueprint
@@ -10,9 +9,6 @@ from blueprints.content import blueprint as content_blueprint
 # Initialise flask app
 app = Flask(__name__)
 project_root_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Register custom filters
-register_filters(app)
 
 # Register blueprints
 app.register_blueprint(website_blueprint)
