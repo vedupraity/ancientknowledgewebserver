@@ -28,13 +28,9 @@ This is Python (Flask) web server project for the website: https://www.ancientkn
 ```sh
 ancient_knowledge_site/  # project root
 ├── blueprints/  # flask blueprints
-│   ├── site/  # site routes and views
-│   └── content/  # content routes and views
 ├── helpers/  # helper modules
 ├── static/  # css, images, js
 ├── templates/  # jinja templates
-│   ├── components/  # reusable jinja templates
-│   ├── pages/  # jinja templates for html pages
 ├── .env.dev  # env vars (for development)
 ├── .env.prod  # env vars (for production)
 ├── app.py  # flask app
