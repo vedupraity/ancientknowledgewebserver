@@ -1,11 +1,12 @@
 import requests
 import requests_cache
 
-from config import DATABASE_URL, GITHUB_DATABASE_BRANCH
+from config import DATABASE_URL, GITHUB_DATABASE_BRANCH, ENABLE_API_CACHE
 from helpers.generic import yaml_to_json
 
 
-requests_cache.install_cache('api_cache')
+if ENABLE_API_CACHE == 'true':
+    requests_cache.install_cache('api_cache')
 
 
 def fetch_gitub_database_tree():

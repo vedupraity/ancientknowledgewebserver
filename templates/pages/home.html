@@ -35,28 +35,19 @@
     <div class="mb-6">
         <div class="gcse-search"></div>
     </div>
-    
-    <div class="animatedParent animateOnce">
-        <div class="mb-6 animated fadeInUpShort">
-            <p class="title is-4 has-text-warning-dark mt-5 mb-4">
-                Books
-            </p>
-            {% with cards=books %}
-                {% include 'components/home_page_card_columns.html' %}
-            {% endwith %}
-        </div>
-    </div>
 
-    <div class="animatedParent animateOnce">
-        <div class="mt-6 animated fadeInUpShort">
-            <p class="title is-4 has-text-warning-dark mt-5 mb-4">
-                Stotra (hymns)
-            </p>
-            {% with cards=stotra %}
-                {% include 'components/home_page_card_columns.html' %}
-            {% endwith %}
+    {% for section in sections %}
+        <div class="animatedParent animateOnce">
+            <div class="{% if not loop.last %}mb-6 {% endif %}animated fadeInUpShort">
+                <p class="title is-4 has-text-warning-dark mt-5 mb-4">
+                    {{ section.name }}
+                </p>
+                {% with cards=section.cards %} 
+                    {% include 'components/home_page_card_columns.html' %}
+                {% endwith %}
+            </div>
         </div>
-    </div>
+    {% endfor %}
 </section>
 
 <section class="section pt-0 animatedParent animateOnce">
