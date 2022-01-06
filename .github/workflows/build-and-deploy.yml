@@ -17,6 +17,7 @@ jobs:
           repository: vedupraity/ancientknowledgedatabase
           ref: master
           token: ${{ secrets.PAT_GITHUB_REPO }}
+      
       - name: Check commits in ancientknowledgedatabase since 24 hours ago
         id: check-new-commits-in-database
         run: |
@@ -25,11 +26,13 @@ jobs:
           else
             echo "::set-output name=has-new-commits::false"
           fi
+      
       - uses: actions/checkout@v2
         with:
           repository: vedupraity/ancientknowledgewebserver
           ref: master
           token: ${{ secrets.PAT_GITHUB_REPO }}
+      
       - name: Check commits in ancientknowledgewebserver since 24 hours ago
         id: check-new-commits-in-webserver
         run: |
@@ -43,7 +46,6 @@ jobs:
     needs: CheckRecentCommits
     if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - uses: actions/checkout@v2
         with:
