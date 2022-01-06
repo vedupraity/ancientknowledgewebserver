@@ -32,14 +32,25 @@ def homeView(language=None):
     supported_languages_code = [_[0] for _ in SITE_CONFIG['content_languages']]
     languages = [language] \
         if language in supported_languages_code else supported_languages_code
-
-    books_meta = get_yaml('/books/meta.yaml')
-    stotra_meta = get_yaml('/stotra/meta.yaml')
+        
+    content_root_meta = get_yaml(f'/meta.yaml')
+    home_page_sections = []
+    
+    for root_meta_item in content_root_meta:
+        _display_language = 'en' if len(languages) > 1 else languages[0]
+        _id = root_meta_item['id']
+        _name = root_meta_item['meta'][_display_language]['title']
+        _meta_item = get_yaml(f'/{_id}/meta.yaml')
+        cards = list(get_meta_array(languages, _meta_item, url_prefix=_id))
+        
+        home_page_sections.append({
+            'name': _name,
+            'cards': cards
+        })
 
     context = getBaseTemplateContext()
     context.update({
-        'books': list(get_meta_array(languages, books_meta, url_prefix='books')),
-        'stotra': list(get_meta_array(languages, stotra_meta, url_prefix='stotra')),
+        'sections': home_page_sections,
     })
 
     return render_template(f'pages/home.html', **context)

@@ -10,6 +10,7 @@ ENV = env("ENV")
 SITE_URL = env("SITE_URL")
 DATABASE_URL = env("DATABASE_URL")
 GITHUB_DATABASE_BRANCH = env("GITHUB_DATABASE_BRANCH")
+ENABLE_API_CACHE = env("ENABLE_API_CACHE")
 
 DATABASE_REPO_DIR = '/home/ved/Work/PersonalProjects/AncientKnowledge/ancientknowledgedatabase'
 
