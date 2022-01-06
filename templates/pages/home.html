@@ -25,20 +25,20 @@
 {% endblock %}
 
 {% block content %}
-<section id="cards-section" class="section">
-    <div class="content">
+<section id="cards-section" class="section animatedParent animateOnce">
+    <div class="content animated fadeInUpShort">
         <p class="subtitle is-4 has-text-warning-dark has-text-centered mt-5 mb-5">
             “Our mission is to allow everyone to learn about Vedic Culture and the Sanātana Dharma.”
         </p>
     </div>
 
-    <div class="mb-6">
+    <div class="mb-6 animated fadeInUpShort">
         <div class="gcse-search"></div>
     </div>
 
     {% for section in sections %}
-        <div class="animatedParent animateOnce">
-            <div class="{% if not loop.last %}mb-6 {% endif %}animated fadeInUpShort">
+        <div class="animated fadeInUpShort">
+            <div class="{% if not loop.last %}mb-6 {% endif %}">
                 <p class="title is-4 has-text-warning-dark mt-5 mb-4">
                     {{ section.name }}
                 </p>
@@ -62,9 +62,20 @@
 
 {% block js_extension %}
 <script type="text/javascript">
-    const supported_languages = {{ content_languages_codes|safe }};
-    if (window.location.pathname === '/') {
-        window.languageSelector();
-    }
+    $(document).ready(() => {
+        $('html').css('overflow-y', 'auto');
+        const supported_languages = {{ content_languages_codes|safe }};
+        if (window.location.pathname === '/') {
+            window.languageSelector();
+        };
+    });
 </script>
+{% endblock %}
+
+{% block css_extension %}
+<style>
+    html {
+        overflow-y: hidden;
+    }
+</style>
 {% endblock %}
