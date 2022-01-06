@@ -2,8 +2,8 @@ name: Build and Deploy
 
 on:
   workflow_dispatch:
-#   schedule:
-#     - cron:  '30 18 * * *' # 12:00 AM IST
+  schedule:
+    - cron:  '30 18 * * *' # 12:00 AM IST
 
 jobs:
   CheckRecentCommits:
