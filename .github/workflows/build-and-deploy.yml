@@ -106,6 +106,8 @@ jobs:
           GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
         run: |
           cp -rf build/* . && rm -rf build
+          # move custom 404 page from /404/index.html to /404.html
+          mv 404/index.html 404.html
 
           date_now_ist="$(TZ=Asia/Kolkata date)"
           release_name="release-$GITHUB_RUN_NUMBER"
