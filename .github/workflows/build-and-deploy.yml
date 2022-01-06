@@ -118,7 +118,6 @@ jobs:
           git status
           git add .
           git commit -m "$release_name ($date_now_ist)"
-          # git push origin master
           git push origin master
 
       - name: 🧹 Purge Cloudflare Cache
