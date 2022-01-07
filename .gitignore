@@ -19,5 +19,5 @@ build/
 api_cache.sqlite
 
 # personal notes
-TODO
+*.todo
 notes.md
