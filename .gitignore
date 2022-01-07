@@ -17,3 +17,6 @@ build/
 
 # requests cache
 api_cache.sqlite
+
+# personal notes
+TODO
