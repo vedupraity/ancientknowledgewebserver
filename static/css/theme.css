@@ -606,6 +606,10 @@ body, p, a, h1, h2, h3, h4, h5, h6 {
     text-align: justify;
 }
 
+.main-content .link-with-offset {
+    transform: translateY(calc(-1 * var(--navbar-height) - 1rem));
+}
+
 
 /* Begin: Google search customization */
 
