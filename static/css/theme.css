@@ -444,6 +444,11 @@ figure.is-128x128 i.is-rounded {
     overflow: hidden;
 }
 
+footer {
+    position: absolute;
+    width: 100%;
+}
+
 .footer-container {
     display: flex;
     flex-direction: row;
@@ -541,7 +546,7 @@ input.is-warning:active {
 }
 
 .image-background {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     min-width: 100%;
@@ -555,7 +560,7 @@ input.is-warning:active {
 
 @media screen and (max-width: 769px) {
     .image-background {
-        background-size: auto;
+        background-size: cover;
     }
 }
 
