@@ -63,6 +63,7 @@
         $('html').css('overflow-y', 'auto');
         const supported_languages = {{ content_languages_codes|safe }};
         if (window.location.pathname === '/') {
+            $('html').css('overflow-y', 'hidden');
             window.languageSelector();
         };
     });

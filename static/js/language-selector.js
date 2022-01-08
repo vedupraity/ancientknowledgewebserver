@@ -15,5 +15,7 @@ window.languageSelector = async () => {
             let newPath = currentPath.replace(/^\/[a-z]{2}\/?/, `/${language}/`);
             window.redirectTo(newPath);
         };
+    } else {
+        $('html').css('overflow-y', 'auto');
     };
 };
