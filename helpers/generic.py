@@ -20,13 +20,15 @@ def get_meta_object(language, meta_item, url_prefix):
         'subtitle': meta_item['meta'][language]['subtitle'],
         'image': meta_item['meta'][language]['image'],
         'description': markdown_to_html(meta_item['meta'][language]['description']),
-    }
+    } if language in meta_item['meta'] else None
 
 
 def get_meta_array(languages: list, meta_objects: list, url_prefix: str):
     for meta_item in meta_objects:
         for language in languages:
-            yield get_meta_object(language, meta_item, url_prefix)
+            _meta = get_meta_object(language, meta_item, url_prefix)
+            if _meta:
+                yield _meta
 
 
 def markdown_to_html(markdown_content):
