@@ -15,7 +15,7 @@ marshmallow==3.14.1
 pycodestyle==2.8.0
 python-dotenv==0.19.2
 PyYAML==6.0
-requests==2.26.0
+requests==2.27.1
 requests-cache==0.9.0
 toml==0.10.2
 urllib3==1.26.7
