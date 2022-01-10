@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '30 18 * * *' # 12:00 AM IST
+    - cron:  '12 30 * * *' # 6:00 PM IST
 
 concurrency: 
   group: ${{ github.ref }}
