@@ -74,6 +74,12 @@ def clean_build_directory(directory):
         os.mkdir(directory)
 
 
+# list of urls to ignore while freezing the site
+ignore_content_url_prefix = [
+    '/en/books/chanakya-neeti'
+]
+
+
 def get_content_urls():
     urls = []
 
@@ -84,7 +90,10 @@ def get_content_urls():
         language_prefix = f'/{language}/'
         for node in github_database_tree['tree']:  # todo
             if node['type'] == 'tree':
-                urls.append(language_prefix + node['path'] + '/')
+                url = language_prefix + node['path'] + '/'
+                if any(url.startswith(prefix) for prefix in ignore_content_url_prefix):
+                    continue
+                urls.append(url)
     return urls
 
 
@@ -115,9 +124,9 @@ if __name__ == '__main__':
     end_time = datetime.datetime.now()
     duration = end_time - start_time
     days, seconds = duration.days, duration.seconds
-    
+
     print(
-        f'Freeze ran for ' + \
-        f'{days * 24 + seconds // 3600}h:{(seconds % 3600) // 60}m:{seconds % 60}s ' + \
+        f'Freeze ran for ' +
+        f'{days * 24 + seconds // 3600}h:{(seconds % 3600) // 60}m:{seconds % 60}s ' +
         f'to freeze {urls_frozen} urls'
     )
