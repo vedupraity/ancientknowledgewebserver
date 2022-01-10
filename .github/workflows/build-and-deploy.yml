@@ -5,6 +5,10 @@ on:
   schedule:
     - cron:  '30 18 * * *' # 12:00 AM IST
 
+concurrency: 
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   CheckRecentCommits:
     runs-on: ubuntu-latest
