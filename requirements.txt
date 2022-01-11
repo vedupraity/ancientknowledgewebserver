@@ -3,7 +3,7 @@ certifi==2021.10.8
 chardet==4.0.0
 click==8.0.3
 css-html-js-minify==2.5.5
-environs==9.3.5
+environs==9.4.0
 Flask==2.0.2
 Frozen-Flask==0.18
 idna==3.3
