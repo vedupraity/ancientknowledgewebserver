@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, render_template, request
 from config import SITE_CONFIG
 
 from helpers.api import get_yaml, get_markdown
@@ -168,7 +168,7 @@ def get_pagination(language, content_path, breadcrumb):
 
 def get_cover_image(language, breadcrumb):
     root_path = breadcrumb[2]['path'] if len(breadcrumb) > 2 else None
-    default_cover_image = SITE_CONFIG['default_cover_image']
+    default_cover_image = SITE_CONFIG['site_image']
     
     if not root_path:
         return default_cover_image
@@ -180,6 +180,23 @@ def get_cover_image(language, breadcrumb):
         return default_cover_image
     else:
         return path_metadata['image']
+    
+
+def get_parent_meta_description(language, breadcrumb, _type='markdown'):
+    root_path = breadcrumb[2]['path'] if len(breadcrumb) > 2 else None
+    default_description_text = SITE_CONFIG['site_description']
+    
+    if not root_path:
+        return default_description_text
+    
+    path_metadata = get_parent_metadata(
+        language, root_path.replace(f'/{language}/', ''))
+
+    if not path_metadata[f'description_{_type}']:
+        return default_description_text
+    else:
+        return path_metadata[f'description_{_type}']
+
 
 def get_context(language, breadcrumb, parent_metadata, tree_metadata, content, pagination):
     context = getBaseTemplateContext()
@@ -189,7 +206,10 @@ def get_context(language, breadcrumb, parent_metadata, tree_metadata, content, p
         'tree': tree_metadata,
         'content': content,
         'pagination': pagination,
-        'cover_image': get_cover_image(language, breadcrumb),
+        'page_title': f'{SITE_CONFIG["site_title"]} | {" | ".join([_["name"] for _ in breadcrumb[1:]])}',
+        'page_description': get_parent_meta_description(language, breadcrumb) or SITE_CONFIG["site_description"],
+        'page_image': get_cover_image(language, breadcrumb),
+        'page_url': SITE_CONFIG["site_url"] + request.path,
     })
     return context
 

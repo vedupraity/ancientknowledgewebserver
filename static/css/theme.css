@@ -338,6 +338,10 @@ a,
     font-weight: bold !important;
 }
 
+.breadcrumb ul {
+    white-space: break-spaces;
+}
+
 
 a:hover {
     color: var(--saffron);
@@ -350,6 +354,9 @@ a:hover {
 
 .button {
     padding: 0 1.25rem 0 1.25rem;
+    white-space: pre-wrap;
+    height: unset;
+    min-height: 2.5em;
 }
 
 a.button,

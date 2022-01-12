@@ -5,17 +5,19 @@
 {# Margin top behind navbar#}
 <div class="mt-6"></div>
 
+{% with page_image=page_image|default(site_image) %}
 <style>
     :root {
-        --page-background-image: url({{ url_for('static', filename=cover_image) }});
+        --page-background-image: url({{ url_for('static', filename=page_image) }});
     }
 </style>
+{% endwith %}
 
 <div class="image-background"></div>
 
 <section class="section pt-6 pb-6">
 
-    <h2 class="title is-4 has-text-warning-dark has-text-centered mb-6">“Our mission is to allow everyone to learn about Vedic Culture and the Sanātana Dharma.”</h2>
+    <h2 class="title is-4 has-text-white has-text-centered mb-6">“Our mission is to allow everyone to learn about Vedic Culture and the Sanātana Dharma.”</h2>
 
     <div class="card card-horizontal is-flex-grow-1 mb-6">
         <div class="card-content">

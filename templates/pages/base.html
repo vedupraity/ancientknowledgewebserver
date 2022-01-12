@@ -19,19 +19,53 @@
     <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet'>
 
     {# Begin SEO tags #}
-    <title>{% if env == "dev" %}[{{env}}] {% endif %}{{ page_title|default(site_title) }}</title>
-    <meta name="description" content="{{ page_description|default(site_description) }}">
-    <meta name="keywords" content="{% if page_keywords|length %}{{ page_keywords|join(', ') }}{% else %}{{ seo_keywords|join(', ') }}{% endif %}">
-
-    <meta property="og:title" content="{{ page_title }}" />
-    <meta property="og:description" content="{{ page_description|default(site_description) }}" />
-    <meta property="og:url" content="{{ site_url }}" />
-    <meta property="og:image" content="{% if site_image %}{{ site_url }}{{ url_for('static', filename=site_image) }}{% else %}{{ site_url }}{{ url_for('static', filename='images/open-book-cover.jpg') }}{% endif %}" />
-    <meta property="og:type" content="{{ page_type|default('website') }}" />
     
-    <meta property="twitter:title" content="{{ page_title }}" />
-    <meta property="twitter:description" content="{{ page_description|default(site_description) }}" />
-    <meta property="twitter:image" content="{% if site_image %}{{ site_url }}{{ url_for('static', filename=site_image) }}{% else %}{{ site_url }}{{ url_for('static', filename='images/open-book-cover.jpg') }}{% endif %}" />
+    {# Variables: #}
+    {# - page_title:str (default:site_title) "The title of the page" #}
+    {# - page_description:str (default:site_description) "The description of the page" #}
+    {# - page_image:str (default:site_image) "The image of the page" #}
+    {# - page_url:str (default:site_url) "The url of the page" #}
+    {# - page_type:str (default:website) "The type of the page" #}
+    {# - page_keywords:list (default:site_keywords) "The keywords for the page" #}
+    {# - site_locale_default:str "The default site locale" #}
+    {# - site_locale_alternate:list "The alternate locales supported" #}
+
+    {% with
+        page_title=page_title|default(site_title),
+        page_description=page_description|default(site_description),
+        page_url=page_url|default(site_url),
+        page_image=page_image|default(site_image),
+        page_type=page_type|default('website'),
+        page_keywords=page_keywords|default(site_keywords)
+    %}
+        <title>{% if env == "dev" %}[{{env}}] {% endif %}{{ page_title }}</title>
+        <meta property="og:title" content="{{ page_title }}" />
+        <meta property="twitter:title" content="{{ page_title }}" />
+        <meta property="og:site_name" content="{{ site_title }}" />
+
+        <meta name="description" content="{{ page_description }}">
+        <meta property="og:description" content="{{ page_description }}" />
+        <meta property="twitter:description" content="{{ page_description }}" />
+
+        <meta property="og:url" content="{{ page_url }}" />
+
+        <meta property="og:image" content="{{ site_url }}{{ url_for('static', filename=page_image) }}" />
+        <meta property="twitter:image" content="{{ site_url }}{{ url_for('static', filename=page_image) }}" />
+
+        <meta property="og:type" content="{{ page_type }}" />
+
+        <meta property="og:locale" content="{{ site_locale_default }}" />
+        {% for locale in site_locale_alternate %}
+            <meta property="og:locale:alternate" content="{{ locale }}" />
+        {% endfor %}
+
+        <meta name="keywords" content="{{ page_keywords|join(', ') }}">
+
+    {% endwith %}
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@{{ social_media_handle }}" />
+    <meta name="twitter:site" content="@{{ social_media_handle }}" />
     {# End SEO tags #}
 
     <link rel="icon" href="{{ site_url }}{{ url_for('static', filename='images/favicon.ico') }}">

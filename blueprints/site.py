@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, render_template, request
 
 from config import SITE_CONFIG
 from helpers.api import get_yaml
@@ -12,8 +12,8 @@ blueprint = Blueprint(f'website_blueprint', __name__)
 def aboutView():
     context = getBaseTemplateContext()
     context.update({
-        'page_title': f'{SITE_CONFIG["site_title"]} | About',
-        'page_description': SITE_CONFIG['site_description'],
+        'page_title': f'{SITE_CONFIG["site_title"]} | About Us',
+        'page_url': SITE_CONFIG["site_url"] + request.path,
     })
 
     return render_template(f'pages/about.html', **context)
@@ -50,6 +50,8 @@ def homeView(language=None):
 
     context = getBaseTemplateContext()
     context.update({
+        'page_image': SITE_CONFIG["site_logo"],
+        'page_url': SITE_CONFIG["site_url"] + request.path,
         'sections': home_page_sections,
     })
 

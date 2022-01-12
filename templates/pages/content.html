@@ -5,11 +5,13 @@
 {# Margin top behind navbar#}
 <div class="mt-6"></div>
 
+{% with page_image=page_image|default(site_image) %}
 <style>
     :root {
-        --page-background-image: url({{ url_for('static', filename=cover_image) }});
+        --page-background-image: url({{ url_for('static', filename=page_image) }});
     }
 </style>
+{% endwith %}
 
 <div class="image-background"></div>
 
