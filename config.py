@@ -23,7 +23,9 @@ SITE_CONFIG = {
     'site_url': SITE_URL,
     'site_title': 'Ancient Knowledge',
     'site_tagline': '“Our mission is to allow everyone to learn about Vedic Culture and the Sanātana Dharma.”',
+    'site_tagline_short': '॥ धर्मो रक्षति रक्षितः ॥',
     'site_description': 'Free library of Texts, Scriptures and Books to learn the foundation of Sanātana Dharma.',
+    'copyright_message': 'This website may contain Copyrighted material used under Fair Use (Section 107 of the Copyright Act) for personal research and non-profit educational purposes.',
     'site_logo': 'images/logo.png',
     'site_image': 'images/default-cover-4x3.jpg',
     'content_languages': [

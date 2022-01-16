@@ -621,6 +621,12 @@ body, p, a, h1, h2, h3, h4, h5, h6 {
     transform: translateY(calc(-1 * var(--navbar-height) - 1rem));
 }
 
+.content-tags {
+    position: fixed;
+    z-index: -1;
+    opacity: 0;
+}
+
 
 /* Begin: Google search customization */
 

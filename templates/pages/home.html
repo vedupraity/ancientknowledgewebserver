@@ -9,7 +9,7 @@
         <img class="mandala-md-bg rotating-cw-slow">
         <img class="mandala-md rotating-cw-slow">
 
-        <h1 id="site-title" class="title is-1 has-text-centered m-0" title-en="Ancient Knowledge" title-hi="॥ धर्मो रक्षति रक्षितः ॥">
+        <h1 id="site-title" class="title is-1 has-text-centered m-0" title-en="{{ site_title }}" title-hi="{{ site_tagline_short }}">
         </h1>
 
         <div class="hero-bottom">
@@ -25,7 +25,7 @@
 <section id="cards-section" class="section animatedParent animateOnce">
     <div class="content animated fadeInUpShort">
         <p class="subtitle is-4 has-text-warning-dark has-text-centered mt-5 mb-5">
-            “Our mission is to allow everyone to learn about Vedic Culture and the Sanātana Dharma.”
+            {{ site_tagline }}
         </p>
     </div>
 
@@ -37,7 +37,7 @@
         <div class="animated fadeInUpShort">
             <div class="{% if not loop.last %}mb-6 {% endif %}">
                 <p class="title is-4 has-text-warning-dark mt-5 mb-4">
-                    {{ section.name }}
+                    <i class="fas fa-bars"></i> {{ section.name }}
                 </p>
                 {% with cards=section.cards %} 
                     {% include 'components/home_page_card_columns.html' %}
@@ -50,7 +50,7 @@
 <section class="section pt-0 animatedParent animateOnce">
     <article class="message is-warning is-small animated fadeInUpShort">
         <div class="message-body has-text-justified">
-            This website may contain Copyrighted material used under Fair Use (Section 107 of the Copyright Act) for personal research and non-profit educational purposes.
+            {{ copyright_message }}
         </div>
     </article>
 </section>

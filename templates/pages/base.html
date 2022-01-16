@@ -88,6 +88,13 @@
 
     {% block hero_section %}{% endblock %}
 
+    {# Begin helper tags for indexing #}
+    <div class="content content-tags">
+        <p>Read {{ page_title }} online in Hindi and English for free</p>
+        <p>{{ page_title }} हिंदी और अंग्रेजी में मुफ्त में ऑनलाइन पढ़ें</p>
+    </div>
+    {# End helper tags for indexing #}
+
     {% block content %}{% endblock %}
 
     {% include "components/footer.html" %}
