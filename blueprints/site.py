@@ -45,6 +45,7 @@ def homeView(language=None):
         
         home_page_sections.append({
             'name': _name,
+            'url': f'/{_display_language}/{_id}/',
             'cards': cards
         })
 

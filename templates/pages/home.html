@@ -37,7 +37,7 @@
         <div class="animated fadeInUpShort">
             <div class="{% if not loop.last %}mb-6 {% endif %}">
                 <p class="title is-4 has-text-warning-dark mt-5 mb-4">
-                    <i class="fas fa-bars"></i> {{ section.name }}
+                    <a href="{{ section.url }}">{{ section.name }}</a>
                 </p>
                 {% with cards=section.cards %} 
                     {% include 'components/home_page_card_columns.html' %}
