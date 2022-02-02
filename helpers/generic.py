@@ -25,11 +25,21 @@ def get_meta_object(language, meta_item, url_prefix):
 
 
 def get_meta_array(languages: list, meta_objects: list, url_prefix: str):
+    from app import thread_pool
+    results = []
+
     for meta_item in meta_objects:
         for language in languages:
-            _meta = get_meta_object(language, meta_item, url_prefix)
-            if _meta:
-                yield _meta
+            # _meta = get_meta_object(language, meta_item, url_prefix)
+            results.append(thread_pool.apply_async(
+                get_meta_object,
+                (language, meta_item, url_prefix)
+            ))
+    
+    for result in results:
+        _meta = result.get()
+        if _meta:
+            yield _meta
 
 
 def markdown_to_html(markdown_content):
