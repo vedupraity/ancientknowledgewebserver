@@ -20,8 +20,21 @@ def get_parent_metadata(language, path):
         parent_path or path,
     )
 
+def _get_breadcrumb_item(language, content_path, index):
+    breadcrumb_path = '/'.join(content_path.split('/')[:index+1])
+    content_path_metadata = get_parent_metadata(language, breadcrumb_path)
+
+    return {
+        'name': content_path_metadata['title'],
+        'path': f'/{language}/' + breadcrumb_path,
+        'is_active': index == len(content_path.split('/')) - 1,
+        'icon_class': 'fas fa-file-alt',
+    }
 
 def get_breadcrumb(language, content_path):
+    from app import thread_pool
+    results = []
+    
     breadcrumb = [{
         'name': 'Home',
         'path': f'/{language}/',
@@ -30,15 +43,16 @@ def get_breadcrumb(language, content_path):
     }]
 
     for index in range(len(content_path.split('/'))):
-        breadcrumb_path = '/'.join(content_path.split('/')[:index+1])
-        content_path_metadata = get_parent_metadata(language, breadcrumb_path)
-
-        breadcrumb.append({
-            'name': content_path_metadata['title'],
-            'path': f'/{language}/' + breadcrumb_path,
-            'is_active': index == len(content_path.split('/')) - 1,
-            'icon_class': 'fas fa-file-alt',
-        })
+        _get_breadcrumb_item(language, content_path, index)
+        results.append(
+            thread_pool.apply_async(
+                _get_breadcrumb_item,
+                (language, content_path, index)
+            )
+        )
+    
+    for result in results:
+        breadcrumb.append(result.get())
 
     return breadcrumb
 
@@ -78,8 +92,9 @@ def get_previous_page(language, current_path, breadcrumb_path_array):
         )
     else:
         # Step forward recursively
-        new_current_path = parent_tree_meta[current_path_meta_index_in_tree -
-                                            1]['path'].replace(f'/{language}/', '')
+        new_current_path = parent_tree_meta[
+            current_path_meta_index_in_tree - 1
+        ]['path'].replace(f'/{language}/', '')
         new_current_path_meta = get_parent_metadata(language, new_current_path)
 
         if new_current_path_meta['type'] == 'leaf':
