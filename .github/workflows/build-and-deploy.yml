@@ -3,14 +3,16 @@ name: Build and Deploy
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '30 12 * * *' # 6:00 PM IST
+    - cron:  '30 11 * * *' # 5:00 PM IST Everyday
 
 concurrency: 
   group: ${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  CheckRecentCommits:
+  # check if new commits pushed to the database or webserver repository in last 24 hours
+  check-recent-commits:
+    name: Check recent commits
     runs-on: ubuntu-latest
     outputs:
       hasCommitsInDatabase: ${{ steps.check-new-commits-in-database.outputs.has-new-commits }}
@@ -46,83 +48,25 @@ jobs:
             echo "::set-output name=has-new-commits::false"
           fi
 
-  Build:
-    needs: CheckRecentCommits
-    if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
+  generate-freeze-candidate-urls:
+    name: Generate Freeze Candidate URLs
     runs-on: ubuntu-latest
+    outputs:
+      hasCommitsInDatabase: ${{ steps.check-new-commits-in-database.outputs.has-new-commits }}
+      hasCommitsInWebserver: ${{ steps.check-new-commits-in-webserver.outputs.has-new-commits }}
     steps:
       - uses: actions/checkout@v2
-        with:
-          repository: vedupraity/ancientknowledgewebserver
-          token: ${{ secrets.PAT_GITHUB_REPO }}
-
+      
       - uses: actions/setup-python@v2
         with:
-          python-version: "3.8"
+          python-version: "3.10.2"
           architecture: "x64"
-
-      - name: 📥 Install
+      
+      - name: Install dependencies
         run: |
-          echo "using: $(python3 --version) and $(pip3 --version)"
           pip3 install -r requirements.txt
 
-      - name: ⚒️ Build
+      - name: Generate Freeze Candidate URLs
         run: |
           source .env.prod
-          python freeze.py
-          echo "finished building all static files"
-          du -h -d 1 build
-
-      - name: 💼 Minify
-        run: |
-          css-html-js-minify --multiple --overwrite ./build
-          echo "finished optimizing build for production"
-          du -h -d 1 build
-
-      - name: Create Build Cache
-        uses: actions/cache@v2
-        with:
-          path: ./build
-          key: cache-build-dir-${{ github.run_number }}
-
-  Deploy:
-    needs: Build
-    if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-      url: https://www.ancientknowledge.in
-    steps:
-      - name: Check out repo - ancientknowledgewebsite
-        uses: actions/checkout@v2
-        with:
-          repository: vedupraity/ancientknowledgewebsite
-          ref: master
-          token: ${{ secrets.PAT_GITHUB_REPO }}
-
-      - name: Obtain Build Cache
-        uses: actions/cache@v2
-        with:
-          path: ./build
-          key: cache-build-dir-${{ github.run_number }}
-
-      - name: 🚀 Deploy
-        env:
-          GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
-        run: |
-          cp -rf build/* . && rm -rf build
-          # move custom 404 page from /404/index.html to /404.html
-          mv 404/index.html 404.html
-          # remove index.html from /static
-          rm -rf static/index.html
-
-          date_now_ist="$(TZ=Asia/Kolkata date)"
-          release_name="release-$GITHUB_RUN_NUMBER"
-          echo "$release_name ($date_now_ist)">version.txt
-
-          git config user.email "${{ secrets.GIT_USER_EMAIL }}"
-          git config user.name "${{ secrets.GIT_USER_NAME }}"
-          git status
-          git add .
-          git commit -m "$release_name ($date_now_ist)"
-          git push origin master
+          python deploy/generate_urls.py
