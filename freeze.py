@@ -14,7 +14,7 @@ start_time = datetime.datetime.now()
 
 app_root_path = app.root_path
 build_destionation = 'build'
-max_threads = 2
+max_threads = 1
 urls_frozen = 0
 
 
