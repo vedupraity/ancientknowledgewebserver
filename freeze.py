@@ -21,7 +21,7 @@ app.config['FREEZER_DEFAULT_MIMETYPE'] = 'text/html; charset=utf-8'
 app.config['FREEZER_IGNORE_MIMETYPE_WARNINGS'] = True
 app.config['FREEZER_IGNORE_MIMETYPE_WARNINGS'] = True
 app.config['FREEZER_SKIP_EXISTING'] = True
-max_threads = 2
+max_threads = 4
 
 urls_frozen = 0
 
