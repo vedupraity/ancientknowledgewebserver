@@ -104,7 +104,7 @@ if __name__ == '__main__':
     clean_build_directory(build_destionation)
 
     site_urls = get_site_urls()
-    content_urls = get_content_urls()[:20]
+    content_urls = get_content_urls()
 
     total_url_count = len(site_urls) + len(content_urls)
 
