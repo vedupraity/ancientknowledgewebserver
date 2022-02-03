@@ -112,7 +112,16 @@ jobs:
           path: ${{ env.pythonLocation }}
           key: python-${{ github.run_number }}
 
+      - name: Cache Freeze Candidates
+        uses: actions/cache@v2
+        with:
+          path: |
+            build_job_ids.json
+            urls_per_build_job.json
+          key: freeze-candidates-${{ github.run_number }}
+
       - name: Freeze URLs
         run: |
-          source .env.prod
-          python freeze_urls.py --build_id=${{ matrix.id }}
+          ls -lah
+          # source .env.prod
+          # python freeze_urls.py --build_id=${{ matrix.id }}
