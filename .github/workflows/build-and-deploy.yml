@@ -88,7 +88,7 @@ jobs:
   freeze-urls:
     name: Freeze URLs
     runs-on: ubuntu-latest
-    needs: [fetch-urls]
+    needs: [generate-freeze-candidate]
     strategy:
       matrix:
         id: ${{ fromJson(needs.generate-freeze-candidate.outputs.build_job_ids) }}
