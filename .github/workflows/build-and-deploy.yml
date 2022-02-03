@@ -53,7 +53,7 @@ jobs:
 
   generate-freeze-candidate:
     name: Generate Freeze Candidates
-    # if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
+    if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
     outputs:
       build_job_ids: ${{ steps.generate-free-candidate-urls.outputs.build_ids }}
