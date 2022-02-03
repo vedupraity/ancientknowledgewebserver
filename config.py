@@ -12,6 +12,7 @@ DATABASE_URL = env("DATABASE_URL")
 GITHUB_DATABASE_BRANCH = env("GITHUB_DATABASE_BRANCH")
 ENABLE_API_CACHE = env("ENABLE_API_CACHE")
 THREAD_POOL_PROCESSES = int(env("THREAD_POOL_PROCESSES"))
+MAX_BUILD_JOBS = int(env("MAX_BUILD_JOBS"))
 
 DATABASE_REPO_DIR = '/home/ved/Work/PersonalProjects/AncientKnowledge/ancientknowledgedatabase'
 

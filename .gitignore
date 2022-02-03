@@ -9,15 +9,18 @@ venv*/
 # IDE config
 .vscode
 
-# development database
-github_database_tree.json
-
 # build artifacts
 build/
 
 # requests cache
-api_cache.sqlite
+.api_cache/
 
 # personal notes
 *.todo
 notes.md
+
+# freeze artifacts
+urls_per_build_job.json
+build_job_ids.json
+stderr.log
+stdout.log
