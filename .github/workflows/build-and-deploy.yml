@@ -122,6 +122,5 @@ jobs:
 
       - name: Freeze URLs
         run: |
-          ls -lah
-          # source .env.prod
-          # python freeze_urls.py --build_id=${{ matrix.id }}
+          source .env.prod
+          python freeze_urls.py --build_id=${{ matrix.id }}
