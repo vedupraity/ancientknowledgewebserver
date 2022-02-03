@@ -3,68 +3,65 @@ name: Build and Deploy
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '30 11 * * *' # 5:00 PM IST Everyday
-  # TODO: remove the push event after testing
-  push:
-    branches:
-      - feature/github-build-matrix
+    - cron: "30 11 * * *" # 5:00 PM IST Everyday
 
-concurrency: 
+concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  # check-recent-commits:
-  #   name: Check recent commits
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     hasCommitsInDatabase: ${{ steps.check-new-commits-in-database.outputs.has-new-commits }}
-  #     hasCommitsInWebserver: ${{ steps.check-new-commits-in-webserver.outputs.has-new-commits }}
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         repository: vedupraity/ancientknowledgedatabase
-  #         ref: master
-  #         token: ${{ secrets.PAT_GITHUB_REPO }}
-      
-  #     - name: Check commits in ancientknowledgedatabase since 24 hours ago
-  #       id: check-new-commits-in-database
-  #       run: |
-  #         if [[ "$(git log --since='24 hours ago')" != "" ]]; then
-  #           echo "::set-output name=has-new-commits::true"
-  #         else
-  #           echo "::set-output name=has-new-commits::false"
-  #         fi
-      
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         repository: vedupraity/ancientknowledgewebserver
-  #         ref: master
-  #         token: ${{ secrets.PAT_GITHUB_REPO }}
-      
-  #     - name: Check commits in ancientknowledgewebserver since 24 hours ago
-  #       id: check-new-commits-in-webserver
-  #       run: |
-  #         if [[ "$(git log --since='24 hours ago')" != "" ]]; then
-  #           echo "::set-output name=has-new-commits::true"
-  #         else
-  #           echo "::set-output name=has-new-commits::false"
-  #         fi
+  check-recent-commits:
+    name: Check Recent Commits
+    runs-on: ubuntu-latest
+    outputs:
+      database_has_changed: ${{ steps.check-new-commits-in-database.outputs.has-new-commits }}
+      webserver_has_changed: ${{ steps.check-new-commits-in-webserver.outputs.has-new-commits }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: vedupraity/ancientknowledgedatabase
+          ref: master
+          token: ${{ secrets.PAT_GITHUB_REPO }}
+
+      - name: Check commits in ancientknowledgedatabase since 24 hours ago
+        id: check-new-commits-in-database
+        run: |
+          if [[ "$(git log --since='24 hours ago')" != "" ]]; then
+            echo "::set-output name=has-new-commits::true"
+          else
+            echo "::set-output name=has-new-commits::false"
+          fi
+
+      - uses: actions/checkout@v2
+        with:
+          repository: vedupraity/ancientknowledgewebserver
+          ref: master
+          token: ${{ secrets.PAT_GITHUB_REPO }}
+
+      - name: Check commits in ancientknowledgewebserver since 24 hours ago
+        id: check-new-commits-in-webserver
+        run: |
+          if [[ "$(git log --since='24 hours ago')" != "" ]]; then
+            echo "::set-output name=has-new-commits::true"
+          else
+            echo "::set-output name=has-new-commits::false"
+          fi
 
   fetch-build-urls:
     name: Fetch Build URLs
-    # if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
+    needs: [check-recent-commits]
+    if: ${{ needs.check-recent-commits.outputs.database_has_changed == 'true' || needs.check-recent-commits.outputs.webserver_has_changed == 'true' }}
     runs-on: ubuntu-latest
     outputs:
       build_job_ids: ${{ steps.generate-urls.outputs.build_job_ids }}
     steps:
       - uses: actions/checkout@v2
-      
+
       - uses: actions/setup-python@v2
         with:
           python-version: "3.10.2"
           architecture: "x64"
-      
+
       - name: Install Requirements
         run: |
           pip3 install -r requirements.txt
@@ -131,7 +128,7 @@ jobs:
         run: |
           css-html-js-minify --multiple --overwrite ./build_${{ matrix.id }}
           du -h -d 1 build_${{ matrix.id }}
-      
+
       - name: Upload build_${{ matrix.id }} Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -174,7 +171,7 @@ jobs:
           du -h -d 1 build_artifacts
 
           mkdir build
-          
+
           jq -c '.[]' build_job_ids.json | while read id; do
             rsync -a build_artifacts/build-artifact-${id}/ build/
           done
@@ -183,7 +180,7 @@ jobs:
         run: |
           # move custom 404 page from build/404/index.html to build/404.html
           mv build/404/index.html build/404.html
-          
+
           # remove index.html from build/static
           rm -rf build/static/index.html
 
@@ -207,7 +204,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: vedupraity/ancientknowledgewebsite
-          ref: master-copy
+          ref: master
           token: ${{ secrets.PAT_GITHUB_REPO }}
 
       - name: Cache Build
