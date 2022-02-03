@@ -56,7 +56,7 @@ jobs:
     # if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
     outputs:
-      build_job_ids: ${{ steps.generate-free-candidate-urls.outputs.build_ids }}
+      build_job_ids: ${{ steps.generate-urls.outputs.build_job_ids }}
     steps:
       - uses: actions/checkout@v2
       
@@ -70,7 +70,7 @@ jobs:
           pip3 install -r requirements.txt
 
       - name: Generate Freeze Candidate URLs
-        id: generate-free-candidate-urls
+        id: generate-urls
         run: |
           source .env.prod
           python generate_urls.py
