@@ -75,15 +75,17 @@ jobs:
           source .env.prod
           python generate_urls.py
 
+          echo "$(cat build_job_ids.json | jq -c)"
+
           echo "::set-output name=build_job_ids::$(cat build_job_ids.json | jq -c)"
 
-      - name: Cache Freeze Candidates
-        uses: actions/cache@v2
-        with:
-          path: |
-            build_job_ids.json
-            urls_per_build_job.json
-          key: freeze-candidates-${{ github.run_number }}
+      # - name: Cache Freeze Candidates
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       build_job_ids.json
+      #       urls_per_build_job.json
+      #     key: freeze-candidates-${{ github.run_number }}
 
   freeze-urls:
     name: Freeze URLs
