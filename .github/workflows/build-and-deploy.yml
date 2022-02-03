@@ -120,13 +120,20 @@ jobs:
       - name: Freeze URLs
         run: |
           source .env.prod
-          python freeze_urls.py --build_id=${{ matrix.id }}
+
+          python freeze_urls.py --build_id=${{ matrix.id }} > >(tee stdout.log) 2> >(tee stderr.log >&2)
+
+          has_error=$(cat stderr.log | grep -i "INTERNAL SERVER ERROR")
+          [[ ! -z $has_error ]] && cat stderr.log && exit 1
+
           mv build build_${{ matrix.id }}
+
           du -h -d 1 build_${{ matrix.id }}
 
       - name: Minify Build
         run: |
           css-html-js-minify --multiple --overwrite ./build_${{ matrix.id }}
+
           du -h -d 1 build_${{ matrix.id }}
 
       - name: Upload build_${{ matrix.id }} Artifact
@@ -220,9 +227,10 @@ jobs:
           release_version="Release-${{ github.run_number }}<br>$(TZ=Asia/Kolkata date)"
           echo $release_version > version.html
 
+          git status
+
           git config user.email "${{ secrets.GIT_USER_EMAIL }}"
           git config user.name "${{ secrets.GIT_USER_NAME }}"
-          git status
           git add .
           git commit -m "$release_version"
           git push
