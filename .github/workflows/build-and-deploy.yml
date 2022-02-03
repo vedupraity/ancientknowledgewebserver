@@ -220,7 +220,7 @@ jobs:
         run: |
           cp -rf build/* . && rm -rf build
           
-          release_version="R-${{ github.run_number }} $(TZ=Asia/Kolkata date)
+          release_version="R-${{ github.run_number }} $(TZ=Asia/Kolkata date)"
           echo $release_version > version.html
 
           git config user.email "${{ secrets.GIT_USER_EMAIL }}"
