@@ -91,8 +91,8 @@ jobs:
             urls_per_build_job.json
           key: freeze-candidates-${{ github.run_number }}
 
-  freeze-urls:
-    name: Freeze URLs
+  build-matrix:
+    name: Build Job
     runs-on: ubuntu-latest
     needs: [generate-freeze-candidate]
     strategy:
@@ -124,3 +124,48 @@ jobs:
         run: |
           source .env.prod
           python freeze_urls.py --build_id=${{ matrix.id }}
+
+          mv build build_${{ matrix.id }}
+          ls -lah build_${{ matrix.id }}
+      
+      - name: Upload build_${{ matrix.id }} Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifact-${{ matrix.id }}
+          path: build_${{ matrix.id }}
+
+  build-optimization:
+    name: Build Optimization
+    runs-on: ubuntu-latest
+    needs: [build-matrix]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.10.2"
+          architecture: "x64"
+
+      - name: Cache Python Environment
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: python-${{ github.run_number }}
+
+      - name: Cache Freeze Candidates
+        uses: actions/cache@v2
+        with:
+          path: |
+            build_job_ids.json
+            urls_per_build_job.json
+          key: freeze-candidates-${{ github.run_number }}
+
+      - name: Download All Build Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: build_artifacts
+
+      - name: Consolidate Builds
+        run: |
+          source .env.prod
+          ls -lah
