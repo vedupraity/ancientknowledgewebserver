@@ -64,7 +64,8 @@ with open('urls_per_build_job.json', 'w') as urls_per_build_job_json:
     print(f'saved urls_per_build_job.json')
 
 with open('build_job_ids.json', 'w') as build_job_ids_json:
-    json.dump(list(range(len(urls_per_build_job))), build_job_ids_json)
+    build_job_ids = [str(_) for _ in range(len(urls_per_build_job))]
+    json.dump(build_job_ids, build_job_ids_json)
     print(f'saved build_job_ids.json')
 
 print(f'Total URLs to freeze {len(freeze_candidates)}')
