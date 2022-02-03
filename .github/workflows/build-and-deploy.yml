@@ -77,3 +77,11 @@ jobs:
 
           # todo: remove these lines
           ls -lah
+          cat urls_per_build_job.json
+          cat build_job_id.json
+
+      - name: Cache Freeze Candidates
+        run: |
+          short_sha=$(git rev-parse --short HEAD)
+
+          echo $short_sha
