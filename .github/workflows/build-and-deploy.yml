@@ -123,8 +123,9 @@ jobs:
 
           python freeze_urls.py --build_id=${{ matrix.id }} > >(tee stdout.log) 2> >(tee stderr.log >&2)
 
-          has_error=$(cat stderr.log | grep -i "INTERNAL SERVER ERROR")
-          if [[ "${has_error}" != "" ]]; then
+          has_error=$(cat stderr.log | grep -i "INTERNAL SERVER ERROR") || true
+          if [[ ! -z $has_error ]]; then
+            cat stderr.log
             exit 1
           fi
 
