@@ -73,9 +73,7 @@ jobs:
       - name: Generate Freeze Candidate URLs
         run: |
           source .env.prod
-          python deploy/generate_urls.py
+          python generate_urls.py
 
           # todo: remove these lines
           ls -lah
-
-          ls -lah deploy

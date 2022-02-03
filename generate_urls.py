@@ -12,7 +12,7 @@ Outputs:
 import json
 import math
 
-from ..config import MAX_BUILD_JOBS, SITE_CONFIG
+from config import MAX_BUILD_JOBS, SITE_CONFIG
 from helpers.api import fetch_gitub_database_tree
 
 
@@ -49,8 +49,8 @@ def get_content_urls():
     return urls
 
 
-freeze_candidates.append(get_site_urls())
-freeze_candidates.append(get_content_urls())
+freeze_candidates += get_site_urls()
+freeze_candidates += get_content_urls()
 
 urls_per_build = math.ceil(len(freeze_candidates) / MAX_BUILD_JOBS)
 
@@ -64,7 +64,7 @@ with open('urls_per_build_job.json', 'w') as urls_per_build_job_json:
     print(f'saved urls_per_build_job.json')
 
 with open('build_job_id.json', 'w') as build_job_id_json:
-    json.dump(list(range(MAX_BUILD_JOBS)), build_job_id_json)
+    json.dump(list(range(len(urls_per_build_job))), build_job_id_json)
     print(f'saved build_job_id.json')
 
 print(f'Total URLs to freeze {len(freeze_candidates)}')
