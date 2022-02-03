@@ -21,6 +21,6 @@ notes.md
 
 # freeze artifacts
 urls_per_build_job.json
-build_job_id.json
+build_job_ids.json
 stderr.log
 stdout.log

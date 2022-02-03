@@ -51,12 +51,12 @@ jobs:
             echo "::set-output name=has-new-commits::false"
           fi
 
-  generate-freeze-candidate-urls:
-    name: Generate Freeze Candidate URLs
+  generate-freeze-candidate:
+    name: Generate Freeze Candidates
+    # if: ${{ needs.CheckRecentCommits.outputs.hasCommitsInDatabase == 'true' || needs.CheckRecentCommits.outputs.hasCommitsInWebserver == 'true' }}
     runs-on: ubuntu-latest
     outputs:
-      hasCommitsInDatabase: ${{ steps.check-new-commits-in-database.outputs.has-new-commits }}
-      hasCommitsInWebserver: ${{ steps.check-new-commits-in-webserver.outputs.has-new-commits }}
+      build_job_ids: ${{ steps.generate-free-candidate-urls.outputs.build_ids }}
     steps:
       - uses: actions/checkout@v2
       
@@ -70,20 +70,31 @@ jobs:
           pip3 install -r requirements.txt
 
       - name: Generate Freeze Candidate URLs
+        id: generate-free-candidate-urls
         run: |
           source .env.prod
           python generate_urls.py
 
-          # todo: remove these lines
-          ls -lah
-          cat urls_per_build_job.json
-          cat build_job_id.json
+          echo "::set-output name=build_job_ids::$(cat build_job_ids.json | jq -c)"
 
       - name: Cache Freeze Candidates
         uses: actions/cache@v2
         with:
           path: |
-            build_job_id.json
+            build_job_ids.json
             urls_per_build_job.json
           key: freeze-candidates-${{ github.run_number }}
 
+  freeze-urls:
+    name: Freeze URLs
+    runs-on: ubuntu-latest
+    needs: [fetch-urls]
+    strategy:
+      matrix:
+        id: ${{ fromJson(needs.generate-freeze-candidate.outputs.build_job_ids) }}
+    steps:
+      - run: |
+          build_job_id=${{ matrix.id }}
+          
+          # TODO: Remove this after testing
+          echo $build_job_id
