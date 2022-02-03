@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron:  '30 11 * * *' # 5:00 PM IST Everyday
+  # TODO: remove the push event after testing
+  push:
+    branches:
+      - feature/github-build-matrix
 
 concurrency: 
   group: ${{ github.ref }}
@@ -70,3 +74,8 @@ jobs:
         run: |
           source .env.prod
           python deploy/generate_urls.py
+
+          # todo: remove these lines
+          ls -lah
+
+          ls -lah deploy

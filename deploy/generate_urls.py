@@ -12,7 +12,7 @@ Outputs:
 import json
 import math
 
-from config import MAX_BUILD_JOBS, SITE_CONFIG
+from ..config import MAX_BUILD_JOBS, SITE_CONFIG
 from helpers.api import fetch_gitub_database_tree
 
 
