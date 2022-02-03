@@ -111,13 +111,7 @@ jobs:
         with:
           path: ${{ env.pythonLocation }}
           key: python-${{ github.run_number }}
-      
-      # - name: Install requirements
-      #   run: |
-      #     pip3 install -r requirements.txt
 
       - name: Freeze URLs
         run: |
-          build_job_id=${{ matrix.id }}
-          
-          pip freeze
+          python freeze_urls.py --build_id=${{ matrix.id }}
