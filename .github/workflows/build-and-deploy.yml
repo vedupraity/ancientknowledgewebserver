@@ -171,5 +171,12 @@ jobs:
 
       - name: Consolidate Builds
         run: |
-          source .env.prod
-          du -h -d 2 build_artifacts
+          du -h -d 1 build_artifacts
+
+          mkdir build
+          
+          jq -c '.[]' build_job_ids.json | while read id; do
+            rsync -a /build_artifacts/build-artifact-${id}/ /build/
+          done
+
+          du -h -d 2 build
