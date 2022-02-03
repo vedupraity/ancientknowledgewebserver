@@ -65,9 +65,15 @@ jobs:
           python-version: "3.10.2"
           architecture: "x64"
       
-      - name: Install dependencies
+      - name: Install Requirements
         run: |
           pip3 install -r requirements.txt
+
+      - name: Cache Python Environment
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: python-${{ github.run_number }}
 
       - name: Generate Freeze Candidate URLs
         id: generate-urls
@@ -75,17 +81,15 @@ jobs:
           source .env.prod
           python generate_urls.py
 
-          echo "$(cat build_job_ids.json | jq -c)"
-
           echo "::set-output name=build_job_ids::$(cat build_job_ids.json | jq -c)"
 
-      # - name: Cache Freeze Candidates
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: |
-      #       build_job_ids.json
-      #       urls_per_build_job.json
-      #     key: freeze-candidates-${{ github.run_number }}
+      - name: Cache Freeze Candidates
+        uses: actions/cache@v2
+        with:
+          path: |
+            build_job_ids.json
+            urls_per_build_job.json
+          key: freeze-candidates-${{ github.run_number }}
 
   freeze-urls:
     name: Freeze URLs
@@ -95,8 +99,25 @@ jobs:
       matrix:
         id: ${{ fromJson(needs.generate-freeze-candidate.outputs.build_job_ids) }}
     steps:
-      - run: |
+      - uses: actions/checkout@v2
+
+      - name: Cache Python Environment
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: python-${{ github.run_number }}
+      
+      # - uses: actions/setup-python@v2
+      #   with:
+      #     python-version: "3.10.2"
+      #     architecture: "x64"
+      
+      # - name: Install requirements
+      #   run: |
+      #     pip3 install -r requirements.txt
+
+      - name: Freeze URLs
+        run: |
           build_job_id=${{ matrix.id }}
           
-          # TODO: Remove this after testing
-          echo $build_job_id
+          pip freeze
