@@ -51,6 +51,7 @@ def homeView(language=None):
 
     context = getBaseTemplateContext()
     context.update({
+        'current_language': language,
         'page_image': SITE_CONFIG["site_logo"],
         'page_url': SITE_CONFIG["site_url"] + request.path,
         'sections': home_page_sections,

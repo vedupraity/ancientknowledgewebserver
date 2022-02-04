@@ -216,6 +216,7 @@ def get_parent_meta_description(language, breadcrumb, _type='markdown'):
 def get_context(language, breadcrumb, parent_metadata, tree_metadata, content, pagination):
     context = getBaseTemplateContext()
     context.update({
+        'current_language': language,
         'breadcrumb': breadcrumb,
         'metadata': parent_metadata,
         'tree': tree_metadata,
