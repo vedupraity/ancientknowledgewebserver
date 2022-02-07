@@ -30,7 +30,6 @@ def get_meta_array(languages: list, meta_objects: list, url_prefix: str):
 
     for meta_item in meta_objects:
         for language in languages:
-            # _meta = get_meta_object(language, meta_item, url_prefix)
             results.append(thread_pool.apply_async(
                 get_meta_object,
                 (language, meta_item, url_prefix)
