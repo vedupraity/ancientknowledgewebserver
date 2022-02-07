@@ -50,7 +50,7 @@ def get_content_urls():
 
 
 freeze_candidates += get_site_urls()
-freeze_candidates += get_content_urls()
+freeze_candidates += get_content_urls()[:100]
 
 urls_per_build = math.ceil(len(freeze_candidates) / MAX_BUILD_JOBS)
 

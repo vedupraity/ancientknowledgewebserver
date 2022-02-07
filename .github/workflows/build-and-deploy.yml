@@ -183,24 +183,31 @@ jobs:
 
       - name: Decompress and Consolidate Builds
         run: |
-          du -h -d 2 build_artifacts
-
           mkdir build
 
           jq -c '.[]' build_job_ids.json | while read id; do
+            du -h -d 4 ./
+
             tar -xf build_artifacts/build-artifact-${id}/build_${id}.tar.xz -C build_artifacts/
-            rsync -a build_artifacts/build-artifact-${id}/ build/
+
+            du -h -d 4 ./
+            
+            # rsync -a build_artifacts/build-artifact-${id}/ build/
+
+            exit 0
           done
 
-      - name: Optimize build for GitHub Pages
-        run: |
-          # move custom 404 page from build/404/index.html to build/404.html
-          mv build/404/index.html build/404.html
+          # du -h -d 4 ./
 
-          # remove index.html from build/static
-          rm -rf build/static/index.html
+      # - name: Optimize build for GitHub Pages
+      #   run: |
+      #     # move custom 404 page from build/404/index.html to build/404.html
+      #     mv build/404/index.html build/404.html
 
-          du -h -d 2 build
+      #     # remove index.html from build/static
+      #     rm -rf build/static/index.html
+
+      #     du -h -d 2 build
 
       # - name: Cache Build
       #   uses: actions/cache@v2
