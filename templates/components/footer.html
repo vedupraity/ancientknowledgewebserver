@@ -4,7 +4,10 @@
             <div class="animatedParent animateOnce">
                 <div class="content-w-image is-flex is-centered-mobile">
                     <figure class="image is-64x64 m-0 animated fadeInUpShort">
-                        <img src="{{ site_url }}{{ url_for('static', filename='images/logo.png') }}">
+                        <img
+                            loading="lazy"
+                            src="{{ site_url }}{{ url_for('static', filename='images/logo.png') }}"
+                        >
                     </figure>
                     <div class="content m-0 is-flex is-flex-direction-column is-justify-content-space-between animated fadeInUpShort">
                         <h4 class="mt-0">Ancient Knowledge</h4>

@@ -5,9 +5,9 @@
 <section class="hero is-light is-fullheight">
     <div class="hero-body is-flex is-justify-content-center animatedParent animateOnce">
 
-        <img class="mandala-lg rotating-ccw-slow">
-        <img class="mandala-md-bg rotating-cw-slow">
-        <img class="mandala-md rotating-cw-slow">
+        <img loading="lazy" class="mandala-lg rotating-ccw-slow">
+        <img loading="lazy" class="mandala-md-bg rotating-cw-slow">
+        <img loading="eager" class="mandala-md rotating-cw-slow">
 
         <h1 id="site-title" class="title is-1 has-text-centered m-0" title-en="{{ site_title }}" title-hi="{{ site_tagline_short }}">
         </h1>
@@ -68,12 +68,4 @@
         };
     });
 </script>
-{% endblock %}
-
-{% block css_extension %}
-<style>
-    html {
-        overflow-y: hidden;
-    }
-</style>
 {% endblock %}

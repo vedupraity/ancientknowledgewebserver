@@ -13,6 +13,7 @@
                             src="{{ url_for('static', filename=card.image if card.image else 'images/default-cover-4x3.jpg') }}"
                             alt="{{ card.title }}"
                             class="has-ratio"
+                            loading="lazy"
                         >
                         </figure>
                     </div>

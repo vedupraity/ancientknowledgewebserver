@@ -72,13 +72,9 @@
     <link rel="shortcut icon" type="image/png" href="{{ site_url }}{{ url_for('static', filename='images/logo.png') }}" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.3/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/bulma.min.css') }}">
     <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/theme.css') }}">
     <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/animations.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     {% block css_extension %}{% endblock %}
 </head>
@@ -119,6 +115,11 @@
         <swal-param name="scrollbarPadding" value="false" />
         <swal-param name="customClass" value='{ "confirmButton": "button is-warning is-outlined", "cancelButton": "button is-grey is-outlined" }' />
     </template>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.3/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.3/dist/sweetalert2.min.js"></script>
     <script src="{{ site_url }}{{ url_for('static', filename='js/language-selector.js') }}"></script>

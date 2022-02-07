@@ -3,7 +3,11 @@
         <a
             class="navbar-item pl-4"
             href="{{ site_url }}{% if current_language %}/{{current_language}}/{% endif %}">
-            <img src="{{ site_url }}{{ url_for('static', filename='images/logo.png') }}" width="28" height="28">
+            <img
+                src="{{ site_url }}{{ url_for('static', filename='images/logo.png') }}"
+                width="28"
+                height="28"
+            >
             <span class="pl-4">
                 {{ site_title }}
             </span>
