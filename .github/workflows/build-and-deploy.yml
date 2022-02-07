@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "30 11 * * *" # 5:00 PM IST Everyday
-  push:
-    branches:
-      - feature/optimize-gha-workflow
 
 concurrency:
   group: ${{ github.ref }}
