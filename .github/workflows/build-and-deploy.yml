@@ -183,21 +183,15 @@ jobs:
 
       - name: Decompress and Consolidate Builds
         run: |
+          du -h -d 3 ./build_artifacts
           mkdir build
 
           jq -c '.[]' build_job_ids.json | while read id; do
-            du -h -d 4 ./
-
             tar -xf build_artifacts/build-artifact-${id}/build_${id}.tar.xz -C build_artifacts/
-
-            du -h -d 4 ./
-            
-            # rsync -a build_artifacts/build-artifact-${id}/ build/
-
-            exit 0
+            rsync -a build_artifacts/build_${id}/ build/
           done
 
-          # du -h -d 4 ./
+          du -h -d 3 ./build
 
       # - name: Optimize build for GitHub Pages
       #   run: |
