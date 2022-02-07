@@ -183,7 +183,6 @@ jobs:
 
       - name: Decompress and Consolidate Builds
         run: |
-          du -h -d 3 ./build_artifacts
           mkdir build
 
           jq -c '.[]' build_job_ids.json | while read id; do
@@ -191,56 +190,54 @@ jobs:
             rsync -a build_artifacts/build_${id}/ build/
           done
 
-          du -h -d 3 ./build
+      - name: Optimize build for GitHub Pages
+        run: |
+          # move custom 404 page from build/404/index.html to build/404.html
+          mv build/404/index.html build/404.html
 
-      # - name: Optimize build for GitHub Pages
-      #   run: |
-      #     # move custom 404 page from build/404/index.html to build/404.html
-      #     mv build/404/index.html build/404.html
+          # remove index.html from build/static
+          rm -rf build/static/index.html
 
-      #     # remove index.html from build/static
-      #     rm -rf build/static/index.html
+          du -h -d 2 build
 
-      #     du -h -d 2 build
+      - name: Cache Build
+        uses: actions/cache@v2
+        with:
+          path: ./build
+          key: build-${{ github.run_number }}
 
-      # - name: Cache Build
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ./build
-      #     key: build-${{ github.run_number }}
+  deploy:
+    name: Deploy
+    needs: [consolidate-build]
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://www.ancientknowledge.in
+    steps:
+      - name: Checkout ancientknowledgewebsite
+        uses: actions/checkout@v2
+        with:
+          repository: vedupraity/ancientknowledgewebsite
+          ref: master
+          token: ${{ secrets.PAT_GITHUB_REPO }}
 
-  # deploy:
-  #   name: Deploy
-  #   needs: [consolidate-build]
-  #   runs-on: ubuntu-latest
-  #   environment:
-  #     name: production
-  #     url: https://www.ancientknowledge.in
-  #   steps:
-  #     - name: Checkout ancientknowledgewebsite
-  #       uses: actions/checkout@v2
-  #       with:
-  #         repository: vedupraity/ancientknowledgewebsite
-  #         ref: master
-  #         token: ${{ secrets.PAT_GITHUB_REPO }}
+      - name: Cache Build
+        uses: actions/cache@v2
+        with:
+          path: ./build
+          key: build-${{ github.run_number }}
 
-  #     - name: Cache Build
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ./build
-  #         key: build-${{ github.run_number }}
+      - name: Deploy
+        run: |
+          cp -rf build/* . && rm -rf build
 
-  #     - name: Deploy
-  #       run: |
-  #         cp -rf build/* . && rm -rf build
+          release_version="Release-${{ github.run_number }}<br>$(TZ=Asia/Kolkata date)"
+          echo $release_version > version.html
 
-  #         release_version="Release-${{ github.run_number }}<br>$(TZ=Asia/Kolkata date)"
-  #         echo $release_version > version.html
+          git status
 
-  #         git status
-
-  #         git config user.email "${{ secrets.GIT_USER_EMAIL }}"
-  #         git config user.name "${{ secrets.GIT_USER_NAME }}"
-  #         git add .
-  #         git commit -m "$release_version"
-  #         git push
+          git config user.email "${{ secrets.GIT_USER_EMAIL }}"
+          git config user.name "${{ secrets.GIT_USER_NAME }}"
+          git add .
+          git commit -m "$release_version"
+          git push
