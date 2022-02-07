@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "30 11 * * *" # 5:00 PM IST Everyday
+  push:
+    branches:
+      - feature/optimize-gha-workflow
 
 concurrency:
   group: ${{ github.ref }}
@@ -133,17 +136,19 @@ jobs:
 
           du -h -d 1 build_${{ matrix.id }}
 
-      - name: Minify Build
+      - name: Minify and Archive Build
         run: |
           css-html-js-minify --multiple --overwrite ./build_${{ matrix.id }}
 
           du -h -d 1 build_${{ matrix.id }}
 
+          tar -cfJ build_${{ matrix.id }}.tar.xz ./build_${{ matrix.id }}
+
       - name: Upload build_${{ matrix.id }} Artifact
         uses: actions/upload-artifact@v2
         with:
           name: build-artifact-${{ matrix.id }}
-          path: build_${{ matrix.id }}
+          path: build_${{ matrix.id }}.tar.xz
 
   consolidate-build:
     name: Consolidate Build
@@ -176,64 +181,65 @@ jobs:
         with:
           path: build_artifacts
 
-      - name: Consolidate Builds
+      - name: Decompress and Consolidate Builds
         run: |
           du -h -d 1 build_artifacts
 
-          mkdir build
+          # mkdir build
 
-          jq -c '.[]' build_job_ids.json | while read id; do
-            rsync -a build_artifacts/build-artifact-${id}/ build/
-          done
+          # jq -c '.[]' build_job_ids.json | while read id; do
+          #   tar -xf $f -C build_artifacts/build-artifact-${id}/
+          #   rsync -a build_artifacts/build-artifact-${id}/ build/
+          # done
 
-      - name: Optimize build for GitHub Pages
-        run: |
-          # move custom 404 page from build/404/index.html to build/404.html
-          mv build/404/index.html build/404.html
+      # - name: Optimize build for GitHub Pages
+      #   run: |
+      #     # move custom 404 page from build/404/index.html to build/404.html
+      #     mv build/404/index.html build/404.html
 
-          # remove index.html from build/static
-          rm -rf build/static/index.html
+      #     # remove index.html from build/static
+      #     rm -rf build/static/index.html
 
-          du -h -d 2 build
+      #     du -h -d 2 build
 
-      - name: Cache Build
-        uses: actions/cache@v2
-        with:
-          path: ./build
-          key: build-${{ github.run_number }}
+      # - name: Cache Build
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ./build
+      #     key: build-${{ github.run_number }}
 
-  deploy:
-    name: Deploy
-    needs: [consolidate-build]
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-      url: https://www.ancientknowledge.in
-    steps:
-      - name: Checkout ancientknowledgewebsite
-        uses: actions/checkout@v2
-        with:
-          repository: vedupraity/ancientknowledgewebsite
-          ref: master
-          token: ${{ secrets.PAT_GITHUB_REPO }}
+  # deploy:
+  #   name: Deploy
+  #   needs: [consolidate-build]
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: production
+  #     url: https://www.ancientknowledge.in
+  #   steps:
+  #     - name: Checkout ancientknowledgewebsite
+  #       uses: actions/checkout@v2
+  #       with:
+  #         repository: vedupraity/ancientknowledgewebsite
+  #         ref: master
+  #         token: ${{ secrets.PAT_GITHUB_REPO }}
 
-      - name: Cache Build
-        uses: actions/cache@v2
-        with:
-          path: ./build
-          key: build-${{ github.run_number }}
+  #     - name: Cache Build
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ./build
+  #         key: build-${{ github.run_number }}
 
-      - name: Deploy
-        run: |
-          cp -rf build/* . && rm -rf build
+  #     - name: Deploy
+  #       run: |
+  #         cp -rf build/* . && rm -rf build
 
-          release_version="Release-${{ github.run_number }}<br>$(TZ=Asia/Kolkata date)"
-          echo $release_version > version.html
+  #         release_version="Release-${{ github.run_number }}<br>$(TZ=Asia/Kolkata date)"
+  #         echo $release_version > version.html
 
-          git status
+  #         git status
 
-          git config user.email "${{ secrets.GIT_USER_EMAIL }}"
-          git config user.name "${{ secrets.GIT_USER_NAME }}"
-          git add .
-          git commit -m "$release_version"
-          git push
+  #         git config user.email "${{ secrets.GIT_USER_EMAIL }}"
+  #         git config user.name "${{ secrets.GIT_USER_NAME }}"
+  #         git add .
+  #         git commit -m "$release_version"
+  #         git push
