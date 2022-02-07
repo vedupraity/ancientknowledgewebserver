@@ -155,18 +155,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-matrix]
     steps:
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v2
-        with:
-          python-version: "3.10.2"
-          architecture: "x64"
+      # - uses: actions/setup-python@v2
+      #   with:
+      #     python-version: "3.10.2"
+      #     architecture: "x64"
 
-      - name: Cache Python Environment
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.pythonLocation }}
-          key: python-${{ github.run_number }}
+      # - name: Cache Python Environment
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ${{ env.pythonLocation }}
+      #     key: python-${{ github.run_number }}
 
       - name: Cache Freeze Candidates
         uses: actions/cache@v2
@@ -185,22 +185,22 @@ jobs:
         run: |
           du -h -d 2 build_artifacts
 
-          # mkdir build
+          mkdir build
 
-          # jq -c '.[]' build_job_ids.json | while read id; do
-          #   tar -xf $f -C build_artifacts/build-artifact-${id}/
-          #   rsync -a build_artifacts/build-artifact-${id}/ build/
-          # done
+          jq -c '.[]' build_job_ids.json | while read id; do
+            tar -xf build_artifacts/build-artifact-${id}/build_${id}.tar.xz -C build_artifacts/
+            rsync -a build_artifacts/build-artifact-${id}/ build/
+          done
 
-      # - name: Optimize build for GitHub Pages
-      #   run: |
-      #     # move custom 404 page from build/404/index.html to build/404.html
-      #     mv build/404/index.html build/404.html
+      - name: Optimize build for GitHub Pages
+        run: |
+          # move custom 404 page from build/404/index.html to build/404.html
+          mv build/404/index.html build/404.html
 
-      #     # remove index.html from build/static
-      #     rm -rf build/static/index.html
+          # remove index.html from build/static
+          rm -rf build/static/index.html
 
-      #     du -h -d 2 build
+          du -h -d 2 build
 
       # - name: Cache Build
       #   uses: actions/cache@v2
