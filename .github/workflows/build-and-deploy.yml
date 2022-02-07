@@ -183,7 +183,7 @@ jobs:
 
       - name: Decompress and Consolidate Builds
         run: |
-          du -h -d 1 build_artifacts
+          du -h -d 2 build_artifacts
 
           # mkdir build
 
