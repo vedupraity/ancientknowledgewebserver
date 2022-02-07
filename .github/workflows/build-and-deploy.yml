@@ -142,7 +142,7 @@ jobs:
 
           du -h -d 1 build_${{ matrix.id }}
 
-          tar -cfJ build_${{ matrix.id }}.tar.xz ./build_${{ matrix.id }}
+          tar -cf build_${{ matrix.id }}.tar.xz ./build_${{ matrix.id }}
 
       - name: Upload build_${{ matrix.id }} Artifact
         uses: actions/upload-artifact@v2
