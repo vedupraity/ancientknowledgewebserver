@@ -133,35 +133,37 @@ jobs:
 
           du -h -d 1 build_${{ matrix.id }}
 
-      - name: Minify Build
+      - name: Minify and Archive Build
         run: |
           css-html-js-minify --multiple --overwrite ./build_${{ matrix.id }}
 
           du -h -d 1 build_${{ matrix.id }}
 
+          tar -cf build_${{ matrix.id }}.tar.xz ./build_${{ matrix.id }}
+
       - name: Upload build_${{ matrix.id }} Artifact
         uses: actions/upload-artifact@v2
         with:
           name: build-artifact-${{ matrix.id }}
-          path: build_${{ matrix.id }}
+          path: build_${{ matrix.id }}.tar.xz
 
   consolidate-build:
     name: Consolidate Build
     runs-on: ubuntu-latest
     needs: [build-matrix]
     steps:
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v2
-        with:
-          python-version: "3.10.2"
-          architecture: "x64"
+      # - uses: actions/setup-python@v2
+      #   with:
+      #     python-version: "3.10.2"
+      #     architecture: "x64"
 
-      - name: Cache Python Environment
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.pythonLocation }}
-          key: python-${{ github.run_number }}
+      # - name: Cache Python Environment
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ${{ env.pythonLocation }}
+      #     key: python-${{ github.run_number }}
 
       - name: Cache Freeze Candidates
         uses: actions/cache@v2
@@ -176,14 +178,13 @@ jobs:
         with:
           path: build_artifacts
 
-      - name: Consolidate Builds
+      - name: Decompress and Consolidate Builds
         run: |
-          du -h -d 1 build_artifacts
-
           mkdir build
 
           jq -c '.[]' build_job_ids.json | while read id; do
-            rsync -a build_artifacts/build-artifact-${id}/ build/
+            tar -xf build_artifacts/build-artifact-${id}/build_${id}.tar.xz -C build_artifacts/
+            rsync -a build_artifacts/build_${id}/ build/
           done
 
       - name: Optimize build for GitHub Pages
