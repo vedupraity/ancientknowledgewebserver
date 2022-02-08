@@ -71,7 +71,6 @@
     <link rel="shortcut icon" type="image/png" href="{{ site_url }}{{ url_for('static', filename='images/logo.png') }}" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
     
-    <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/theme.css') }}">
     <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/animations.css') }}">
     
     {% block css_extension %}{% endblock %}
@@ -127,6 +126,7 @@
     <script src="{{ site_url }}{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ site_url }}{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ site_url }}{{ url_for('static', filename='js/css3-animate-it.js') }}"></script>
+    <link rel="stylesheet" href="{{ site_url }}{{ url_for('static', filename='css/theme.css') }}">
 
     {% block js_extension %}{% endblock %}
 </body>

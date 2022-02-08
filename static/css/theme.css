@@ -632,6 +632,10 @@ body, p, a, h1, h2, h3, h4, h5, h6 {
     opacity: 0;
 }
 
+.swal2-confirm,
+.swal2-cancel {
+    display: flex !important;
+}
 
 /* Begin: Google search customization */
 
