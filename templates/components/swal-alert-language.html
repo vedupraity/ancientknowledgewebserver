@@ -1,0 +1,26 @@
+<template id="language-selector-swal-template">
+    <swal-html>
+        <div class="content">
+            {% if request.path == '/' %}
+                <h6>Welcome to Ancient Knowledge!</h6>
+            {% endif %}
+            <p>Please select your language</p>
+        </div>
+    </swal-html>
+
+    <swal-input type="radio" value="{{ content_languages[0][0] }}">
+        {% for language in content_languages %}
+            <swal-input-option value="{{ language[0] }}">{{ language[1] }}</swal-input-option>
+        {% endfor %}
+    </swal-input>
+
+    <swal-button type="confirm">
+        Confirm
+    </swal-button>
+    <swal-button type="cancel">
+        Cancel
+    </swal-button>
+    <swal-param name="allowOutsideClick" value="false" />
+    <swal-param name="scrollbarPadding" value="false" />
+    <swal-param name="customClass" value='{ "confirmButton": "button is-warning is-outlined", "cancelButton": "button is-grey is-outlined" }' />
+</template>

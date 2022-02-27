@@ -90,8 +90,14 @@
 
     {# Begin helper tags for indexing #}
     <div class="content content-tags">
-        <p>Read {{ page_title }} online in Hindi and English for free</p>
-        <p>{{ page_title }} हिंदी और अंग्रेजी में मुफ्त में ऑनलाइन पढ़ें</p>
+        <p>Read {{ page_title }} online in Hindi</p>
+        <p>Read {{ page_title }} with Hindi translation</p>
+        <p>Read {{ page_title }} online in English</p>
+        <p>Read {{ page_title }} with English translation</p>
+        <p>{{ page_title }} हिंदी में ऑनलाइन पढ़ें</p>
+        <p>{{ page_title }} हिंदी में अर्थ सहित</p>
+        <p>{{ page_title }} अंग्रेजी में ऑनलाइन पढ़ें</p>
+        <p>{{ page_title }} अंग्रेजी में अनुवाद सहित</p>
     </div>
     {# End helper tags for indexing #}
 
@@ -99,26 +105,7 @@
 
     {% include "components/footer.html" %}
 
-    <template id="language-selector-swal-template">
-        <swal-title>
-            Select language
-        </swal-title>
-        <swal-input type="select" value="{{ content_languages[0][0] }}" />
-            {% for language in content_languages %}
-                <swal-input-option value="{{ language[0] }}">{{ language[1] }}</swal-input-option>
-            {% endfor %}
-        </swal-input>
-
-        <swal-button type="confirm">
-            Confirm
-        </swal-button>
-        <swal-button type="cancel">
-            Cancel
-        </swal-button>
-        <swal-param name="allowOutsideClick" value="false" />
-        <swal-param name="scrollbarPadding" value="false" />
-        <swal-param name="customClass" value='{ "confirmButton": "button is-warning is-outlined", "cancelButton": "button is-grey is-outlined" }' />
-    </template>
+    {% include "components/swal-alert-language.html" %}
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.3/dist/sweetalert2.min.js"></script>
     <script src="{{ site_url }}{{ url_for('static', filename='js/language-selector.js') }}"></script>
