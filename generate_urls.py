@@ -21,9 +21,7 @@ urls_per_build_job = []
 freeze_candidates = []
 
 # list of url prefix to ignore while freezing the site
-exclude_url_prefix = [
-    '/en/books/chanakya-neeti'
-]
+exclude_url_prefix = []
 
 
 def get_site_urls():
