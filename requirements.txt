@@ -1,5 +1,5 @@
 autopep8==1.6.0
-CacheControl==0.12.10
+CacheControl==0.12.11
 certifi==2021.10.8
 chardet==4.0.0
 charset-normalizer==2.0.12
