@@ -73,3 +73,7 @@ This will build artifacts and store under `build` directory
 ```sh
 ./run build dev
 ```
+
+## Contact
+
+contact@ancientknowledge.in
