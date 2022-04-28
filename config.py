@@ -39,7 +39,7 @@ SITE_CONFIG = {
     'site_keywords': [
         'ancient', 'knowledge', 'india', 'sanatan', 'dharma', 'history', 'philosophy', 'spirituality', 'religion', 'hindu', 'devotee',
     ],
-    'contact_email': 'ancientknowledgeinbox@gmail.com',
+    'contact_email': 'contact@ancientknowledge.in',
     'google_analytics_tracking_id': 'G-2G57C3C15V',
     'social_media_handle': 'PraacheenGyaan',
     'social_media_facebook': 'https://www.facebook.com/PraacheenGyaan/',
