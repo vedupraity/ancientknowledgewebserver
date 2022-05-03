@@ -7,7 +7,7 @@ click==8.1.2
 colorama==0.4.4
 css-html-js-minify==2.5.5
 environs==9.5.0
-Flask==2.1.1
+Flask==2.1.2
 Frozen-Flask==0.18
 idna==3.3
 itsdangerous==2.1.2
