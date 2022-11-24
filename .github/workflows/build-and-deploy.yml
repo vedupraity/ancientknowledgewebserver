@@ -17,7 +17,7 @@ jobs:
       database_has_changed: ${{ steps.check-new-commits-in-database.outputs.has-new-commits }}
       webserver_has_changed: ${{ steps.check-new-commits-in-webserver.outputs.has-new-commits }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           repository: vedupraity/ancientknowledgedatabase
           ref: master
@@ -32,7 +32,7 @@ jobs:
             echo "::set-output name=has-new-commits::false"
           fi
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           repository: vedupraity/ancientknowledgewebserver
           ref: master
@@ -55,7 +55,7 @@ jobs:
     outputs:
       build_job_ids: ${{ steps.generate-urls.outputs.build_job_ids }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: actions/setup-python@v4
         with:
@@ -95,7 +95,7 @@ jobs:
       matrix:
         id: ${{ fromJson(needs.fetch-build-urls.outputs.build_job_ids) }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: actions/setup-python@v4
         with:
@@ -197,7 +197,7 @@ jobs:
       url: https://www.ancientknowledge.in
     steps:
       - name: Checkout ancientknowledgewebsite
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: vedupraity/ancientknowledgewebsite
           ref: master
