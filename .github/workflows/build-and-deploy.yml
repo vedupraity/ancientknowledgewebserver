@@ -57,10 +57,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
-          python-version: "3.10.2"
-          architecture: "x64"
+          python-version: "3.10"
 
       - name: Install Requirements
         run: |
@@ -98,10 +97,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
-          python-version: "3.10.2"
-          architecture: "x64"
+          python-version: "3.10"
 
       - name: Cache Python Environment
         uses: actions/cache@v2
@@ -152,19 +150,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-matrix]
     steps:
-      # - uses: actions/checkout@v2
-
-      # - uses: actions/setup-python@v2
-      #   with:
-      #     python-version: "3.10.2"
-      #     architecture: "x64"
-
-      # - name: Cache Python Environment
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ${{ env.pythonLocation }}
-      #     key: python-${{ github.run_number }}
-
       - name: Cache Freeze Candidates
         uses: actions/cache@v2
         with:
