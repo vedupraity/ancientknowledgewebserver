@@ -14,8 +14,8 @@ jobs:
     name: Check Recent Commits
     runs-on: ubuntu-latest
     outputs:
-      database_has_changed: ${{ steps.check-new-commits-in-database.outputs.has-new-commits }}
-      webserver_has_changed: ${{ steps.check-new-commits-in-webserver.outputs.has-new-commits }}
+      database_has_changed: ${{ steps.check-new-commits-in-database.outputs.has_new_commits }}
+      webserver_has_changed: ${{ steps.check-new-commits-in-webserver.outputs.has_new_commits }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -27,9 +27,9 @@ jobs:
         id: check-new-commits-in-database
         run: |
           if [[ "$(git log --since='24 hours ago')" != "" ]]; then
-            echo "::set-output name=has-new-commits::true"
+            echo "has_new_commits=true" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=has-new-commits::false"
+            echo "has_new_commits=false" >> $GITHUB_OUTPUT
           fi
 
       - uses: actions/checkout@v3
@@ -42,9 +42,9 @@ jobs:
         id: check-new-commits-in-webserver
         run: |
           if [[ "$(git log --since='24 hours ago')" != "" ]]; then
-            echo "::set-output name=has-new-commits::true"
+            echo "has_new_commits=true" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=has-new-commits::false"
+            echo "has_new_commits=false" >> $GITHUB_OUTPUT
           fi
 
   fetch-build-urls:
@@ -77,7 +77,7 @@ jobs:
           source .env.prod
           python generate_urls.py
 
-          echo "::set-output name=build_job_ids::$(cat build_job_ids.json | jq -c)"
+          echo "build_job_ids=$(cat build_job_ids.json | jq -c)" >> $GITHUB_OUTPUT
 
       - name: Cache Freeze Candidates
         uses: actions/cache@v2
