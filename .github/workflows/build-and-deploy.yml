@@ -65,12 +65,6 @@ jobs:
         run: |
           pip3 install -r requirements.txt
 
-      - name: Cache Python Environment
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.pythonLocation }}
-          key: python-${{ github.run_number }}
-
       - name: Generate Freeze Candidate URLs
         id: generate-urls
         run: |
@@ -101,11 +95,9 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Cache Python Environment
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.pythonLocation }}
-          key: python-${{ github.run_number }}
+      - name: Install Requirements
+        run: |
+          pip3 install -r requirements.txt
 
       - name: Cache Freeze Candidates
         uses: actions/cache@v2
