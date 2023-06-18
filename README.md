@@ -1,4 +1,4 @@
-# Ancient Knowledge Webserver: Python Flask Service for Enhanced Navigation of Centralized Open Source Database of Ancient Scriptures
+# Ancient Knowledge Webserver: Web Service for Enhanced Navigation of Centralized Open Source Database of Ancient Scriptures
 
 Welcome to the Ancient Knowledge repository, a hub for Vedic Culture and the Sanātana Dharma. Our mission is to foster a platform that enables everyone to explore and learn from the profound wisdom contained within ancient scriptures.
 
