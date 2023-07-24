@@ -22,7 +22,7 @@ msgpack==1.0.5
 packaging==23.1
 pycodestyle==2.10.0
 python-dotenv==1.0.0
-PyYAML==6.0
+PyYAML==6.0.1
 requests==2.31.0
 toml==0.10.2
 tomli==2.0.1
